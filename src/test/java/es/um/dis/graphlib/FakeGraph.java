@@ -9,7 +9,7 @@ import java.util.Set;
 public class FakeGraph extends Graph<String, String> {
 
 	@Override
-	public Map<String, Set<String>> getAdjacentNodes(String node) {
+	public Map<String, Set<String>> getAdjacentNodesWithEdges(String node) {
 		Map<String, Set<String>> adjacentNodes = new HashMap<String, Set<String>>();
 		if ("A".equals(node)) {
 			adjacentNodes.put("1", new HashSet<String>(Arrays.asList("B")));
@@ -26,31 +26,22 @@ public class FakeGraph extends Graph<String, String> {
 			adjacentNodes.put("7", new HashSet<String>(Arrays.asList("C")));
 		} else if ("F".equals(node)) {
 			// no edges
+		} else if ("G".equals(node)){
+			adjacentNodes.put("9", new HashSet<String>(Arrays.asList("I")));
+			adjacentNodes.put("10", new HashSet<String>(Arrays.asList("J")));
+		} else if ("H".equals(node)){
+			adjacentNodes.put("11", new HashSet<String>(Arrays.asList("I")));
+			adjacentNodes.put("12", new HashSet<String>(Arrays.asList("J")));
+		} else if ("I".equals(node)) {
+			// no edges
+		} else if ("J".equals(node)) {
+			// no edges
 		}
 		return adjacentNodes;
 	}
 
 	@Override
-	public Set<String> getSourceNodesFromEdge(String edge) {
-		Set<String> nodes = new HashSet<String>();
-		if ("1".equals(edge)) {
-			nodes.add("A");
-		} else if ("2".equals(edge)) {
-			nodes.add("B");
-		} else if ("3".equals(edge)) {
-			nodes.add("B");
-		} else if ("4".equals(edge)) {
-			nodes.add("D");
-		} else if ("5".equals(edge)) {
-			nodes.add("E");
-		} else if ("6".equals(edge)) {
-			nodes.add("E");
-		} else if ("7".equals(edge)) {
-			nodes.add("E");
-		} else if ("8".equals(edge)) {
-			nodes.add("C");
-		}
-		return nodes;
+	public Set<String> getNodes() {
+		return new HashSet<String>(Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J"));
 	}
-
 }

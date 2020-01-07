@@ -1,8 +1,9 @@
 package es.um.dis.graphlib;
 
-import java.util.HashSet;
+import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import es.um.dis.graphlib.algorithms.Algorithm;
 import es.um.dis.graphlib.algorithms.AlgorithmInput;
@@ -20,6 +21,12 @@ import es.um.dis.graphlib.algorithms.AlgorithmOutput;
  *            Edge
  */
 public abstract class Graph<N, E> {
+	/**
+	 * Get the nodes in a graph.
+	 * 
+	 * @return Set of nodes
+	 */
+	public abstract Set<N> getNodes();
 
 	/**
 	 * Retrieve the adjacent nodes of the node passed as parameter. This method
@@ -29,7 +36,19 @@ public abstract class Graph<N, E> {
 	 * @param node
 	 * @return
 	 */
-	public abstract Map<E, Set<N>> getAdjacentNodes(N node);
+	public abstract Map<E, Set<N>> getAdjacentNodesWithEdges(N node);
+
+	/**
+	 * Retrieve a set of adjacent nodes of the node passed as parameter.
+	 * Information about the edges connecting this node with its adjacent is not
+	 * retrieved.
+	 * 
+	 * @param node
+	 * @return
+	 */
+	public Set<N> getAdjacentNodes(N node){
+		return this.getAdjacentNodesWithEdges(node).values().stream().flatMap(Collection::stream).collect(Collectors.toSet());
+	}
 
 	/**
 	 * Retrieve the nodes acting as source node in the edge passed as parameter
@@ -37,7 +56,7 @@ public abstract class Graph<N, E> {
 	 * @param edge
 	 * @return A set of nodes.
 	 */
-	public abstract Set<N> getSourceNodesFromEdge(E edge);
+	// public abstract Set<N> getSourceNodesFromEdge(E edge);
 
 	/**
 	 * Retrieve the edges those source is the node passed as argument.
@@ -45,9 +64,9 @@ public abstract class Graph<N, E> {
 	 * @param node
 	 * @return A set of edges.
 	 */
-	public Set<E> getEdgesFromSourceNode(N node) {
-		return new HashSet<E>(getAdjacentNodes(node).keySet());
-	}
+	// public Set<E> getEdgesFromSourceNode(N node) {
+	// return new HashSet<E>(getAdjacentNodes(node).keySet());
+	// }
 
 	/**
 	 * Execute an algorithm on the graph.
