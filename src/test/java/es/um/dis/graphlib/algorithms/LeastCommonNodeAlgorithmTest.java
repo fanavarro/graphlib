@@ -5,7 +5,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import es.um.dis.graphlib.FakeGraph;
@@ -16,7 +15,6 @@ import es.um.dis.graphlib.algorithms.least_common_node.LeastCommonNodeOutput;
 public class LeastCommonNodeAlgorithmTest {
 
 	@Test
-	@Ignore
 	public void leastCommonnodeTest1() {
 		FakeGraph graph = new FakeGraph();
 		LeastCommonNodeInput<String, String> input = new LeastCommonNodeInput<String, String>();
