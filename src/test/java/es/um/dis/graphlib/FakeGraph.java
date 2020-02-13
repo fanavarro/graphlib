@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class FakeGraph extends Graph<String, String> {
+public class FakeGraph extends AbstractGraph<String, String> {
 
 	@Override
 	public Map<String, Set<String>> getAdjacentNodesWithEdges(String node) {

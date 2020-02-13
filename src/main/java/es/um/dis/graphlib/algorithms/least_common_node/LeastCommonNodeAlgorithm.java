@@ -8,7 +8,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
-import es.um.dis.graphlib.Graph;
+import es.um.dis.graphlib.AbstractGraph;
 import es.um.dis.graphlib.algorithms.Algorithm;
 import es.um.dis.graphlib.algorithms.AlgorithmInput;
 
@@ -19,7 +19,7 @@ public class LeastCommonNodeAlgorithm<N, E> implements Algorithm<N, E> {
 		LeastCommonNodeInput<N, E> leastCommonNodeInput = (LeastCommonNodeInput<N, E>) input;
 		N node1 = leastCommonNodeInput.getNode1();
 		N node2 = leastCommonNodeInput.getNode2();
-		Graph<N, E> graph = leastCommonNodeInput.getGraph();
+		AbstractGraph<N, E> graph = leastCommonNodeInput.getGraph();
 		Set<N> leastCommonNodes = this.getLeastCommonNode(graph, node1, node2);
 		LeastCommonNodeOutput<N, E> leastCommonNodeOutput = new LeastCommonNodeOutput<N, E>();
 		leastCommonNodeOutput.setNode1(node1);
@@ -28,7 +28,7 @@ public class LeastCommonNodeAlgorithm<N, E> implements Algorithm<N, E> {
 		return leastCommonNodeOutput;
 	}
 
-	private Set<N> getLeastCommonNode(Graph<N, E> graph, N node1, N node2) {
+	private Set<N> getLeastCommonNode(AbstractGraph<N, E> graph, N node1, N node2) {
 		Set<N> commonNodes = null;
 		SortedMap<Integer, Set<N>> nodesByLevel1 = new TreeMap<Integer, Set<N>>();
 		SortedMap<Integer, Set<N>> nodesByLevel2 = new TreeMap<Integer, Set<N>>();
@@ -65,7 +65,7 @@ public class LeastCommonNodeAlgorithm<N, E> implements Algorithm<N, E> {
 	 * @param node
 	 * @param level
 	 */
-	private void getRelatedNodesByLevel(Graph<N, E> graph, Map<Integer, Set<N>> nodesByLevel, N node, int level) {
+	private void getRelatedNodesByLevel(AbstractGraph<N, E> graph, Map<Integer, Set<N>> nodesByLevel, N node, int level) {
 		if (nodesByLevel.get(level) == null) {
 			nodesByLevel.put(level, new HashSet<N>());
 		}

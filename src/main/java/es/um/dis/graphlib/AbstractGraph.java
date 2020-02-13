@@ -1,19 +1,33 @@
 package es.um.dis.graphlib;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import es.um.dis.graphlib.algorithms.Algorithm;
 import es.um.dis.graphlib.algorithms.AlgorithmInput;
 import es.um.dis.graphlib.algorithms.AlgorithmOutput;
 
-public interface Graph<N, E> {
+/**
+ * Class representing a graph. It defines all methods for applying graph
+ * algorithms
+ * 
+ * @author fabad
+ *
+ * @param <N>
+ *            Node
+ * @param <E>
+ *            Edge
+ */
+public abstract class AbstractGraph<N, E> implements Graph<N,E>{
 	/**
 	 * Get the nodes in a graph.
 	 * 
 	 * @return Set of nodes
 	 */
-	Set<N> getNodes();
+	@Override
+	public abstract Set<N> getNodes();
 
 	/**
 	 * Retrieve the adjacent nodes of the node passed as parameter. This method
@@ -23,7 +37,8 @@ public interface Graph<N, E> {
 	 * @param node
 	 * @return
 	 */
-	Map<E, Set<N>> getAdjacentNodesWithEdges(N node);
+	@Override
+	public abstract Map<E, Set<N>> getAdjacentNodesWithEdges(N node);
 
 	/**
 	 * Retrieve a set of adjacent nodes of the node passed as parameter.
@@ -33,7 +48,10 @@ public interface Graph<N, E> {
 	 * @param node
 	 * @return
 	 */
-	Set<N> getAdjacentNodes(N node);
+	@Override
+	public Set<N> getAdjacentNodes(N node){
+		return this.getAdjacentNodesWithEdges(node).values().stream().flatMap(Collection::stream).collect(Collectors.toSet());
+	}
 
 	/**
 	 * Execute an algorithm on the graph.
@@ -44,5 +62,9 @@ public interface Graph<N, E> {
 	 *            The input arguments for the algorithm.
 	 * @return AlgorithmOutput
 	 */
-	AlgorithmOutput<N, E> applyAlgorithm(Algorithm<N, E> algorithm, AlgorithmInput<N, E> input);
+	@Override
+	public AlgorithmOutput<N, E> applyAlgorithm(Algorithm<N, E> algorithm, AlgorithmInput<N, E> input) {
+		input.setGraph(this);
+		return algorithm.apply(input);
+	}
 }
