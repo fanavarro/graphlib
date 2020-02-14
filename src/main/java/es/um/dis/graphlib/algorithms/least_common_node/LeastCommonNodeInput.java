@@ -1,6 +1,7 @@
 package es.um.dis.graphlib.algorithms.least_common_node;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import es.um.dis.graphlib.AbstractGraph;
 import es.um.dis.graphlib.algorithms.AlgorithmInput;
@@ -21,11 +22,7 @@ public class LeastCommonNodeInput<N, E> implements Serializable, AlgorithmInput<
 	/** The graph. */
 	private AbstractGraph<N, E> graph;
 	
-	/** The node 1. */
-	private N node1;
-	
-	/** The node 2. */
-	private N node2;
+	private Set<N> nodes;
 	
 	/* (non-Javadoc)
 	 * @see es.um.dis.graphlib.algorithms.AlgorithmInput#getGraph()
@@ -41,58 +38,24 @@ public class LeastCommonNodeInput<N, E> implements Serializable, AlgorithmInput<
 		this.graph = graph;
 	}
 	
-	/**
-	 * Gets the node 1.
-	 *
-	 * @return the node 1
-	 */
-	public N getNode1() {
-		return node1;
-	}
 	
-	/**
-	 * Sets the node 1.
-	 *
-	 * @param node1 the new node 1
-	 */
-	public void setNode1(N node1) {
-		this.node1 = node1;
+	public Set<N> getNodes() {
+		return nodes;
 	}
-	
-	/**
-	 * Gets the node 2.
-	 *
-	 * @return the node 2
-	 */
-	public N getNode2() {
-		return node2;
+
+	public void setNodes(Set<N> nodes) {
+		this.nodes = nodes;
 	}
-	
-	/**
-	 * Sets the node 2.
-	 *
-	 * @param node2 the new node 2
-	 */
-	public void setNode2(N node2) {
-		this.node2 = node2;
-	}
-	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((graph == null) ? 0 : graph.hashCode());
-		result = prime * result + ((node1 == null) ? 0 : node1.hashCode());
-		result = prime * result + ((node2 == null) ? 0 : node2.hashCode());
+		result = prime * result + ((nodes == null) ? 0 : nodes.hashCode());
 		return result;
 	}
-	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -107,35 +70,24 @@ public class LeastCommonNodeInput<N, E> implements Serializable, AlgorithmInput<
 				return false;
 		} else if (!graph.equals(other.graph))
 			return false;
-		if (node1 == null) {
-			if (other.node1 != null)
+		if (nodes == null) {
+			if (other.nodes != null)
 				return false;
-		} else if (!node1.equals(other.node1))
-			return false;
-		if (node2 == null) {
-			if (other.node2 != null)
-				return false;
-		} else if (!node2.equals(other.node2))
+		} else if (!nodes.equals(other.nodes))
 			return false;
 		return true;
 	}
-	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("LessCommonNodeInput [graph=");
+		builder.append("LeastCommonNodeInput [graph=");
 		builder.append(graph);
-		builder.append(", node1=");
-		builder.append(node1);
-		builder.append(", node2=");
-		builder.append(node2);
+		builder.append(", nodes=");
+		builder.append(nodes);
 		builder.append("]");
 		return builder.toString();
 	}
-	
 	
 	
 }
