@@ -1,6 +1,7 @@
 package es.um.dis.graphlib.algorithms;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -83,5 +84,31 @@ public class LeastCommonNodeAlgorithmTest {
 		LeastCommonNodeOutput<String, String> output = (LeastCommonNodeOutput<String, String>) graph.applyAlgorithm(algorithm, input);
 		assertNotNull(output);
 		assertTrue(output.getLeastCommonNodes().isEmpty());
+	}
+	
+	@Test
+	public void leastCommonnodeTest6() {
+		FakeGraph graph = new FakeGraph();
+		LeastCommonNodeInput<String, String> input = new LeastCommonNodeInput<String, String>();
+		input.setGraph(graph);
+		input.setNodes(new HashSet<String>(Arrays.asList("D", "E", "C")));
+		LeastCommonNodeAlgorithm<String, String> algorithm = new LeastCommonNodeAlgorithm<String, String>();
+		LeastCommonNodeOutput<String, String> output = (LeastCommonNodeOutput<String, String>) graph.applyAlgorithm(algorithm, input);
+		assertNotNull(output);
+		assertFalse(output.getLeastCommonNodes().isEmpty());
+		assertTrue(output.getLeastCommonNodes().contains("C"));
+	}
+	
+	@Test
+	public void leastCommonnodeTest7() {
+		FakeGraph graph = new FakeGraph();
+		LeastCommonNodeInput<String, String> input = new LeastCommonNodeInput<String, String>();
+		input.setGraph(graph);
+		input.setNodes(new HashSet<String>(Arrays.asList("A", "E", "C")));
+		LeastCommonNodeAlgorithm<String, String> algorithm = new LeastCommonNodeAlgorithm<String, String>();
+		LeastCommonNodeOutput<String, String> output = (LeastCommonNodeOutput<String, String>) graph.applyAlgorithm(algorithm, input);
+		assertNotNull(output);
+		assertFalse(output.getLeastCommonNodes().isEmpty());
+		assertTrue(output.getLeastCommonNodes().contains("B"));
 	}
 }
