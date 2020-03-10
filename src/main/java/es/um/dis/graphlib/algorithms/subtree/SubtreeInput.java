@@ -2,20 +2,20 @@ package es.um.dis.graphlib.algorithms.subtree;
 
 import java.util.Set;
 
-import es.um.dis.graphlib.AbstractGraph;
+import es.um.dis.graphlib.Graph;
 import es.um.dis.graphlib.algorithms.AlgorithmInput;
 
 public class SubtreeInput<N,E> implements AlgorithmInput<N,E>{
-	private AbstractGraph<N,E> graph;
+	private Graph<N,E> graph;
 	private Set<N> nodesToBeContained;
 
 	@Override
-	public AbstractGraph<N, E> getGraph() {
+	public Graph<N, E> getGraph() {
 		return graph;
 	}
 
 	@Override
-	public void setGraph(AbstractGraph<N, E> graph) {
+	public void setGraph(Graph<N, E> graph) {
 		this.graph = graph;
 	}
 

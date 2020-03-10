@@ -3,7 +3,7 @@ package es.um.dis.graphlib.algorithms.least_common_node;
 import java.io.Serializable;
 import java.util.Set;
 
-import es.um.dis.graphlib.AbstractGraph;
+import es.um.dis.graphlib.Graph;
 import es.um.dis.graphlib.algorithms.AlgorithmInput;
 
 // TODO: Auto-generated Javadoc
@@ -20,21 +20,23 @@ public class LeastCommonNodeInput<N, E> implements Serializable, AlgorithmInput<
 	private static final long serialVersionUID = -3870514401416895135L;
 	
 	/** The graph. */
-	private AbstractGraph<N, E> graph;
+	private Graph<N, E> graph;
 	
 	private Set<N> nodes;
+	
+	private boolean reverse;
 	
 	/* (non-Javadoc)
 	 * @see es.um.dis.graphlib.algorithms.AlgorithmInput#getGraph()
 	 */
-	public AbstractGraph<N, E> getGraph() {
+	public Graph<N, E> getGraph() {
 		return graph;
 	}
 	
 	/* (non-Javadoc)
 	 * @see es.um.dis.graphlib.algorithms.AlgorithmInput#setGraph(es.um.dis.graphlib.Graph)
 	 */
-	public void setGraph(AbstractGraph<N, E> graph) {
+	public void setGraph(Graph<N, E> graph) {
 		this.graph = graph;
 	}
 	
@@ -87,6 +89,14 @@ public class LeastCommonNodeInput<N, E> implements Serializable, AlgorithmInput<
 		builder.append(nodes);
 		builder.append("]");
 		return builder.toString();
+	}
+
+	public boolean isReverse() {
+		return reverse;
+	}
+
+	public void setReverse(boolean inverse) {
+		this.reverse = inverse;
 	}
 	
 	

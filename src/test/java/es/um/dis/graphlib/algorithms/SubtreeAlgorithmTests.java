@@ -57,6 +57,7 @@ public class SubtreeAlgorithmTests {
 		assertEquals(expectedTrees, output.getTrees());
 	}
 	
+	
 	@Test
 	public void subtreeAlgorithmTest3() {
 		FakeGraph graph = new FakeGraph();
@@ -71,7 +72,25 @@ public class SubtreeAlgorithmTests {
 		assertNotNull(output);
 		assertNotNull(output.getTrees());
 		assertTrue(output.getTrees().isEmpty());
+	}
+	
+	@Test
+	public void subtreeAlgorithmTest4() {
+		FakeGraph graph = new FakeGraph();
+		Algorithm<String, String> algorithm = new SubtreeAlgorithm<String, String>();
+
+		Set<String> nodesToContain = new HashSet<String>(Arrays.asList("I", "J"));
+		SubtreeInput<String, String> input = new SubtreeInput<String, String>();
+		input.setGraph(graph);
+		input.setNodesToBeContained(nodesToContain);
+
+		SubtreeOutput<String, String> output = (SubtreeOutput<String, String>) graph.applyAlgorithm(algorithm, input);
+		assertNotNull(output);
+		assertNotNull(output.getTrees());
+		assertTrue(!output.getTrees().isEmpty());
 		
+		Set<Tree<String, String>> expectedTrees = createExpectedTreesForTest4();
+		assertEquals(expectedTrees, output.getTrees());
 	}
 
 	private Set<Tree<String, String>> createExpectedTreesForTest1() {
@@ -91,9 +110,17 @@ public class SubtreeAlgorithmTests {
 		tree2.addNode("E", "6", "F");
 		
 		
+		SimpleTreeImpl<String, String> tree3 = new SimpleTreeImpl<String, String>();
+		tree3.addNode("E", "7", "C");
+		tree3.addNode("C", "8", "B");
+		tree3.addNode("E", "5", "F");
+		tree3.addNode("E", "6", "F");
+		
+		
 		Set<Tree<String, String>> expectedTrees = new HashSet<Tree<String, String>>();
 		expectedTrees.add(tree1);
 		expectedTrees.add(tree2);
+		expectedTrees.add(tree3);
 		return expectedTrees;
 	}
 	
@@ -104,6 +131,21 @@ public class SubtreeAlgorithmTests {
 		
 		Set<Tree<String, String>> expectedTrees = new HashSet<Tree<String, String>>();
 		expectedTrees.add(tree1);
+		return expectedTrees;
+	}
+	
+	private Set<Tree<String, String>> createExpectedTreesForTest4() {
+		SimpleTreeImpl<String, String> tree1 = new SimpleTreeImpl<String, String>();
+		tree1.addNode("G", "9", "I");
+		tree1.addNode("G", "10", "J");
+		
+		SimpleTreeImpl<String, String> tree2 = new SimpleTreeImpl<String, String>();
+		tree2.addNode("H", "11", "I");
+		tree2.addNode("H", "12", "J");
+		
+		Set<Tree<String, String>> expectedTrees = new HashSet<Tree<String, String>>();
+		expectedTrees.add(tree1);
+		expectedTrees.add(tree2);
 		return expectedTrees;
 	}
 

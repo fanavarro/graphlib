@@ -2,7 +2,7 @@ package es.um.dis.graphlib.algorithms.shortest_path;
 
 import java.io.Serializable;
 
-import es.um.dis.graphlib.AbstractGraph;
+import es.um.dis.graphlib.Graph;
 import es.um.dis.graphlib.algorithms.AlgorithmInput;
 
 public class ShortestPathInput<N, E> implements AlgorithmInput<N, E>, Serializable{
@@ -10,7 +10,7 @@ public class ShortestPathInput<N, E> implements AlgorithmInput<N, E>, Serializab
 	 * 
 	 */
 	private static final long serialVersionUID = 8422914860142875681L;
-	private AbstractGraph<N,E> graph;
+	private Graph<N,E> graph;
 	private N sourceNode;
 	private N targetNode;
 	private int maxDepth;
@@ -33,10 +33,10 @@ public class ShortestPathInput<N, E> implements AlgorithmInput<N, E>, Serializab
 	public void setMaxDepth(int maxDepth) {
 		this.maxDepth = maxDepth;
 	}
-	public AbstractGraph<N, E> getGraph() {
+	public Graph<N, E> getGraph() {
 		return graph;
 	}
-	public void setGraph(AbstractGraph<N, E> graph) {
+	public void setGraph(Graph<N, E> graph) {
 		this.graph = graph;
 	}
 	@Override

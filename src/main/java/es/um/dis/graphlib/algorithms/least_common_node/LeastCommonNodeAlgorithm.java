@@ -11,31 +11,32 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
-import es.um.dis.graphlib.AbstractGraph;
+import es.um.dis.graphlib.Graph;
 import es.um.dis.graphlib.algorithms.Algorithm;
 import es.um.dis.graphlib.algorithms.AlgorithmInput;
 
 public class LeastCommonNodeAlgorithm<N, E> implements Algorithm<N, E> {
-
 	@Override
 	public LeastCommonNodeOutput<N, E> apply(AlgorithmInput<N, E> input) {
 		LeastCommonNodeInput<N, E> leastCommonNodeInput = (LeastCommonNodeInput<N, E>) input;
 		Set<N> nodes = leastCommonNodeInput.getNodes();
-		AbstractGraph<N, E> graph = leastCommonNodeInput.getGraph();
-		Set<N> leastCommonNodes = this.getLeastCommonNode(graph, nodes);
+		Graph<N, E> graph = leastCommonNodeInput.getGraph();
+		boolean reverse = leastCommonNodeInput.isReverse();
+		Set<N> leastCommonNodes = this.getLeastCommonNode(graph, nodes, reverse);
 		LeastCommonNodeOutput<N, E> leastCommonNodeOutput = new LeastCommonNodeOutput<N, E>();
 		leastCommonNodeOutput.setNodes(nodes);
 		leastCommonNodeOutput.setLeastCommonNodes(leastCommonNodes);
+		leastCommonNodeOutput.setInverse(leastCommonNodeInput.isReverse());
 		return leastCommonNodeOutput;
 	}
 
 
-	private Set<N> getLeastCommonNode(AbstractGraph<N, E> graph, Set<N> nodes) {
+	private Set<N> getLeastCommonNode(Graph<N, E> graph, Set<N> nodes, boolean reverse) {
 		Set<N> commonNodes = null;
 		List<SortedMap<Integer, Set<N>>> nodesByLevels = new ArrayList<SortedMap<Integer, Set<N>>>();
 		for (N node : nodes) {
 			SortedMap<Integer, Set<N>> nodesByLevel = new TreeMap<Integer, Set<N>>();
-			this.getRelatedNodesByLevel(graph, nodesByLevel, node, 0);
+			this.getRelatedNodesByLevel(graph, nodesByLevel, node, 0, reverse);
 			nodesByLevels.add(nodesByLevel);
 		}
 		commonNodes = getLeastCommonNode(nodesByLevels);
@@ -94,20 +95,28 @@ public class LeastCommonNodeAlgorithm<N, E> implements Algorithm<N, E> {
 	 * @param nodesByLevel
 	 * @param node
 	 * @param level
+	 * @param reverse 
 	 */
-	private void getRelatedNodesByLevel(AbstractGraph<N, E> graph, Map<Integer, Set<N>> nodesByLevel, N node,
-			int level) {
+	private void getRelatedNodesByLevel(Graph<N, E> graph, Map<Integer, Set<N>> nodesByLevel, N node,
+			int level, boolean reverse) {
 		if (nodesByLevel.get(level) == null) {
 			nodesByLevel.put(level, new HashSet<N>());
 		}
 		nodesByLevel.get(level).add(node);
-		for (N adjacentNode : graph.getAdjacentNodes(node)) {
+		Set<N> relatedNodes;
+		if(reverse){
+			relatedNodes = graph.getIncomingNodes(node);
+		} else {
+			relatedNodes = graph.getAdjacentNodes(node);
+		}
+		 
+		for (N relatedNode : relatedNodes) {
 			// We skip the current node if it has been visited before (cycle
 			// supporting)
-			if (nodesByLevel.values().stream().flatMap(Collection::stream).anyMatch(n -> (n.equals(adjacentNode)))) {
+			if (nodesByLevel.values().stream().flatMap(Collection::stream).anyMatch(n -> (n.equals(relatedNode)))) {
 				continue;
 			}
-			getRelatedNodesByLevel(graph, nodesByLevel, adjacentNode, level + 1);
+			getRelatedNodesByLevel(graph, nodesByLevel, relatedNode, level + 1, reverse);
 		}
 	}
 

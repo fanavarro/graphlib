@@ -18,6 +18,8 @@ public class LeastCommonNodeOutput<N, E> implements Serializable, AlgorithmOutpu
 	
 	private Set<N> nodes;
 	
+	private boolean inverse;
+	
 	/** The least common nodes. */
 	private Set<N> leastCommonNodes;
 
@@ -46,6 +48,14 @@ public class LeastCommonNodeOutput<N, E> implements Serializable, AlgorithmOutpu
 	 */
 	public void setLeastCommonNodes(Set<N> leastCommonNodes) {
 		this.leastCommonNodes = leastCommonNodes;
+	}
+
+	public boolean isInverse() {
+		return inverse;
+	}
+
+	public void setInverse(boolean inverse) {
+		this.inverse = inverse;
 	}
 
 	@Override

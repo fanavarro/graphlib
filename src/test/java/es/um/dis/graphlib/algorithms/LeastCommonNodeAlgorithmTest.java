@@ -111,4 +111,48 @@ public class LeastCommonNodeAlgorithmTest {
 		assertFalse(output.getLeastCommonNodes().isEmpty());
 		assertTrue(output.getLeastCommonNodes().contains("B"));
 	}
+	
+	@Test
+	public void leastCommonnodeTest8() {
+		FakeGraph graph = new FakeGraph();
+		LeastCommonNodeInput<String, String> input = new LeastCommonNodeInput<String, String>();
+		input.setGraph(graph);
+		input.setNodes(new HashSet<String>(Arrays.asList("B", "D")));
+		input.setReverse(true);
+		LeastCommonNodeAlgorithm<String, String> algorithm = new LeastCommonNodeAlgorithm<String, String>();
+		LeastCommonNodeOutput<String, String> output = (LeastCommonNodeOutput<String, String>) graph.applyAlgorithm(algorithm, input);
+		assertNotNull(output);
+		assertFalse(output.getLeastCommonNodes().isEmpty());
+		assertEquals(1, output.getLeastCommonNodes().size());
+		assertTrue(output.getLeastCommonNodes().contains("B"));
+	}
+	
+	@Test
+	public void leastCommonnodeTest9() {
+		FakeGraph graph = new FakeGraph();
+		LeastCommonNodeInput<String, String> input = new LeastCommonNodeInput<String, String>();
+		input.setGraph(graph);
+		input.setNodes(new HashSet<String>(Arrays.asList("A", "E")));
+		input.setReverse(true);
+		LeastCommonNodeAlgorithm<String, String> algorithm = new LeastCommonNodeAlgorithm<String, String>();
+		LeastCommonNodeOutput<String, String> output = (LeastCommonNodeOutput<String, String>) graph.applyAlgorithm(algorithm, input);
+		assertNotNull(output);
+		assertFalse(output.getLeastCommonNodes().isEmpty());
+		assertTrue(output.getLeastCommonNodes().contains("A"));
+	}
+	
+	public void leastCommonnodeTest10() {
+		FakeGraph graph = new FakeGraph();
+		LeastCommonNodeInput<String, String> input = new LeastCommonNodeInput<String, String>();
+		input.setGraph(graph);
+		input.setNodes(new HashSet<String>(Arrays.asList("B", "E")));
+		input.setReverse(true);
+		LeastCommonNodeAlgorithm<String, String> algorithm = new LeastCommonNodeAlgorithm<String, String>();
+		LeastCommonNodeOutput<String, String> output = (LeastCommonNodeOutput<String, String>) graph.applyAlgorithm(algorithm, input);
+		assertNotNull(output);
+		assertFalse(output.getLeastCommonNodes().isEmpty());
+		assertEquals(2, output.getLeastCommonNodes().size());
+		assertTrue(output.getLeastCommonNodes().contains("E"));
+		assertTrue(output.getLeastCommonNodes().contains("B"));
+	}
 }

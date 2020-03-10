@@ -1,7 +1,10 @@
 package es.um.dis.graphlib;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -51,6 +54,31 @@ public abstract class AbstractGraph<N, E> implements Graph<N,E>{
 	@Override
 	public Set<N> getAdjacentNodes(N node){
 		return this.getAdjacentNodesWithEdges(node).values().stream().flatMap(Collection::stream).collect(Collectors.toSet());
+	}
+	
+	@Override
+	public Map<E, Set<N>> getIncomingNodesWithedges(N node){
+		Map<E, Set<N>> incomingNodes = new HashMap<E, Set<N>>();
+		for(N otherNode : getNodes()){
+			if(otherNode.equals(node)){
+				continue;
+			}
+			
+			Map<E, Set<N>> adjacentNodes = this.getAdjacentNodesWithEdges(otherNode);
+			for(Entry<E, Set<N>> entry : adjacentNodes.entrySet()){
+				if(entry.getValue().contains(node)){
+					E edge = entry.getKey();
+					incomingNodes.putIfAbsent(edge, new HashSet<N>());
+					incomingNodes.get(edge).add(otherNode);
+				}
+			}
+		}
+		return incomingNodes;
+	}
+	
+	@Override
+	public Set<N> getIncomingNodes(N node){
+		return this.getIncomingNodesWithedges(node).values().stream().flatMap(Collection::stream).collect(Collectors.toSet());
 	}
 
 	/**

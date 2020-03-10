@@ -18,7 +18,8 @@ public interface Graph<N, E> {
 	/**
 	 * Retrieve the adjacent nodes of the node passed as parameter. This method
 	 * returns a map where the key is an edge, and the value is a set of nodes
-	 * connected through the corresponding edge to the node passed as parameter.
+	 * connected through the corresponding edge FROM the node passed as
+	 * parameter.
 	 * 
 	 * @param node
 	 * @return
@@ -36,6 +37,25 @@ public interface Graph<N, E> {
 	Set<N> getAdjacentNodes(N node);
 
 	/**
+	 * Retrieve the incoming nodes of the node passed as parameter. This method
+	 * returns a map where the key is an edge, and the value is a set of nodes
+	 * connected through the corresponding edge TO the node passed as parameter.
+	 * 
+	 * @param node
+	 * @return
+	 */
+	Map<E, Set<N>> getIncomingNodesWithedges(N node);
+
+	/**
+	 * Retrieve the incoming nodes of the node passed as parameter. Information
+	 * about the edges connecting incoming nodes to this node is not retrieved.
+	 * 
+	 * @param node
+	 * @return
+	 */
+	Set<N> getIncomingNodes(N node);
+
+	/**
 	 * Execute an algorithm on the graph.
 	 * 
 	 * @param algorithm
@@ -45,4 +65,5 @@ public interface Graph<N, E> {
 	 * @return AlgorithmOutput
 	 */
 	AlgorithmOutput<N, E> applyAlgorithm(Algorithm<N, E> algorithm, AlgorithmInput<N, E> input);
+
 }

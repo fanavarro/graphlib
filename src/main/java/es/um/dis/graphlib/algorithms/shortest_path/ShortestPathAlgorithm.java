@@ -9,7 +9,7 @@ import java.util.Map.Entry;
 import java.util.Queue;
 import java.util.Set;
 
-import es.um.dis.graphlib.AbstractGraph;
+import es.um.dis.graphlib.Graph;
 import es.um.dis.graphlib.algorithms.Algorithm;
 import es.um.dis.graphlib.algorithms.AlgorithmInput;
 
@@ -19,7 +19,7 @@ public class ShortestPathAlgorithm<N, E> implements Algorithm<N, E> {
 		ShortestPathInput<N, E> shortestPathInput = (ShortestPathInput<N,E>)input;
 		N source = shortestPathInput.getSourceNode();
 		N target = shortestPathInput.getTargetNode();
-		AbstractGraph<N,E> graph = input.getGraph();
+		Graph<N,E> graph = input.getGraph();
 		int maxDepth = Integer.MAX_VALUE;
 		if (shortestPathInput.getMaxDepth() > 0){
 			maxDepth = shortestPathInput.getMaxDepth();
@@ -59,7 +59,7 @@ public class ShortestPathAlgorithm<N, E> implements Algorithm<N, E> {
 	 * @param maxDepth
 	 * @return
 	 */
-	private TreeNode<N, Set<E>> getTreePaths(AbstractGraph<N,E> graph, N source, N destiny, int maxDepth) {
+	private TreeNode<N, Set<E>> getTreePaths(Graph<N,E> graph, N source, N destiny, int maxDepth) {
 		Set<TreeNode<N, Set<E>>> visited = new HashSet<TreeNode<N, Set<E>>>();
 		Queue<TreeNode<N, Set<E>>> q = new LinkedList<TreeNode<N, Set<E>>>();
 		Queue<Integer> depthQueue = new LinkedList<Integer>();

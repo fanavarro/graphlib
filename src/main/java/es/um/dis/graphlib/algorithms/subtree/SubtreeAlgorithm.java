@@ -6,12 +6,15 @@ import java.util.Map.Entry;
 import java.util.Queue;
 import java.util.Set;
 
-import es.um.dis.graphlib.AbstractGraph;
+import es.um.dis.graphlib.Graph;
 import es.um.dis.graphlib.SimpleTreeImpl;
 import es.um.dis.graphlib.Tree;
 import es.um.dis.graphlib.algorithms.Algorithm;
 import es.um.dis.graphlib.algorithms.AlgorithmInput;
 import es.um.dis.graphlib.algorithms.AlgorithmOutput;
+import es.um.dis.graphlib.algorithms.least_common_node.LeastCommonNodeAlgorithm;
+import es.um.dis.graphlib.algorithms.least_common_node.LeastCommonNodeInput;
+import es.um.dis.graphlib.algorithms.least_common_node.LeastCommonNodeOutput;
 
 public class SubtreeAlgorithm<N, E> implements Algorithm<N,E>{
 
@@ -19,23 +22,41 @@ public class SubtreeAlgorithm<N, E> implements Algorithm<N,E>{
 	public AlgorithmOutput<N, E> apply(AlgorithmInput<N, E> input) {
 		SubtreeInput<N,E> subtreeInput = (SubtreeInput<N, E>)input;
 		Set<N> nodesToBeContained = subtreeInput.getNodesToBeContained();
-		AbstractGraph<N,E> graph = subtreeInput.getGraph();
+		Graph<N,E> graph = subtreeInput.getGraph();
 		SubtreeOutput<N, E> output = this.getTreeContainingNodes(graph, nodesToBeContained);
 		return output;
 	}
 
-	private SubtreeOutput<N, E> getTreeContainingNodes(AbstractGraph<N, E> graph, Set<N> nodesToBeContained) {
+	private SubtreeOutput<N, E> getTreeContainingNodes(Graph<N, E> graph, Set<N> nodesToBeContained) {
 		SubtreeOutput<N, E> output = new SubtreeOutput<N, E>();
-		for(N rootNode : nodesToBeContained){
+		Set<N> commonAncestors = this.getCommonAncestors(graph, nodesToBeContained);
+		Set<N> possibleRoots = new HashSet<N>(nodesToBeContained);
+		possibleRoots.addAll(commonAncestors);
+		for(N rootNode : possibleRoots){
 			Tree<N, E> subtree = getTreeContainingNodes(graph, nodesToBeContained, rootNode);
 			if(subtree != null){
 				output.addTree(subtree);
 			}
 		}
+		
 		return output;
 	}
 	
-	private Tree<N,E> getTreeContainingNodes(AbstractGraph<N, E> graph, Set<N> nodesToBeContained, N rootNode) {
+	private Set<N> getCommonAncestors(Graph<N,E> graph, Set<N> nodes){
+		Set<N> commonAncestors = new HashSet<N>();
+		LeastCommonNodeAlgorithm<N, E> lcnAlgorithm = new LeastCommonNodeAlgorithm<N, E>();
+		LeastCommonNodeInput<N,E> input = new LeastCommonNodeInput<N,E>();
+		input.setGraph(graph);
+		input.setNodes(nodes);
+		input.setReverse(true);
+		LeastCommonNodeOutput <N,E> output = (LeastCommonNodeOutput<N, E>) graph.applyAlgorithm(lcnAlgorithm, input);
+		if(output != null && output.getLeastCommonNodes() != null){
+			commonAncestors = output.getLeastCommonNodes();
+		}
+		return commonAncestors;
+	}
+	
+	private Tree<N,E> getTreeContainingNodes(Graph<N, E> graph, Set<N> nodesToBeContained, N rootNode) {
 		SimpleTreeImpl<N,E> output = new SimpleTreeImpl<N,E>();
 		Set<N> nodesToVisit = new HashSet<N>(nodesToBeContained);
 		Queue<N> q = new LinkedList<N>();
