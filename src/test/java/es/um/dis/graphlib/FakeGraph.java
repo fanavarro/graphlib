@@ -6,8 +6,15 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+
+/**
+ * The Class FakeGraph.
+ */
 public class FakeGraph extends AbstractGraph<String, String> {
 
+	/* (non-Javadoc)
+	 * @see es.um.dis.graphlib.AbstractGraph#getAdjacentNodesWithEdges(java.lang.Object)
+	 */
 	@Override
 	public Map<String, Set<String>> getAdjacentNodesWithEdges(String node) {
 		Map<String, Set<String>> adjacentNodes = new HashMap<String, Set<String>>();
@@ -40,6 +47,9 @@ public class FakeGraph extends AbstractGraph<String, String> {
 		return adjacentNodes;
 	}
 
+	/* (non-Javadoc)
+	 * @see es.um.dis.graphlib.AbstractGraph#getNodes()
+	 */
 	@Override
 	public Set<String> getNodes() {
 		return new HashSet<String>(Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J"));

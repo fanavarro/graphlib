@@ -17,8 +17,15 @@ import es.um.dis.graphlib.algorithms.subtree.SubtreeAlgorithm;
 import es.um.dis.graphlib.algorithms.subtree.SubtreeInput;
 import es.um.dis.graphlib.algorithms.subtree.SubtreeOutput;
 
+
+/**
+ * The Class SubtreeAlgorithmTests.
+ */
 public class SubtreeAlgorithmTests {
 
+	/**
+	 * Subtree algorithm test 1.
+	 */
 	@Test
 	public void subtreeAlgorithmTest1() {
 		FakeGraph graph = new FakeGraph();
@@ -38,6 +45,9 @@ public class SubtreeAlgorithmTests {
 		assertEquals(expectedTrees, output.getTrees());
 	}
 	
+	/**
+	 * Subtree algorithm test 2.
+	 */
 	@Test
 	public void subtreeAlgorithmTest2() {
 		FakeGraph graph = new FakeGraph();
@@ -58,6 +68,9 @@ public class SubtreeAlgorithmTests {
 	}
 	
 	
+	/**
+	 * Subtree algorithm test 3.
+	 */
 	@Test
 	public void subtreeAlgorithmTest3() {
 		FakeGraph graph = new FakeGraph();
@@ -74,6 +87,9 @@ public class SubtreeAlgorithmTests {
 		assertTrue(output.getTrees().isEmpty());
 	}
 	
+	/**
+	 * Subtree algorithm test 4.
+	 */
 	@Test
 	public void subtreeAlgorithmTest4() {
 		FakeGraph graph = new FakeGraph();
@@ -93,6 +109,11 @@ public class SubtreeAlgorithmTests {
 		assertEquals(expectedTrees, output.getTrees());
 	}
 
+	/**
+	 * Creates the expected trees for test 1.
+	 *
+	 * @return the sets the
+	 */
 	private Set<Tree<String, String>> createExpectedTreesForTest1() {
 		SimpleTreeImpl<String, String> tree1 = new SimpleTreeImpl<String, String>();
 		tree1.addNode("B", "2", "C");
@@ -124,6 +145,11 @@ public class SubtreeAlgorithmTests {
 		return expectedTrees;
 	}
 	
+	/**
+	 * Creates the expected trees for test 2.
+	 *
+	 * @return the sets the
+	 */
 	private Set<Tree<String, String>> createExpectedTreesForTest2() {
 		SimpleTreeImpl<String, String> tree1 = new SimpleTreeImpl<String, String>();
 		tree1.addNode("G", "9", "I");
@@ -134,6 +160,11 @@ public class SubtreeAlgorithmTests {
 		return expectedTrees;
 	}
 	
+	/**
+	 * Creates the expected trees for test 4.
+	 *
+	 * @return the sets the
+	 */
 	private Set<Tree<String, String>> createExpectedTreesForTest4() {
 		SimpleTreeImpl<String, String> tree1 = new SimpleTreeImpl<String, String>();
 		tree1.addNode("G", "9", "I");

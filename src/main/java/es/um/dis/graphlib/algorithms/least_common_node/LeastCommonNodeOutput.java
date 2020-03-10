@@ -5,29 +5,42 @@ import java.util.Set;
 
 import es.um.dis.graphlib.algorithms.AlgorithmOutput;
 
+
 /**
  * The Class LeastCommonNodeOutput.
  *
- * @param <N> the number type
- * @param <E> the element type
+ * @param <N> the node type
+ * @param <E> the edge type
  */
 public class LeastCommonNodeOutput<N, E> implements Serializable, AlgorithmOutput<N, E> {
 	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 8021326381257947314L;
 	
+	/** The nodes. */
 	private Set<N> nodes;
 	
-	private boolean inverse;
+	/** The reverse. */
+	private boolean reverse;
 	
 	/** The least common nodes. */
 	private Set<N> leastCommonNodes;
 
 
+	/**
+	 * Gets the nodes.
+	 *
+	 * @return the nodes
+	 */
 	public Set<N> getNodes() {
 		return nodes;
 	}
 
+	/**
+	 * Sets the nodes.
+	 *
+	 * @param nodes the new nodes
+	 */
 	public void setNodes(Set<N> nodes) {
 		this.nodes = nodes;
 	}
@@ -50,14 +63,27 @@ public class LeastCommonNodeOutput<N, E> implements Serializable, AlgorithmOutpu
 		this.leastCommonNodes = leastCommonNodes;
 	}
 
-	public boolean isInverse() {
-		return inverse;
+	/**
+	 * Checks if is reverse.
+	 *
+	 * @return true, if is reverse
+	 */
+	public boolean isReverse() {
+		return reverse;
 	}
 
-	public void setInverse(boolean inverse) {
-		this.inverse = inverse;
+	/**
+	 * Sets the reverse.
+	 *
+	 * @param reverse the new reverse
+	 */
+	public void setReverse(boolean reverse) {
+		this.reverse = reverse;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -67,6 +93,9 @@ public class LeastCommonNodeOutput<N, E> implements Serializable, AlgorithmOutpu
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -89,6 +118,9 @@ public class LeastCommonNodeOutput<N, E> implements Serializable, AlgorithmOutpu
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

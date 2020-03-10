@@ -13,8 +13,18 @@ import es.um.dis.graphlib.Graph;
 import es.um.dis.graphlib.algorithms.Algorithm;
 import es.um.dis.graphlib.algorithms.AlgorithmInput;
 
+
+/**
+ * The Class ShortestPathAlgorithm.
+ *
+ * @param <N> the node type
+ * @param <E> the edge type
+ */
 public class ShortestPathAlgorithm<N, E> implements Algorithm<N, E> {
 
+	/* (non-Javadoc)
+	 * @see es.um.dis.graphlib.algorithms.Algorithm#apply(es.um.dis.graphlib.algorithms.AlgorithmInput)
+	 */
 	public ShortestPathOutput<N, E> apply(AlgorithmInput<N, E> input) {
 		ShortestPathInput<N, E> shortestPathInput = (ShortestPathInput<N,E>)input;
 		N source = shortestPathInput.getSourceNode();
@@ -31,6 +41,12 @@ public class ShortestPathAlgorithm<N, E> implements Algorithm<N, E> {
 		return output;
 	}
 	
+	/**
+	 * Builds the path.
+	 *
+	 * @param node the node
+	 * @return the list
+	 */
 	private List<PathNode<N,E>> buildPath(TreeNode<N, Set<E>> node) {
 		List<PathNode<N,E>> path = null;
 		if (node != null) {
@@ -52,12 +68,13 @@ public class ShortestPathAlgorithm<N, E> implements Algorithm<N, E> {
 	}
 	
 	/**
-	 * BFS algorithm
-	 * @param graph
-	 * @param source
-	 * @param destiny
-	 * @param maxDepth
-	 * @return
+	 * BFS algorithm.
+	 *
+	 * @param graph the graph
+	 * @param source the source
+	 * @param destiny the destiny
+	 * @param maxDepth the max depth
+	 * @return the tree paths
 	 */
 	private TreeNode<N, Set<E>> getTreePaths(Graph<N,E> graph, N source, N destiny, int maxDepth) {
 		Set<TreeNode<N, Set<E>>> visited = new HashSet<TreeNode<N, Set<E>>>();
@@ -111,6 +128,14 @@ public class ShortestPathAlgorithm<N, E> implements Algorithm<N, E> {
 		
 	}
 	
+	/**
+	 * Visited.
+	 *
+	 * @param node the node
+	 * @param s the s
+	 * @param currentDepth the current depth
+	 * @return true, if successful
+	 */
 	private boolean visited(TreeNode<N, Set<E>> node, Collection<TreeNode<N, Set<E>>> s, int currentDepth) {
 		for(TreeNode<N, Set<E>> iterator : s){
 			if(iterator.getContent().equals(node.getContent())){
@@ -122,6 +147,14 @@ public class ShortestPathAlgorithm<N, E> implements Algorithm<N, E> {
 		return false;
 	}
 	
+	/**
+	 * Gets the tree node from collection.
+	 *
+	 * @param owlClass the owl class
+	 * @param parent the parent
+	 * @param collection the collection
+	 * @return the tree node from collection
+	 */
 	private TreeNode<N, Set<E>> getTreeNodeFromCollection(N owlClass, N parent, Collection<TreeNode<N, Set<E>>> collection){
 		for(TreeNode<N, Set<E>> node : collection){
 			if(node.getContent().equals(owlClass) && node.getParent().getContent().equals(parent)){

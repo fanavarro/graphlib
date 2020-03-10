@@ -7,6 +7,13 @@ import es.um.dis.graphlib.algorithms.Algorithm;
 import es.um.dis.graphlib.algorithms.AlgorithmInput;
 import es.um.dis.graphlib.algorithms.AlgorithmOutput;
 
+
+/**
+ * The Interface Graph.
+ *
+ * @param <N> the node type
+ * @param <E> the edge type
+ */
 public interface Graph<N, E> {
 	/**
 	 * Get the nodes in a graph.
@@ -20,9 +27,9 @@ public interface Graph<N, E> {
 	 * returns a map where the key is an edge, and the value is a set of nodes
 	 * connected through the corresponding edge FROM the node passed as
 	 * parameter.
-	 * 
-	 * @param node
-	 * @return
+	 *
+	 * @param node the node
+	 * @return the adjacent nodes with edges
 	 */
 	Map<E, Set<N>> getAdjacentNodesWithEdges(N node);
 
@@ -30,9 +37,9 @@ public interface Graph<N, E> {
 	 * Retrieve a set of adjacent nodes of the node passed as parameter.
 	 * Information about the edges connecting this node with its adjacent is not
 	 * retrieved.
-	 * 
-	 * @param node
-	 * @return
+	 *
+	 * @param node the node
+	 * @return the adjacent nodes
 	 */
 	Set<N> getAdjacentNodes(N node);
 
@@ -40,18 +47,18 @@ public interface Graph<N, E> {
 	 * Retrieve the incoming nodes of the node passed as parameter. This method
 	 * returns a map where the key is an edge, and the value is a set of nodes
 	 * connected through the corresponding edge TO the node passed as parameter.
-	 * 
-	 * @param node
-	 * @return
+	 *
+	 * @param node the node
+	 * @return the incoming nodes withedges
 	 */
 	Map<E, Set<N>> getIncomingNodesWithedges(N node);
 
 	/**
 	 * Retrieve the incoming nodes of the node passed as parameter. Information
 	 * about the edges connecting incoming nodes to this node is not retrieved.
-	 * 
-	 * @param node
-	 * @return
+	 *
+	 * @param node the node
+	 * @return the incoming nodes
 	 */
 	Set<N> getIncomingNodes(N node);
 

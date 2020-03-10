@@ -6,12 +6,12 @@ import java.util.Set;
 import es.um.dis.graphlib.Graph;
 import es.um.dis.graphlib.algorithms.AlgorithmInput;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class LessCommonNodeInput.
  *
- * @param <N> the number type
- * @param <E> the element type
+ * @param <N> the node type
+ * @param <E> the edge type
  */
 public class LeastCommonNodeInput<N, E> implements Serializable, AlgorithmInput<N, E>{
 
@@ -22,8 +22,10 @@ public class LeastCommonNodeInput<N, E> implements Serializable, AlgorithmInput<
 	/** The graph. */
 	private Graph<N, E> graph;
 	
+	/** The nodes. */
 	private Set<N> nodes;
 	
+	/** The reverse. */
 	private boolean reverse;
 	
 	/* (non-Javadoc)
@@ -41,14 +43,27 @@ public class LeastCommonNodeInput<N, E> implements Serializable, AlgorithmInput<
 	}
 	
 	
+	/**
+	 * Gets the nodes.
+	 *
+	 * @return the nodes
+	 */
 	public Set<N> getNodes() {
 		return nodes;
 	}
 
+	/**
+	 * Sets the nodes.
+	 *
+	 * @param nodes the new nodes
+	 */
 	public void setNodes(Set<N> nodes) {
 		this.nodes = nodes;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -58,6 +73,9 @@ public class LeastCommonNodeInput<N, E> implements Serializable, AlgorithmInput<
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -80,6 +98,9 @@ public class LeastCommonNodeInput<N, E> implements Serializable, AlgorithmInput<
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -91,10 +112,20 @@ public class LeastCommonNodeInput<N, E> implements Serializable, AlgorithmInput<
 		return builder.toString();
 	}
 
+	/**
+	 * Checks if is reverse.
+	 *
+	 * @return true, if is reverse
+	 */
 	public boolean isReverse() {
 		return reverse;
 	}
 
+	/**
+	 * Sets the reverse.
+	 *
+	 * @param inverse the new reverse
+	 */
 	public void setReverse(boolean inverse) {
 		this.reverse = inverse;
 	}

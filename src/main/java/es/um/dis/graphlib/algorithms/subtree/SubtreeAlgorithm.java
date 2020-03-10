@@ -16,8 +16,18 @@ import es.um.dis.graphlib.algorithms.least_common_node.LeastCommonNodeAlgorithm;
 import es.um.dis.graphlib.algorithms.least_common_node.LeastCommonNodeInput;
 import es.um.dis.graphlib.algorithms.least_common_node.LeastCommonNodeOutput;
 
+
+/**
+ * The Class SubtreeAlgorithm.
+ *
+ * @param <N> the node type
+ * @param <E> the edge type
+ */
 public class SubtreeAlgorithm<N, E> implements Algorithm<N,E>{
 
+	/* (non-Javadoc)
+	 * @see es.um.dis.graphlib.algorithms.Algorithm#apply(es.um.dis.graphlib.algorithms.AlgorithmInput)
+	 */
 	@Override
 	public AlgorithmOutput<N, E> apply(AlgorithmInput<N, E> input) {
 		SubtreeInput<N,E> subtreeInput = (SubtreeInput<N, E>)input;
@@ -27,6 +37,13 @@ public class SubtreeAlgorithm<N, E> implements Algorithm<N,E>{
 		return output;
 	}
 
+	/**
+	 * Gets the tree containing nodes.
+	 *
+	 * @param graph the graph
+	 * @param nodesToBeContained the nodes to be contained
+	 * @return the tree containing nodes
+	 */
 	private SubtreeOutput<N, E> getTreeContainingNodes(Graph<N, E> graph, Set<N> nodesToBeContained) {
 		SubtreeOutput<N, E> output = new SubtreeOutput<N, E>();
 		Set<N> commonAncestors = this.getCommonAncestors(graph, nodesToBeContained);
@@ -42,6 +59,13 @@ public class SubtreeAlgorithm<N, E> implements Algorithm<N,E>{
 		return output;
 	}
 	
+	/**
+	 * Gets the common ancestors.
+	 *
+	 * @param graph the graph
+	 * @param nodes the nodes
+	 * @return the common ancestors
+	 */
 	private Set<N> getCommonAncestors(Graph<N,E> graph, Set<N> nodes){
 		Set<N> commonAncestors = new HashSet<N>();
 		LeastCommonNodeAlgorithm<N, E> lcnAlgorithm = new LeastCommonNodeAlgorithm<N, E>();
@@ -56,6 +80,14 @@ public class SubtreeAlgorithm<N, E> implements Algorithm<N,E>{
 		return commonAncestors;
 	}
 	
+	/**
+	 * Gets the tree containing nodes.
+	 *
+	 * @param graph the graph
+	 * @param nodesToBeContained the nodes to be contained
+	 * @param rootNode the root node
+	 * @return the tree containing nodes
+	 */
 	private Tree<N,E> getTreeContainingNodes(Graph<N, E> graph, Set<N> nodesToBeContained, N rootNode) {
 		SimpleTreeImpl<N,E> output = new SimpleTreeImpl<N,E>();
 		Set<N> nodesToVisit = new HashSet<N>(nodesToBeContained);

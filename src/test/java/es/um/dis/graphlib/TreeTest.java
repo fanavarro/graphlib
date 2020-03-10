@@ -7,9 +7,16 @@ import java.util.HashSet;
 
 import org.junit.Test;
 
+
+/**
+ * The Class TreeTest.
+ */
 public class TreeTest {
 	
 
+	/**
+	 * Test correct tree.
+	 */
 	@Test
 	public void testCorrectTree() {
 		Tree<String, String> tree = createCorrectTree();
@@ -19,18 +26,29 @@ public class TreeTest {
 
 	
 
+	/**
+	 * Test incorrect tree 1.
+	 */
 	@Test(expected = IllegalStateException.class)
 	public void testIncorrectTree1() {
 		Tree<String, String> tree = createIncorrectTree1();
 		tree.getRoot();
 	}
 	
+	/**
+	 * Test incorrect tree 2.
+	 */
 	@Test(expected = IllegalStateException.class)
 	public void testIncorrectTree2() {
 		Tree<String, String> tree = createIncorrectTree2();
 		tree.getRoot();
 	}
 	
+	/**
+	 * Creates the correct tree.
+	 *
+	 * @return the tree
+	 */
 	private Tree<String, String> createCorrectTree() {
 		SimpleTreeImpl<String, String> tree = new SimpleTreeImpl<String, String>();
 		tree.addNode("A", "1", "B");
@@ -40,6 +58,11 @@ public class TreeTest {
 		return tree;
 	}
 
+	/**
+	 * Creates the incorrect tree 1.
+	 *
+	 * @return the tree
+	 */
 	private Tree<String, String> createIncorrectTree1() {
 		SimpleTreeImpl<String, String> tree = new SimpleTreeImpl<String, String>();
 		tree.addNode("A", "1", "B");
@@ -50,6 +73,11 @@ public class TreeTest {
 		return tree;
 	}
 	
+	/**
+	 * Creates the incorrect tree 2.
+	 *
+	 * @return the tree
+	 */
 	private Tree<String, String> createIncorrectTree2() {
 		SimpleTreeImpl<String, String> tree = new SimpleTreeImpl<String, String>();
 		tree.addNode("A", "1", "B");

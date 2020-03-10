@@ -9,8 +9,15 @@ import es.um.dis.graphlib.algorithms.shortest_path.ShortestPathAlgorithm;
 import es.um.dis.graphlib.algorithms.shortest_path.ShortestPathInput;
 import es.um.dis.graphlib.algorithms.shortest_path.ShortestPathOutput;
 
+
+/**
+ * The Class ShortestPathAlgorithmTest.
+ */
 public class ShortestPathAlgorithmTest {
 
+	/**
+	 * Test shortest path 1.
+	 */
 	@Test
 	public void testShortestPath1() {
 		FakeGraph graph = new FakeGraph();
@@ -29,6 +36,9 @@ public class ShortestPathAlgorithmTest {
 		assertEquals("C", output.getPath().get(1).getTarget());
 	}
 
+	/**
+	 * Test shortest path 2.
+	 */
 	@Test
 	public void testShortestPath2() {
 		FakeGraph graph = new FakeGraph();
@@ -55,6 +65,9 @@ public class ShortestPathAlgorithmTest {
 		assertEquals("F", output.getPath().get(3).getTarget());
 	}
 	
+	/**
+	 * Test shortest path 3.
+	 */
 	@Test
 	public void testShortestPath3() {
 		FakeGraph graph = new FakeGraph();
@@ -68,6 +81,10 @@ public class ShortestPathAlgorithmTest {
 		assertNull(output.getPath());
 		
 	}
+	
+	/**
+	 * Test shortest path 4.
+	 */
 	@Test
 	public void testShortestPath4() {
 		FakeGraph graph = new FakeGraph();
@@ -79,6 +96,10 @@ public class ShortestPathAlgorithmTest {
 		assertNotNull(output);
 		assertNull(output.getPath());
 	}
+	
+	/**
+	 * Test shortest path 5.
+	 */
 	@Test
 	public void testShortestPath5() {
 		FakeGraph graph = new FakeGraph();

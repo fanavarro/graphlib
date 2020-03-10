@@ -12,6 +12,7 @@ import es.um.dis.graphlib.algorithms.Algorithm;
 import es.um.dis.graphlib.algorithms.AlgorithmInput;
 import es.um.dis.graphlib.algorithms.AlgorithmOutput;
 
+
 /**
  * Class representing a graph. It defines all methods for applying graph
  * algorithms
@@ -36,9 +37,9 @@ public abstract class AbstractGraph<N, E> implements Graph<N,E>{
 	 * Retrieve the adjacent nodes of the node passed as parameter. This method
 	 * returns a map where the key is an edge, and the value is a set of nodes
 	 * connected through the corresponding edge to the node passed as parameter.
-	 * 
-	 * @param node
-	 * @return
+	 *
+	 * @param node the node
+	 * @return the adjacent nodes with edges
 	 */
 	@Override
 	public abstract Map<E, Set<N>> getAdjacentNodesWithEdges(N node);
@@ -47,15 +48,18 @@ public abstract class AbstractGraph<N, E> implements Graph<N,E>{
 	 * Retrieve a set of adjacent nodes of the node passed as parameter.
 	 * Information about the edges connecting this node with its adjacent is not
 	 * retrieved.
-	 * 
-	 * @param node
-	 * @return
+	 *
+	 * @param node the node
+	 * @return the adjacent nodes
 	 */
 	@Override
 	public Set<N> getAdjacentNodes(N node){
 		return this.getAdjacentNodesWithEdges(node).values().stream().flatMap(Collection::stream).collect(Collectors.toSet());
 	}
 	
+	/* (non-Javadoc)
+	 * @see es.um.dis.graphlib.Graph#getIncomingNodesWithedges(java.lang.Object)
+	 */
 	@Override
 	public Map<E, Set<N>> getIncomingNodesWithedges(N node){
 		Map<E, Set<N>> incomingNodes = new HashMap<E, Set<N>>();
@@ -76,6 +80,9 @@ public abstract class AbstractGraph<N, E> implements Graph<N,E>{
 		return incomingNodes;
 	}
 	
+	/* (non-Javadoc)
+	 * @see es.um.dis.graphlib.Graph#getIncomingNodes(java.lang.Object)
+	 */
 	@Override
 	public Set<N> getIncomingNodes(N node){
 		return this.getIncomingNodesWithedges(node).values().stream().flatMap(Collection::stream).collect(Collectors.toSet());

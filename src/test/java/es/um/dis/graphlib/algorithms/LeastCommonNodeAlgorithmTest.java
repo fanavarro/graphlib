@@ -15,8 +15,15 @@ import es.um.dis.graphlib.algorithms.least_common_node.LeastCommonNodeAlgorithm;
 import es.um.dis.graphlib.algorithms.least_common_node.LeastCommonNodeInput;
 import es.um.dis.graphlib.algorithms.least_common_node.LeastCommonNodeOutput;
 
+
+/**
+ * The Class LeastCommonNodeAlgorithmTest.
+ */
 public class LeastCommonNodeAlgorithmTest {
 
+	/**
+	 * Least commonnode test 1.
+	 */
 	@Test
 	public void leastCommonnodeTest1() {
 		FakeGraph graph = new FakeGraph();
@@ -31,6 +38,9 @@ public class LeastCommonNodeAlgorithmTest {
 		assertTrue(output.getLeastCommonNodes().contains("B"));
 	}
 
+	/**
+	 * Least commonnode test 2.
+	 */
 	@Test
 	public void leastCommonnodeTest2() {
 		FakeGraph graph = new FakeGraph();
@@ -45,6 +55,9 @@ public class LeastCommonNodeAlgorithmTest {
 		assertTrue(output.getLeastCommonNodes().contains("C"));
 	}
 	
+	/**
+	 * Least commonnode test 3.
+	 */
 	@Test
 	public void leastCommonnodeTest3() {
 		FakeGraph graph = new FakeGraph();
@@ -59,6 +72,9 @@ public class LeastCommonNodeAlgorithmTest {
 		assertTrue(output.getLeastCommonNodes().contains("F"));
 	}
 	
+	/**
+	 * Least commonnode test 4.
+	 */
 	@Test
 	public void leastCommonnodeTest4() {
 		FakeGraph graph = new FakeGraph();
@@ -74,6 +90,9 @@ public class LeastCommonNodeAlgorithmTest {
 		assertTrue(output.getLeastCommonNodes().contains("J"));
 	}
 	
+	/**
+	 * Least commonnode test 5.
+	 */
 	@Test
 	public void leastCommonnodeTest5() {
 		FakeGraph graph = new FakeGraph();
@@ -86,6 +105,9 @@ public class LeastCommonNodeAlgorithmTest {
 		assertTrue(output.getLeastCommonNodes().isEmpty());
 	}
 	
+	/**
+	 * Least commonnode test 6.
+	 */
 	@Test
 	public void leastCommonnodeTest6() {
 		FakeGraph graph = new FakeGraph();
@@ -99,6 +121,9 @@ public class LeastCommonNodeAlgorithmTest {
 		assertTrue(output.getLeastCommonNodes().contains("C"));
 	}
 	
+	/**
+	 * Least commonnode test 7.
+	 */
 	@Test
 	public void leastCommonnodeTest7() {
 		FakeGraph graph = new FakeGraph();
@@ -112,6 +137,9 @@ public class LeastCommonNodeAlgorithmTest {
 		assertTrue(output.getLeastCommonNodes().contains("B"));
 	}
 	
+	/**
+	 * Least commonnode test 8.
+	 */
 	@Test
 	public void leastCommonnodeTest8() {
 		FakeGraph graph = new FakeGraph();
@@ -127,6 +155,9 @@ public class LeastCommonNodeAlgorithmTest {
 		assertTrue(output.getLeastCommonNodes().contains("B"));
 	}
 	
+	/**
+	 * Least commonnode test 9.
+	 */
 	@Test
 	public void leastCommonnodeTest9() {
 		FakeGraph graph = new FakeGraph();
@@ -141,6 +172,9 @@ public class LeastCommonNodeAlgorithmTest {
 		assertTrue(output.getLeastCommonNodes().contains("A"));
 	}
 	
+	/**
+	 * Least commonnode test 10.
+	 */
 	public void leastCommonnodeTest10() {
 		FakeGraph graph = new FakeGraph();
 		LeastCommonNodeInput<String, String> input = new LeastCommonNodeInput<String, String>();

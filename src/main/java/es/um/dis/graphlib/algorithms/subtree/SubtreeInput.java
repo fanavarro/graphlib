@@ -5,28 +5,58 @@ import java.util.Set;
 import es.um.dis.graphlib.Graph;
 import es.um.dis.graphlib.algorithms.AlgorithmInput;
 
+
+/**
+ * The Class SubtreeInput.
+ *
+ * @param <N> the node type
+ * @param <E> the edge type
+ */
 public class SubtreeInput<N,E> implements AlgorithmInput<N,E>{
+	
+	/** The graph. */
 	private Graph<N,E> graph;
+	
+	/** The nodes to be contained. */
 	private Set<N> nodesToBeContained;
 
+	/* (non-Javadoc)
+	 * @see es.um.dis.graphlib.algorithms.AlgorithmInput#getGraph()
+	 */
 	@Override
 	public Graph<N, E> getGraph() {
 		return graph;
 	}
 
+	/* (non-Javadoc)
+	 * @see es.um.dis.graphlib.algorithms.AlgorithmInput#setGraph(es.um.dis.graphlib.Graph)
+	 */
 	@Override
 	public void setGraph(Graph<N, E> graph) {
 		this.graph = graph;
 	}
 
+	/**
+	 * Gets the nodes to be contained.
+	 *
+	 * @return the nodes to be contained
+	 */
 	public Set<N> getNodesToBeContained() {
 		return nodesToBeContained;
 	}
 
+	/**
+	 * Sets the nodes to be contained.
+	 *
+	 * @param nodesToBeContained the new nodes to be contained
+	 */
 	public void setNodesToBeContained(Set<N> nodesToBeContained) {
 		this.nodesToBeContained = nodesToBeContained;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -36,6 +66,9 @@ public class SubtreeInput<N,E> implements AlgorithmInput<N,E>{
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -58,6 +91,9 @@ public class SubtreeInput<N,E> implements AlgorithmInput<N,E>{
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

@@ -11,8 +11,15 @@ import java.util.Set;
 
 import org.junit.Test;
 
+
+/**
+ * The Class GraphTest.
+ */
 public class GraphTest {
 	
+	/**
+	 * Test get adjacent nodes.
+	 */
 	@Test
 	public void testGetAdjacentNodes(){
 		FakeGraph graph = new FakeGraph();
@@ -20,6 +27,9 @@ public class GraphTest {
 		assertTrue(graph.getAdjacentNodes("E").containsAll(Arrays.asList("F","C")));
 	}
 	
+	/**
+	 * Test get incoming nodes.
+	 */
 	@Test
 	public void testGetIncomingNodes(){
 		FakeGraph graph = new FakeGraph();
@@ -30,6 +40,11 @@ public class GraphTest {
 		assertEquals(new HashSet<String>(Arrays.asList("E", "B")), graph.getIncomingNodes("C"));
 	}
 	
+	/**
+	 * Incoming nodes B.
+	 *
+	 * @return the map
+	 */
 	private Map<String, Set<String>> incomingNodesB(){
 		Map<String, Set<String>> expected = new HashMap<String, Set<String>>();
 		expected.put("1", new HashSet<String>(Arrays.asList("A")));
@@ -37,6 +52,11 @@ public class GraphTest {
 		return expected;
 	}
 	
+	/**
+	 * Incoming nodes F.
+	 *
+	 * @return the map
+	 */
 	private Map<String, Set<String>> incomingNodesF(){
 		Map<String, Set<String>> expected = new HashMap<String, Set<String>>();
 		expected.put("5", new HashSet<String>(Arrays.asList("E")));
