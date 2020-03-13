@@ -70,3 +70,73 @@ The following parameters could be specified in SubtreeInput class:
 The algorithm returns a SubtreeOutput object with the following fields:
 
 * **trees**: a set of trees that contain the nodes specified in *nodesToBeContained*.
+
+
+## Example
+In this section, we are going to create a simple graph in which we could apply algorithms. Both nodes and edges of this graph will be text strings. The first step is to create a class by extending AbstractGraph. then, we have to implement the methods *getAdjacentNodesWithEdges* and *getNodes* as follows:
+
+* **getNodes** returns a set of all nodes in the graph.
+
+* **getAdjacentNodesWithEdges** receives a node, and it returns a map whose keys are edges, and whose values are sets of nodes adjacent to the one passed as parameter through the corresponding edge. 
+
+In this simple example we are going to implement these functions by coding directly the desired behaviour without keeping ant sort of structure in the class:
+
+```java
+package es.um.dis.graphlib;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+
+/**
+ * The Class FakeGraph.
+ */
+public class FakeGraph extends AbstractGraph<String, String> {
+
+	/* (non-Javadoc)
+	 * @see es.um.dis.graphlib.AbstractGraph#getAdjacentNodesWithEdges(java.lang.Object)
+	 */
+	@Override
+	public Map<String, Set<String>> getAdjacentNodesWithEdges(String node) {
+		Map<String, Set<String>> adjacentNodes = new HashMap<String, Set<String>>();
+		if ("A".equals(node)) {
+			adjacentNodes.put("1", new HashSet<String>(Arrays.asList("B")));
+		} else if ("B".equals(node)) {
+			adjacentNodes.put("2", new HashSet<String>(Arrays.asList("C")));
+			adjacentNodes.put("3", new HashSet<String>(Arrays.asList("D")));
+		} else if ("C".equals(node)) {
+			adjacentNodes.put("8", new HashSet<String>(Arrays.asList("B")));
+		} else if ("D".equals(node)) {
+			adjacentNodes.put("4", new HashSet<String>(Arrays.asList("E")));
+		} else if ("E".equals(node)) {
+			adjacentNodes.put("5", new HashSet<String>(Arrays.asList("F")));
+			adjacentNodes.put("6", new HashSet<String>(Arrays.asList("F")));
+			adjacentNodes.put("7", new HashSet<String>(Arrays.asList("C")));
+		} else if ("F".equals(node)) {
+			// no edges
+		} else if ("G".equals(node)){
+			adjacentNodes.put("9", new HashSet<String>(Arrays.asList("I")));
+			adjacentNodes.put("10", new HashSet<String>(Arrays.asList("J")));
+		} else if ("H".equals(node)){
+			adjacentNodes.put("11", new HashSet<String>(Arrays.asList("I")));
+			adjacentNodes.put("12", new HashSet<String>(Arrays.asList("J")));
+		} else if ("I".equals(node)) {
+			// no edges
+		} else if ("J".equals(node)) {
+			// no edges
+		}
+		return adjacentNodes;
+	}
+
+	/* (non-Javadoc)
+	 * @see es.um.dis.graphlib.AbstractGraph#getNodes()
+	 */
+	@Override
+	public Set<String> getNodes() {
+		return new HashSet<String>(Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J"));
+	}
+}
+```
