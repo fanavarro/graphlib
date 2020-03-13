@@ -72,14 +72,18 @@ The algorithm returns a SubtreeOutput object with the following fields:
 * **trees**: a set of trees that contain the nodes specified in *nodesToBeContained*.
 
 
-## Example
-In this section, we are going to create a simple graph in which we could apply algorithms. Both nodes and edges of this graph will be text strings. The first step is to create a class by extending AbstractGraph. then, we have to implement the methods *getAdjacentNodesWithEdges* and *getNodes* as follows:
+## Simple example
+In this section, we are going to create a simple graph called FakeGraph, used for testing, in which we could apply the available algorithms. Both nodes and edges of this graph will be text strings. Nodes are denoted by letters from "A" to "J", while edges are denoted by numbers from "1" to "12". The next figure shows the FakeGraph. As you can see, it is a cyclic, directed graph, and it contains two islands. Moreover, two nodes could be connected by more than one edge.
 
-* **getNodes** returns a set of all nodes in the graph.
+![](./assets/FakeGraph.png)
 
-* **getAdjacentNodesWithEdges** receives a node, and it returns a map whose keys are edges, and whose values are sets of nodes adjacent to the one passed as parameter through the corresponding edge. 
+The first step is to create a class by extending AbstractGraph, indicating that both nodes and edges are strings. Then, we have to implement the methods *getAdjacentNodesWithEdges* and *getNodes* as follows:
 
-In this simple example we are going to implement these functions by coding directly the desired behaviour without keeping ant sort of structure in the class:
+* **getNodes** returns a set of all nodes in the graph. In this case, we should return the set ("A", "B", "C", "D", "E", "F", "J", "H", "I", "J").
+
+* **getAdjacentNodesWithEdges** receives a node, and it returns a map whose keys are edges, and whose values are sets of nodes adjacent to the one passed as parameter through the corresponding edge. In this case, we are going to implement this function by simply hardcoding the desired behaviour. For example, if the node passed as parameter is "B", we should return a map indicating that the adjacent nodes are "C" through the edge "2", and "D" through the edge "3": {"2" => Set("C"); "3" => Set("D")}. In the case of the node "E", we should indicate that its adjacent nodes are "C" through the edge "7", and "F" through the edges "5" and "6": {"7" => Set("C"); "5" => Set("F"); "6" => Set("F")}.
+
+Finally, the implementation of this graph is as follows:
 
 ```java
 package es.um.dis.graphlib;
@@ -140,3 +144,33 @@ public class FakeGraph extends AbstractGraph<String, String> {
 	}
 }
 ```
+
+At this point, we can apply algorithms to the graph. As example, below is showed a test case for the least common node algorithm, which computes the least common node of "A" and "C" in the FakeGraph, which results in node "B":
+
+```java
+@Test
+public void leastCommonNodeTest1() {
+	/* Create the graph */
+	FakeGraph graph = new FakeGraph();
+
+	/* Create the algorithm to apply */
+	LeastCommonNodeAlgorithm<String, String> algorithm = new LeastCommonNodeAlgorithm<String, String>();
+
+	/* Create the input for the algorithm */
+	LeastCommonNodeInput<String, String> input = new LeastCommonNodeInput<String, String>();
+	input.setGraph(graph);
+	input.setNodes(new HashSet<String>(Arrays.asList("A", "C")));
+
+	/* Apply the algorithm */
+	LeastCommonNodeOutput<String, String> output = (LeastCommonNodeOutput<String, String>) graph
+			.applyAlgorithm(algorithm, input);
+
+	/* Check output */
+	assertNotNull(output);
+	assertNotNull(output.getLeastCommonNodes());
+	assertEquals(1, output.getLeastCommonNodes().size());
+	assertTrue(output.getLeastCommonNodes().contains("B"));
+}
+```
+
+For more examples, please check the [test cases](./src/test/java/es/um/dis/graphlib/algorithms) provided for each algorithm.
