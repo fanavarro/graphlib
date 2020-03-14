@@ -22,7 +22,7 @@ import es.um.dis.graphlib.algorithms.subtree.SubtreeOutput;
 /**
  * The Class SubtreeAlgorithmTests.
  */
-public class SubtreeAlgorithmTests {
+public class SubtreeAlgorithmTest {
 
 	/**
 	 * Subtree algorithm test 1.
@@ -37,7 +37,8 @@ public class SubtreeAlgorithmTests {
 		input.setGraph(graph);
 		input.setNodesToBeContained(nodesToContain);
 
-		SubtreeOutput<String, String> output = (SubtreeOutput<String, String>) graph.applyAlgorithm(algorithm, input);
+		
+		SubtreeOutput<String, String> output = (SubtreeOutput<String, String>) algorithm.apply(input);
 		assertNotNull(output);
 		assertNotNull(output.getTrees());
 		assertTrue(!output.getTrees().isEmpty());
@@ -59,7 +60,7 @@ public class SubtreeAlgorithmTests {
 		input.setGraph(graph);
 		input.setNodesToBeContained(nodesToContain);
 
-		SubtreeOutput<String, String> output = (SubtreeOutput<String, String>) graph.applyAlgorithm(algorithm, input);
+		SubtreeOutput<String, String> output = (SubtreeOutput<String, String>) algorithm.apply(input);
 		assertNotNull(output);
 		assertNotNull(output.getTrees());
 		assertTrue(!output.getTrees().isEmpty());
@@ -82,7 +83,7 @@ public class SubtreeAlgorithmTests {
 		input.setGraph(graph);
 		input.setNodesToBeContained(nodesToContain);
 
-		SubtreeOutput<String, String> output = (SubtreeOutput<String, String>) graph.applyAlgorithm(algorithm, input);
+		SubtreeOutput<String, String> output = (SubtreeOutput<String, String>) algorithm.apply(input);
 		assertNotNull(output);
 		assertNotNull(output.getTrees());
 		assertTrue(output.getTrees().isEmpty());
@@ -101,7 +102,7 @@ public class SubtreeAlgorithmTests {
 		input.setGraph(graph);
 		input.setNodesToBeContained(nodesToContain);
 
-		SubtreeOutput<String, String> output = (SubtreeOutput<String, String>) graph.applyAlgorithm(algorithm, input);
+		SubtreeOutput<String, String> output = (SubtreeOutput<String, String>) algorithm.apply(input);
 		assertNotNull(output);
 		assertNotNull(output.getTrees());
 		assertTrue(!output.getTrees().isEmpty());
