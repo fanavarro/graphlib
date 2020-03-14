@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/fanavarro/graphlib.svg?branch=master)](https://travis-ci.org/fanavarro/graphlib)
+[![Build Status](https://travis-ci.org/fanavarro/graphlib.svg?branch=master)](https://travis-ci.org/fanavarro/graphlib) [![codecov](https://codecov.io/gh/fanavarro/graphlib/branch/master/graph/badge.svg)](https://codecov.io/gh/fanavarro/graphlib)
 
 # graphlib
 Java library for graph management.
