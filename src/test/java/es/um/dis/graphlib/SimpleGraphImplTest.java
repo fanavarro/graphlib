@@ -74,6 +74,7 @@ public class SimpleGraphImplTest {
 
 	@Test
 	public void testEqualsObject() {
+		assertTrue(new SimpleGraphImpl<String, String>().equals(new SimpleGraphImpl<String, String>()));
 		SimpleGraphImpl<String, String> g1 = this.createTestGraph();
 		SimpleGraphImpl<String, String> g2 = this.createTestGraph();
 		
@@ -83,6 +84,8 @@ public class SimpleGraphImplTest {
 		g2.addNode("X");
 		assertTrue(!g1.equals(g2));
 		assertTrue(!g2.equals(g1));
+		assertTrue(!g1.equals(null));
+		assertTrue(!g1.equals(new String()));
 	}
 	
 	private SimpleGraphImpl<String, String> createTestGraph(){

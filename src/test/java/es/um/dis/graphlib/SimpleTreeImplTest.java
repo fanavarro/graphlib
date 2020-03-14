@@ -28,6 +28,7 @@ public class SimpleTreeImplTest {
 	
 	@Test
 	public void testEquals(){
+		assertTrue(new SimpleTreeImpl<String, String>().equals(new SimpleTreeImpl<String, String>()));
 		SimpleTreeImpl<String, String> tree1 = (SimpleTreeImpl<String, String>) createCorrectTree();
 		SimpleTreeImpl<String, String> tree2 = (SimpleTreeImpl<String, String>) createCorrectTree();
 		
@@ -37,6 +38,9 @@ public class SimpleTreeImplTest {
 		tree2.addNode("D", "3", "X");
 		assertTrue(!tree1.equals(tree2));
 		assertTrue(!tree2.equals(tree1));
+		
+		assertTrue(!tree1.equals(null));
+		assertTrue(!tree1.equals(new String()));
 	}
 
 	/**
