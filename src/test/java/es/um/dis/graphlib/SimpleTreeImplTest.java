@@ -34,6 +34,8 @@ public class SimpleTreeImplTest {
 		
 		assertTrue(tree1.equals(tree2));
 		assertTrue(tree2.equals(tree1));
+		assertTrue(tree1.equals(tree1));
+		assertTrue(tree2.equals(tree2));
 		
 		tree2.addNode("D", "3", "X");
 		assertTrue(!tree1.equals(tree2));

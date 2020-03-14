@@ -80,6 +80,8 @@ public class SimpleGraphImplTest {
 		
 		assertTrue(g1.equals(g2));
 		assertTrue(g2.equals(g1));
+		assertTrue(g1.equals(g1));
+		assertTrue(g2.equals(g2));
 		
 		g2.addNode("X");
 		assertTrue(!g1.equals(g2));
