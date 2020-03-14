@@ -1,4 +1,4 @@
-package es.um.dis.graphlib.algorithms;
+package es.um.dis.graphlib.algorithms.least_common_node;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

@@ -1,4 +1,4 @@
-package es.um.dis.graphlib.algorithms;
+package es.um.dis.graphlib.algorithms.subtree;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -13,6 +13,7 @@ import org.junit.Test;
 import es.um.dis.graphlib.FakeGraph;
 import es.um.dis.graphlib.SimpleTreeImpl;
 import es.um.dis.graphlib.Tree;
+import es.um.dis.graphlib.algorithms.Algorithm;
 import es.um.dis.graphlib.algorithms.subtree.SubtreeAlgorithm;
 import es.um.dis.graphlib.algorithms.subtree.SubtreeInput;
 import es.um.dis.graphlib.algorithms.subtree.SubtreeOutput;

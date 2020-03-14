@@ -1,4 +1,4 @@
-package es.um.dis.graphlib.algorithms;
+package es.um.dis.graphlib.algorithms.shortest_path;
 
 import static org.junit.Assert.*;
 

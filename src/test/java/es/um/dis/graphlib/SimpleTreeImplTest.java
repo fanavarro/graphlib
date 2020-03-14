@@ -1,6 +1,7 @@
 package es.um.dis.graphlib;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -11,8 +12,32 @@ import org.junit.Test;
 /**
  * The Class TreeTest.
  */
-public class TreeTest {
+public class SimpleTreeImplTest {
 	
+	@Test
+	public void testAddNode(){
+		SimpleTreeImpl<String, String> tree = new SimpleTreeImpl<String, String>();
+		tree.addNode("A", "1", new HashSet<String>(Arrays.asList("B", "C")));
+		tree.addNode("C", "2", "D");
+		
+		assertEquals(new HashSet<String>(Arrays.asList("A", "B", "C", "D")), tree.getNodes());
+		assertEquals(new HashSet<String>(Arrays.asList("B", "C")), tree.getAdjacentNodes("A"));
+		assertTrue(tree.getAdjacentNodes("B").isEmpty());
+		assertEquals(new HashSet<String>(Arrays.asList("D")), tree.getAdjacentNodes("C"));
+	}
+	
+	@Test
+	public void testEquals(){
+		SimpleTreeImpl<String, String> tree1 = (SimpleTreeImpl<String, String>) createCorrectTree();
+		SimpleTreeImpl<String, String> tree2 = (SimpleTreeImpl<String, String>) createCorrectTree();
+		
+		assertTrue(tree1.equals(tree2));
+		assertTrue(tree2.equals(tree1));
+		
+		tree2.addNode("D", "3", "X");
+		assertTrue(!tree1.equals(tree2));
+		assertTrue(!tree2.equals(tree1));
+	}
 
 	/**
 	 * Test correct tree.
