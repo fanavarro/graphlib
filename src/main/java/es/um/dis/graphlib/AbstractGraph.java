@@ -102,4 +102,35 @@ public abstract class AbstractGraph<N, E> implements Graph<N,E>{
 		input.setGraph(this);
 		return algorithm.apply(input);
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean equals(Object other){
+		if(this == other){
+			return true;
+		}
+		if(other == null){
+			return false;
+		}
+		if (!(other instanceof Graph<?,?>)){
+			return false;
+		}
+		Graph<N,E> otherGraph = null;
+		
+		try{
+			otherGraph = (Graph<N, E>) other;
+		} catch (ClassCastException e){
+			return false;
+		}
+		if(!this.getNodes().equals(otherGraph.getNodes())){
+			return false;
+		}
+		for (N node : this.getNodes()){
+			if(!this.getAdjacentNodesWithEdges(node).equals(otherGraph.getAdjacentNodesWithEdges(node))){
+				return false;
+			}
+		}
+		return true;
+		
+	}
 }

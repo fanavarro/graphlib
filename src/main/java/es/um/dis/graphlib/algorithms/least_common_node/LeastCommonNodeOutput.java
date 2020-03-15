@@ -81,21 +81,16 @@ public class LeastCommonNodeOutput<N, E> implements Serializable, AlgorithmOutpu
 		this.reverse = reverse;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((leastCommonNodes == null) ? 0 : leastCommonNodes.hashCode());
 		result = prime * result + ((nodes == null) ? 0 : nodes.hashCode());
+		result = prime * result + (reverse ? 1231 : 1237);
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -104,7 +99,7 @@ public class LeastCommonNodeOutput<N, E> implements Serializable, AlgorithmOutpu
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		LeastCommonNodeOutput<?, ?> other = (LeastCommonNodeOutput<?, ?>) obj;
+		LeastCommonNodeOutput<?,?> other = (LeastCommonNodeOutput<?,?>) obj;
 		if (leastCommonNodes == null) {
 			if (other.leastCommonNodes != null)
 				return false;
@@ -115,22 +110,22 @@ public class LeastCommonNodeOutput<N, E> implements Serializable, AlgorithmOutpu
 				return false;
 		} else if (!nodes.equals(other.nodes))
 			return false;
+		if (reverse != other.reverse)
+			return false;
 		return true;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("LeastCommonNodeOutput [nodes=");
 		builder.append(nodes);
+		builder.append(", reverse=");
+		builder.append(reverse);
 		builder.append(", leastCommonNodes=");
 		builder.append(leastCommonNodes);
 		builder.append("]");
 		return builder.toString();
 	}
-
 
 }
