@@ -4,6 +4,7 @@ import es.um.dis.graphlib.Graph;
 
 
 
+// TODO: Auto-generated Javadoc
 /**
  * Interface for the input used in algorithms. All algorithms have at least a
  * graph as input.

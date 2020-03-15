@@ -18,6 +18,7 @@ import es.um.dis.graphlib.algorithms.least_common_node.LeastCommonNodeOutput;
 
 
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class SubtreeAlgorithm.
  *
@@ -32,21 +33,22 @@ public class SubtreeAlgorithm<N, E> implements Algorithm<N,E>{
 	@Override
 	public AlgorithmOutput<N, E> apply(AlgorithmInput<N, E> input) {
 		SubtreeInput<N,E> subtreeInput = (SubtreeInput<N, E>)input;
-		Set<N> nodesToBeContained = subtreeInput.getNodesToBeContained();
-		Graph<N,E> graph = subtreeInput.getGraph();
-		SubtreeOutput<N, E> output = this.getTreeContainingNodes(graph, nodesToBeContained);
+		
+		SubtreeOutput<N, E> output = this.getTreeContainingNodes(subtreeInput);
 		return output;
 	}
 
 	/**
 	 * Gets the tree containing nodes.
 	 *
-	 * @param graph the graph
-	 * @param nodesToBeContained the nodes to be contained
+	 * @param subtreeInput the subtree input
 	 * @return the tree containing nodes
 	 */
-	private SubtreeOutput<N, E> getTreeContainingNodes(Graph<N, E> graph, Set<N> nodesToBeContained) {
+	private SubtreeOutput<N, E> getTreeContainingNodes(SubtreeInput<N, E> subtreeInput) {
 		SubtreeOutput<N, E> output = new SubtreeOutput<N, E>();
+		output.setInput(subtreeInput);
+		Set<N> nodesToBeContained = subtreeInput.getNodesToBeContained();
+		Graph<N,E> graph = subtreeInput.getGraph();
 		Set<N> commonAncestors = this.getCommonAncestors(graph, nodesToBeContained);
 		Set<N> possibleRoots = new HashSet<N>(nodesToBeContained);
 		possibleRoots.addAll(commonAncestors);

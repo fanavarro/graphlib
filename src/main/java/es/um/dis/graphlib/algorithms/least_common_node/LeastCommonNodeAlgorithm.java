@@ -17,6 +17,7 @@ import es.um.dis.graphlib.algorithms.AlgorithmInput;
 
 
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class LeastCommonNodeAlgorithm.
  *
@@ -36,9 +37,9 @@ public class LeastCommonNodeAlgorithm<N, E> implements Algorithm<N, E> {
 		boolean reverse = leastCommonNodeInput.isReverse();
 		Set<N> leastCommonNodes = this.getLeastCommonNode(graph, nodes, reverse);
 		LeastCommonNodeOutput<N, E> leastCommonNodeOutput = new LeastCommonNodeOutput<N, E>();
-		leastCommonNodeOutput.setNodes(nodes);
+		leastCommonNodeOutput.setInput(leastCommonNodeInput);
 		leastCommonNodeOutput.setLeastCommonNodes(leastCommonNodes);
-		leastCommonNodeOutput.setReverse(leastCommonNodeInput.isReverse());
+
 		return leastCommonNodeOutput;
 	}
 

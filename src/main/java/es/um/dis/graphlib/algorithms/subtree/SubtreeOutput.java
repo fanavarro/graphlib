@@ -4,27 +4,38 @@ import java.util.HashSet;
 import java.util.Set;
 
 import es.um.dis.graphlib.Tree;
+import es.um.dis.graphlib.algorithms.AlgorithmInput;
 import es.um.dis.graphlib.algorithms.AlgorithmOutput;
 
-
-
+// TODO: Auto-generated Javadoc
 /**
  * The Class SubtreeOutput.
  *
- * @param <N> the node type
- * @param <E> the edge type
+ * @param <N>
+ *            the node type
+ * @param <E>
+ *            the edge type
  */
-public class SubtreeOutput<N, E> implements AlgorithmOutput<N,E> {
-	
+public class SubtreeOutput<N, E> implements AlgorithmOutput<N, E> {
+
 	/** The trees. */
 	private Set<Tree<N, E>> trees;
+
+	/** The input. */
+	private SubtreeInput<N, E> input;
 	
 	/**
+
 	 * Instantiates a new subtree output.
+
 	 */
+
 	public SubtreeOutput(){
+
 		this.trees = new HashSet<Tree<N,E>>();
+
 	}
+
 
 	/**
 	 * Gets the trees.
@@ -33,6 +44,31 @@ public class SubtreeOutput<N, E> implements AlgorithmOutput<N,E> {
 	 */
 	public Set<Tree<N, E>> getTrees() {
 		return trees;
+	}
+
+	/**
+	 * Sets the trees.
+	 *
+	 * @param trees the trees
+	 */
+	public void setTrees(Set<Tree<N, E>> trees) {
+		this.trees = trees;
+	}
+
+	/* (non-Javadoc)
+	 * @see es.um.dis.graphlib.algorithms.AlgorithmOutput#getInput()
+	 */
+	@Override
+	public SubtreeInput<N, E> getInput() {
+		return input;
+	}
+
+	/* (non-Javadoc)
+	 * @see es.um.dis.graphlib.algorithms.AlgorithmOutput#setInput(es.um.dis.graphlib.algorithms.AlgorithmInput)
+	 */
+	@Override
+	public void setInput(AlgorithmInput<N, E> input) {
+		this.input = (SubtreeInput<N, E>) input;
 	}
 
 	/**
@@ -51,6 +87,7 @@ public class SubtreeOutput<N, E> implements AlgorithmOutput<N,E> {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((input == null) ? 0 : input.hashCode());
 		result = prime * result + ((trees == null) ? 0 : trees.hashCode());
 		return result;
 	}
@@ -67,6 +104,11 @@ public class SubtreeOutput<N, E> implements AlgorithmOutput<N,E> {
 		if (getClass() != obj.getClass())
 			return false;
 		SubtreeOutput<?, ?> other = (SubtreeOutput<?, ?>) obj;
+		if (input == null) {
+			if (other.input != null)
+				return false;
+		} else if (!input.equals(other.input))
+			return false;
 		if (trees == null) {
 			if (other.trees != null)
 				return false;
@@ -81,10 +123,12 @@ public class SubtreeOutput<N, E> implements AlgorithmOutput<N,E> {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("SubtreeOutput [tree=");
+		builder.append("SubtreeOutput [trees=");
 		builder.append(trees);
+		builder.append(", input=");
+		builder.append(input);
 		builder.append("]");
 		return builder.toString();
 	}
-	
+
 }

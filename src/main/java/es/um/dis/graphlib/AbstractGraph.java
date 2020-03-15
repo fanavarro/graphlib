@@ -14,6 +14,7 @@ import es.um.dis.graphlib.algorithms.AlgorithmInput;
 import es.um.dis.graphlib.algorithms.AlgorithmOutput;
 
 
+// TODO: Auto-generated Javadoc
 /**
  * Class representing a graph. It defines all methods for applying graph
  * algorithms

@@ -15,6 +15,7 @@ import es.um.dis.graphlib.algorithms.AlgorithmInput;
 
 
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class ShortestPathAlgorithm.
  *
@@ -38,6 +39,7 @@ public class ShortestPathAlgorithm<N, E> implements Algorithm<N, E> {
 		TreeNode<N, Set<E>> destinyNode = this.getTreePaths(graph, source, target, maxDepth);
 		List<PathNode<N,E>> path =  this.buildPath(destinyNode);
 		ShortestPathOutput<N,E> output = new ShortestPathOutput<N,E>();
+		output.setInput(shortestPathInput);
 		output.setPath(path);
 		return output;
 	}

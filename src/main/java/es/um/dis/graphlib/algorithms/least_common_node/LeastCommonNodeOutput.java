@@ -3,10 +3,12 @@ package es.um.dis.graphlib.algorithms.least_common_node;
 import java.io.Serializable;
 import java.util.Set;
 
+import es.um.dis.graphlib.algorithms.AlgorithmInput;
 import es.um.dis.graphlib.algorithms.AlgorithmOutput;
 
 
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class LeastCommonNodeOutput.
  *
@@ -18,32 +20,26 @@ public class LeastCommonNodeOutput<N, E> implements Serializable, AlgorithmOutpu
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 8021326381257947314L;
 	
-	/** The nodes. */
-	private Set<N> nodes;
-	
-	/** The reverse. */
-	private boolean reverse;
+	/** The input. */
+	private LeastCommonNodeInput<N, E> input;
 	
 	/** The least common nodes. */
 	private Set<N> leastCommonNodes;
 
-
-	/**
-	 * Gets the nodes.
-	 *
-	 * @return the nodes
+	/* (non-Javadoc)
+	 * @see es.um.dis.graphlib.algorithms.AlgorithmOutput#getInput()
 	 */
-	public Set<N> getNodes() {
-		return nodes;
+	@Override
+	public LeastCommonNodeInput<N, E> getInput() {
+		return input;
 	}
 
-	/**
-	 * Sets the nodes.
-	 *
-	 * @param nodes the new nodes
+	/* (non-Javadoc)
+	 * @see es.um.dis.graphlib.algorithms.AlgorithmOutput#setInput(es.um.dis.graphlib.algorithms.AlgorithmInput)
 	 */
-	public void setNodes(Set<N> nodes) {
-		this.nodes = nodes;
+	@Override
+	public void setInput(AlgorithmInput<N, E> input) {
+		this.input = (LeastCommonNodeInput<N, E>) input;
 	}
 
 	/**
@@ -64,24 +60,6 @@ public class LeastCommonNodeOutput<N, E> implements Serializable, AlgorithmOutpu
 		this.leastCommonNodes = leastCommonNodes;
 	}
 
-	/**
-	 * Checks if is reverse.
-	 *
-	 * @return true, if is reverse
-	 */
-	public boolean isReverse() {
-		return reverse;
-	}
-
-	/**
-	 * Sets the reverse.
-	 *
-	 * @param reverse the new reverse
-	 */
-	public void setReverse(boolean reverse) {
-		this.reverse = reverse;
-	}
-
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -89,9 +67,8 @@ public class LeastCommonNodeOutput<N, E> implements Serializable, AlgorithmOutpu
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((input == null) ? 0 : input.hashCode());
 		result = prime * result + ((leastCommonNodes == null) ? 0 : leastCommonNodes.hashCode());
-		result = prime * result + ((nodes == null) ? 0 : nodes.hashCode());
-		result = prime * result + (reverse ? 1231 : 1237);
 		return result;
 	}
 
@@ -107,17 +84,15 @@ public class LeastCommonNodeOutput<N, E> implements Serializable, AlgorithmOutpu
 		if (getClass() != obj.getClass())
 			return false;
 		LeastCommonNodeOutput<?,?> other = (LeastCommonNodeOutput<?,?>) obj;
+		if (input == null) {
+			if (other.input != null)
+				return false;
+		} else if (!input.equals(other.input))
+			return false;
 		if (leastCommonNodes == null) {
 			if (other.leastCommonNodes != null)
 				return false;
 		} else if (!leastCommonNodes.equals(other.leastCommonNodes))
-			return false;
-		if (nodes == null) {
-			if (other.nodes != null)
-				return false;
-		} else if (!nodes.equals(other.nodes))
-			return false;
-		if (reverse != other.reverse)
 			return false;
 		return true;
 	}
@@ -128,14 +103,15 @@ public class LeastCommonNodeOutput<N, E> implements Serializable, AlgorithmOutpu
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("LeastCommonNodeOutput [nodes=");
-		builder.append(nodes);
-		builder.append(", reverse=");
-		builder.append(reverse);
+		builder.append("LeastCommonNodeOutput [input=");
+		builder.append(input);
 		builder.append(", leastCommonNodes=");
 		builder.append(leastCommonNodes);
 		builder.append("]");
 		return builder.toString();
 	}
+
+
+
 
 }
