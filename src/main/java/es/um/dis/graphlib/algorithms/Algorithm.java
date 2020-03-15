@@ -1,6 +1,7 @@
 package es.um.dis.graphlib.algorithms;
 
 
+
 /**
  * The Interface Algorithm.
  *

@@ -15,6 +15,7 @@ import es.um.dis.graphlib.algorithms.least_common_node.LeastCommonNodeAlgorithm;
 import es.um.dis.graphlib.algorithms.least_common_node.LeastCommonNodeInput;
 import es.um.dis.graphlib.algorithms.least_common_node.LeastCommonNodeOutput;
 
+
 /**
  * The Class LeastCommonNodeAlgorithmTest.
  */

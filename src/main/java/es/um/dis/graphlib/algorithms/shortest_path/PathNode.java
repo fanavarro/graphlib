@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 
+
 /**
  * Class representing a node in a path. It contains source and target nodes, and
  * a set of edges that relate both nodes.

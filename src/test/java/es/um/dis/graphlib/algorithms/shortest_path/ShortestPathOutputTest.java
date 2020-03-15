@@ -9,13 +9,23 @@ import es.um.dis.graphlib.Graph;
 import es.um.dis.graphlib.test_config.GraphTestFactory;
 import es.um.dis.graphlib.test_config.MeanBeanConfigurationBase;
 
+
+/**
+ * The Class ShortestPathOutputTest.
+ */
 public class ShortestPathOutputTest {
 
+	/**
+	 * Test getters and setters.
+	 */
 	@Test
 	public void testGettersAndSetters() {
-		new BeanTester().testBean(ShortestPathOutput.class, MeanBeanConfigurationBase.getConfiguration());
+		new BeanTester().testBean(ShortestPathOutput.class, MeanBeanConfigurationBase.getConfigurationBuilderBase().build());
 	}
 	
+	/**
+	 * Test equals.
+	 */
 	@Test
 	public void testEquals(){
 		EqualsMethodTester tester = new EqualsMethodTester();
@@ -23,6 +33,9 @@ public class ShortestPathOutputTest {
 		tester.testEqualsMethod(ShortestPathOutput.class);
 	}
 
+	/**
+	 * Test hash.
+	 */
 	@Test
 	public void testHash(){
 		HashCodeMethodTester tester = new HashCodeMethodTester();

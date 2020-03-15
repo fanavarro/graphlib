@@ -12,6 +12,7 @@ import java.util.Set;
 
 import org.junit.Test;
 
+
 /**
  * The Class GraphTest.
  */
@@ -40,19 +41,30 @@ public class GraphTest {
 		assertEquals(new HashSet<String>(Arrays.asList("E", "B")), graph.getIncomingNodes("C"));
 	}
 
+	/**
+	 * Test equals 1.
+	 */
 	@Test
-	public void testEquals() {
+	public void testEquals1() {
 		FakeGraph g1 = new FakeGraph();
 		FakeGraph g2 = new FakeGraph();
-		SimpleGraphImpl<Integer, Integer> g3 = new SimpleGraphImpl<Integer, Integer>();
-		g3.addNode(1);
-		SimpleGraphImpl<Integer, Integer> g4 = new SimpleGraphImpl<Integer, Integer>();
-		g4.addNode(1);
+		
 
 		assertTrue(g1.equals(g1));
 		assertTrue(g1.equals(g2));
 		assertTrue(g2.equals(g1));
 		assertFalse(g1.equals(null));
+	}
+	
+	/**
+	 * Test equals 2.
+	 */
+	@Test
+	public void testEquals2() {
+		SimpleGraphImpl<Integer, Integer> g3 = new SimpleGraphImpl<Integer, Integer>();
+		g3.addNode(1);
+		SimpleGraphImpl<Integer, Integer> g4 = new SimpleGraphImpl<Integer, Integer>();
+		g4.addNode(1);
 		assertTrue(g3.equals(g3));
 		assertTrue(g4.equals(g4));
 		assertTrue(g3.equals(g4));

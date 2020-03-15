@@ -8,6 +8,7 @@ import es.um.dis.graphlib.algorithms.AlgorithmInput;
 import es.um.dis.graphlib.algorithms.AlgorithmOutput;
 
 
+
 /**
  * The Interface Graph.
  *

@@ -9,14 +9,24 @@ import es.um.dis.graphlib.Graph;
 import es.um.dis.graphlib.test_config.GraphTestFactory;
 import es.um.dis.graphlib.test_config.MeanBeanConfigurationBase;
 
+
+/**
+ * The Class LeastCommonNodeInputTest.
+ */
 public class LeastCommonNodeInputTest {
 
+	/**
+	 * Test getters and setters.
+	 */
 	@Test
 	public void testGettersAndSetters() {
-		new BeanTester().testBean(LeastCommonNodeInput.class, MeanBeanConfigurationBase.getConfiguration());
+		new BeanTester().testBean(LeastCommonNodeInput.class, MeanBeanConfigurationBase.getConfigurationBuilderBase().build());
 		
 	}
 	
+	/**
+	 * Test equals.
+	 */
 	@Test
 	public void testEquals(){
 		EqualsMethodTester tester = new EqualsMethodTester();
@@ -24,6 +34,9 @@ public class LeastCommonNodeInputTest {
 		tester.testEqualsMethod(LeastCommonNodeInput.class);
 	}
 	
+	/**
+	 * Test hash.
+	 */
 	@Test
 	public void testHash(){
 		HashCodeMethodTester tester = new HashCodeMethodTester();

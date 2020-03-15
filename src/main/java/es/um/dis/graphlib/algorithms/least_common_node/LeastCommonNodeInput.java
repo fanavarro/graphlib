@@ -7,6 +7,7 @@ import es.um.dis.graphlib.Graph;
 import es.um.dis.graphlib.algorithms.AlgorithmInput;
 
 
+
 /**
  * The Class LessCommonNodeInput.
  *
@@ -79,6 +80,9 @@ public class LeastCommonNodeInput<N, E> implements Serializable, AlgorithmInput<
 		this.reverse = inverse;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -89,6 +93,9 @@ public class LeastCommonNodeInput<N, E> implements Serializable, AlgorithmInput<
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -113,6 +120,9 @@ public class LeastCommonNodeInput<N, E> implements Serializable, AlgorithmInput<
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

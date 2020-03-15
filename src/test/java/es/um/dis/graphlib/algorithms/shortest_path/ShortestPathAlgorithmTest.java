@@ -10,6 +10,7 @@ import es.um.dis.graphlib.algorithms.shortest_path.ShortestPathInput;
 import es.um.dis.graphlib.algorithms.shortest_path.ShortestPathOutput;
 
 
+
 /**
  * The Class ShortestPathAlgorithmTest.
  */

@@ -9,13 +9,23 @@ import es.um.dis.graphlib.Graph;
 import es.um.dis.graphlib.test_config.GraphTestFactory;
 import es.um.dis.graphlib.test_config.MeanBeanConfigurationBase;
 
+
+/**
+ * The Class SubtreeOutputTest.
+ */
 public class SubtreeOutputTest {
 
+	/**
+	 * Test getters and setters.
+	 */
 	@Test
 	public void testGettersAndSetters() {
-		new BeanTester().testBean(SubtreeOutput.class, MeanBeanConfigurationBase.getConfiguration());
+		new BeanTester().testBean(SubtreeOutput.class, MeanBeanConfigurationBase.getConfigurationBuilderBase().build());
 	}
 	
+	/**
+	 * Test equals.
+	 */
 	@Test
 	public void testEquals(){
 		EqualsMethodTester tester = new EqualsMethodTester();
@@ -23,6 +33,9 @@ public class SubtreeOutputTest {
 		tester.testEqualsMethod(SubtreeOutput.class);
 	}
 	
+	/**
+	 * Test hash.
+	 */
 	@Test
 	public void testHash(){
 		HashCodeMethodTester tester = new HashCodeMethodTester();

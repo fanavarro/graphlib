@@ -6,6 +6,7 @@ import java.util.Set;
 import es.um.dis.graphlib.algorithms.AlgorithmOutput;
 
 
+
 /**
  * The Class LeastCommonNodeOutput.
  *
@@ -81,6 +82,9 @@ public class LeastCommonNodeOutput<N, E> implements Serializable, AlgorithmOutpu
 		this.reverse = reverse;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -91,6 +95,9 @@ public class LeastCommonNodeOutput<N, E> implements Serializable, AlgorithmOutpu
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -115,6 +122,9 @@ public class LeastCommonNodeOutput<N, E> implements Serializable, AlgorithmOutpu
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

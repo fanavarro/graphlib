@@ -6,6 +6,7 @@ import java.util.List;
 import es.um.dis.graphlib.algorithms.AlgorithmOutput;
 
 
+
 /**
  * The Class ShortestPathOutput.
  *
@@ -38,6 +39,9 @@ public class ShortestPathOutput<N,E> implements AlgorithmOutput<N,E>, Serializab
 		this.path = path;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -46,6 +50,9 @@ public class ShortestPathOutput<N,E> implements AlgorithmOutput<N,E>, Serializab
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -63,6 +70,9 @@ public class ShortestPathOutput<N,E> implements AlgorithmOutput<N,E>, Serializab
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

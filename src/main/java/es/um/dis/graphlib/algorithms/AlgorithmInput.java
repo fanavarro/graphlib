@@ -3,6 +3,7 @@ package es.um.dis.graphlib.algorithms;
 import es.um.dis.graphlib.Graph;
 
 
+
 /**
  * Interface for the input used in algorithms. All algorithms have at least a
  * graph as input.

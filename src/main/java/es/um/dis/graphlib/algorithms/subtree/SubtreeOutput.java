@@ -7,6 +7,7 @@ import es.um.dis.graphlib.Tree;
 import es.um.dis.graphlib.algorithms.AlgorithmOutput;
 
 
+
 /**
  * The Class SubtreeOutput.
  *

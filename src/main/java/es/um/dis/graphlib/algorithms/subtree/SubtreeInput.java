@@ -6,6 +6,7 @@ import es.um.dis.graphlib.Graph;
 import es.um.dis.graphlib.algorithms.AlgorithmInput;
 
 
+
 /**
  * The Class SubtreeInput.
  *

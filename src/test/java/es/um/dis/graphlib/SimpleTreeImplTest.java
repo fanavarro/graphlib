@@ -7,6 +7,11 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 import org.junit.Test;
+import org.meanbean.test.EqualsMethodTester;
+import org.meanbean.test.HashCodeMethodTester;
+
+import es.um.dis.graphlib.test_config.GraphTestFactory;
+
 
 
 /**
@@ -14,6 +19,9 @@ import org.junit.Test;
  */
 public class SimpleTreeImplTest {
 	
+	/**
+	 * Test add node.
+	 */
 	@Test
 	public void testAddNode(){
 		SimpleTreeImpl<String, String> tree = new SimpleTreeImpl<String, String>();
@@ -26,8 +34,11 @@ public class SimpleTreeImplTest {
 		assertEquals(new HashSet<String>(Arrays.asList("D")), tree.getAdjacentNodes("C"));
 	}
 	
+	/**
+	 * Test equals 1.
+	 */
 	@Test
-	public void testEquals(){
+	public void testEquals1(){
 		assertTrue(new SimpleTreeImpl<String, String>().equals(new SimpleTreeImpl<String, String>()));
 		SimpleTreeImpl<String, String> tree1 = (SimpleTreeImpl<String, String>) createCorrectTree();
 		SimpleTreeImpl<String, String> tree2 = (SimpleTreeImpl<String, String>) createCorrectTree();
@@ -36,10 +47,12 @@ public class SimpleTreeImplTest {
 		assertTrue(tree2.equals(tree1));
 		assertTrue(tree1.equals(tree1));
 		assertTrue(tree2.equals(tree2));
+		assertTrue(tree1.hashCode() == tree2.hashCode());
 		
 		tree2.addNode("D", "3", "X");
 		assertTrue(!tree1.equals(tree2));
 		assertTrue(!tree2.equals(tree1));
+		assertTrue(tree1.hashCode() != tree2.hashCode());
 		
 		assertTrue(!tree1.equals(null));
 		assertTrue(!tree1.equals(new String()));
@@ -73,6 +86,26 @@ public class SimpleTreeImplTest {
 	public void testIncorrectTree2() {
 		Tree<String, String> tree = createIncorrectTree2();
 		tree.getRoot();
+	}
+	
+	/**
+	 * Test equals 2.
+	 */
+	@Test
+	public void testEquals2(){
+		EqualsMethodTester tester = new EqualsMethodTester();
+		tester.getFactoryCollection().addFactory(Graph.class, new GraphTestFactory());
+		tester.testEqualsMethod(SimpleTreeImpl.class);
+	}
+	
+	/**
+	 * Test hash.
+	 */
+	@Test
+	public void testHash(){
+		HashCodeMethodTester tester = new HashCodeMethodTester();
+		tester.getFactoryCollection().addFactory(Graph.class, new GraphTestFactory());
+		tester.testHashCodeMethod(SimpleTreeImpl.class);
 	}
 	
 	/**
