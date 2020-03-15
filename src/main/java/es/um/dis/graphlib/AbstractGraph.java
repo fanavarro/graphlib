@@ -115,13 +115,9 @@ public abstract class AbstractGraph<N, E> implements Graph<N,E>{
 		if (!(other instanceof Graph<?,?>)){
 			return false;
 		}
-		Graph<N,E> otherGraph = null;
 		
-		try{
-			otherGraph = (Graph<N, E>) other;
-		} catch (ClassCastException e){
-			return false;
-		}
+		Graph<N,E> otherGraph = (Graph<N, E>) other;
+		
 		if(!this.getNodes().equals(otherGraph.getNodes())){
 			return false;
 		}

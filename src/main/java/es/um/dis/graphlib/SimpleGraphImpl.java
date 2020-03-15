@@ -100,22 +100,22 @@ public class SimpleGraphImpl<N,E> extends AbstractGraph<N, E>{
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		SimpleGraphImpl<?,?> other = (SimpleGraphImpl<?,?>) obj;
-		if (adjacentNodes == null) {
-			if (other.adjacentNodes != null)
-				return false;
-		} else if (!adjacentNodes.equals(other.adjacentNodes))
-			return false;
-		return true;
-	}
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (obj == null)
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		SimpleGraphImpl<?,?> other = (SimpleGraphImpl<?,?>) obj;
+//		if (adjacentNodes == null) {
+//			if (other.adjacentNodes != null)
+//				return false;
+//		} else if (!adjacentNodes.equals(other.adjacentNodes))
+//			return false;
+//		return true;
+//	}
 	
 
 

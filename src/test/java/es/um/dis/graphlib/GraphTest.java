@@ -1,6 +1,7 @@
 package es.um.dis.graphlib;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
@@ -38,6 +39,25 @@ public class GraphTest {
 		assertEquals(new HashSet<String>(Arrays.asList("A", "C")), graph.getIncomingNodes("B"));
 		assertEquals(new HashSet<String>(Arrays.asList("E")), graph.getIncomingNodes("F"));
 		assertEquals(new HashSet<String>(Arrays.asList("E", "B")), graph.getIncomingNodes("C"));
+	}
+	
+	@Test
+	public void testEquals(){
+		FakeGraph g1 = new FakeGraph();
+		FakeGraph g2 = new FakeGraph();
+		Graph<Integer, Integer> g3= new SimpleGraphImpl<Integer, Integer>();
+		((SimpleGraphImpl<Integer, Integer>) g3).addNode(1);
+		Graph<String, String> g4= new SimpleGraphImpl<String, String>();
+		((SimpleGraphImpl<String, String>) g4).addNode("1");
+		
+		assertTrue(g1.equals(g1));
+		assertTrue(g1.equals(g2));
+		assertTrue(g2.equals(g1));
+		assertFalse(g1.equals(null));
+		assertTrue(g3.equals(g3));
+		assertTrue(g4.equals(g4));
+		assertFalse(g3.equals(g4));
+		assertFalse(g4.equals(g3));
 	}
 	
 	/**
