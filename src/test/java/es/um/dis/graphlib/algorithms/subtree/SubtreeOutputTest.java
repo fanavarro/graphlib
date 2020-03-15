@@ -1,7 +1,11 @@
 package es.um.dis.graphlib.algorithms.subtree;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.Test;
 import org.meanbean.lang.EquivalentFactory;
@@ -14,6 +18,7 @@ import org.meanbean.test.HashCodeMethodTester;
 import es.um.dis.graphlib.FakeGraph;
 import es.um.dis.graphlib.Graph;
 import es.um.dis.graphlib.SimpleTreeImpl;
+import es.um.dis.graphlib.Tree;
 import es.um.dis.graphlib.test_config.GraphTestFactory;
 import es.um.dis.graphlib.test_config.MeanBeanConfigurationBase;
 
@@ -44,6 +49,41 @@ public class SubtreeOutputTest {
 		tester.getFactoryCollection().addFactory(Graph.class, new GraphTestFactory());
 		tester.testEqualsMethod(new SubtreeOutputEquivalentFactory(), configuration);
 	}
+	
+	/**
+	 * Test equals.
+	 */
+	@Test
+	public void testEquals2() {
+		SubtreeOutput<String, String> o1;
+		SubtreeOutput<String, String> o2;
+		
+		o1 = new SubtreeOutputEquivalentFactory().create();
+		o2 = new SubtreeOutputEquivalentFactory().create();
+		assertTrue(o1.equals(o2));
+		assertTrue(o2.equals(o1));
+		assertTrue(o1.equals(o1));
+		assertTrue(o2.equals(o2));
+		assertTrue(o1.hashCode() == o2.hashCode());
+		
+		o1 = new SubtreeOutputEquivalentFactory().create();
+		o2 = new SubtreeOutputEquivalentFactory().create();
+		o2.setInput(null);
+		assertFalse(o1.equals(o2));
+		assertFalse(o2.equals(o1));
+		assertTrue(o1.equals(o1));
+		assertTrue(o2.equals(o2));
+		assertFalse(o1.hashCode() == o2.hashCode());
+		
+		o1 = new SubtreeOutputEquivalentFactory().create();
+		o2 = new SubtreeOutputEquivalentFactory().create();
+		o2.setTrees(null);
+		assertFalse(o1.equals(o2));
+		assertFalse(o2.equals(o1));
+		assertTrue(o1.equals(o1));
+		assertTrue(o2.equals(o2));
+		assertFalse(o1.hashCode() == o2.hashCode());
+	}
 
 	/**
 	 * Test hash.
@@ -67,7 +107,7 @@ public class SubtreeOutputTest {
 		public SubtreeOutput<String, String> create() {
 			SubtreeOutput<String, String> output = new SubtreeOutput<String, String>();
 			SubtreeInput<String, String> input = new InputFactory().create();
-			output.addTree(new SimpleTreeImpl<String, String>());
+			output.setTrees(createExampleTrees());
 			output.setInput(input);
 			return output;
 		}
@@ -86,10 +126,46 @@ public class SubtreeOutputTest {
 		public SubtreeInput<String, String> create() {
 			SubtreeInput<String, String> input = new SubtreeInput<String, String>();
 			input.setGraph(new FakeGraph());
-			input.setNodesToBeContained(new HashSet<String>(Arrays.asList("A", "B")));
+			input.setNodesToBeContained(new HashSet<String>(Arrays.asList("B", "C", "F")));
 			return input;
 		}
 
+	}
+	
+	/**
+	 * Creates the sample trees.
+	 *
+	 * @return the sets the
+	 */
+	private Set<Tree<String, String>> createExampleTrees() {
+		SimpleTreeImpl<String, String> tree1 = new SimpleTreeImpl<String, String>();
+		tree1.addNode("B", "2", "C");
+		tree1.addNode("B", "3", "D");
+		tree1.addNode("D", "4", "E");
+		tree1.addNode("E", "5", "F");
+		tree1.addNode("E", "6", "F");
+		
+
+		SimpleTreeImpl<String, String> tree2 = new SimpleTreeImpl<String, String>();
+		tree2.addNode("C", "8", "B");
+		tree2.addNode("B", "3", "D");
+		tree2.addNode("D", "4", "E");
+		tree2.addNode("E", "5", "F");
+		tree2.addNode("E", "6", "F");
+		
+		
+		SimpleTreeImpl<String, String> tree3 = new SimpleTreeImpl<String, String>();
+		tree3.addNode("E", "7", "C");
+		tree3.addNode("C", "8", "B");
+		tree3.addNode("E", "5", "F");
+		tree3.addNode("E", "6", "F");
+		
+		
+		Set<Tree<String, String>> exampleTrees = new HashSet<Tree<String, String>>();
+		exampleTrees.add(tree1);
+		exampleTrees.add(tree2);
+		exampleTrees.add(tree3);
+		return exampleTrees;
 	}
 
 }
