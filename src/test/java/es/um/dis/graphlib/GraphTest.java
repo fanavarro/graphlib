@@ -45,10 +45,10 @@ public class GraphTest {
 	public void testEquals(){
 		FakeGraph g1 = new FakeGraph();
 		FakeGraph g2 = new FakeGraph();
-		Graph<Integer, Integer> g3= new SimpleGraphImpl<Integer, Integer>();
-		((SimpleGraphImpl<Integer, Integer>) g3).addNode(1);
-		Graph<String, String> g4= new SimpleGraphImpl<String, String>();
-		((SimpleGraphImpl<String, String>) g4).addNode("1");
+		SimpleGraphImpl<Integer, Integer> g3= new SimpleGraphImpl<Integer, Integer>();
+		 g3.addNode(1);
+		SimpleGraphImpl<Integer, Integer> g4= new SimpleGraphImpl<Integer, Integer>();
+		g4.addNode(1);
 		
 		assertTrue(g1.equals(g1));
 		assertTrue(g1.equals(g2));
@@ -56,6 +56,10 @@ public class GraphTest {
 		assertFalse(g1.equals(null));
 		assertTrue(g3.equals(g3));
 		assertTrue(g4.equals(g4));
+		assertTrue(g3.equals(g4));
+		assertTrue(g4.equals(g3));
+		
+		g4.addNode(1,2,3);
 		assertFalse(g3.equals(g4));
 		assertFalse(g4.equals(g3));
 	}
