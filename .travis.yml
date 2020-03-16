@@ -20,6 +20,13 @@ addons:
     build_command_prepend: "mvn clean"
     build_command: "mvn compile package"
     branch_pattern: master
+  sonarcloud:
+    organization: "fanavarro" # the key of the org you chose at step #3
+    token:
+      secure: "YuO2owvWo5HNWScthbSkiFOjuSBp7UslhhdnSx+DLG8oOnE1rXLoJG6YAwP3X6S6xSNLtFk1SC+lg9saSGWPDYf+v55T79er5cf+nhLEiPu4uKtf/mikUuohuKo75skyBkGgT5Fu69WF/oihM4000JA+Q7AYYzI8meIQiEtPCPpdsWJiFY2JkcLicCPMScd6tDmhgoUkhvGrx1jh9dFrJi5HNQ60CsXO9FrsKazgL4+tKKkgVRci2Fcg+9zVk5IOPqhpCdAPPjTy68OiSmCoX7M86VaugeAZMdoXn3OdgNQWhuTWGmRS6MnbH9Qs19JDpbabl7rIoDi7UVYxg/9f7iGf9tT3IGvIUXQHtA+7sFgokChPdQKB/62M4vJ/i0RlJnQ9AoGZNaXjPUogBXpYobBX6cXcOGJfXbC2oxhuhSnuUNKiOVt826p5uQK5B9hgdwS+hOkDC5dKk8BaDZqghPmGD3kpWsN3lAduWA7LbovjXRttd0oeCYNJdvrVNKEzajGojdhCV8gupEW9JZ9Y+D1vV3FQgDQikmETDbADd2meeVuXN7+KZX0LPG1QFS6t0LrG2ij2vXI4CcZf10JxkOAyWw8hMDnDlZ9cX4oKr2b9TKOPFsF+oYHYJbQl0WOqoWW4+E9rNS3LACe/Tha81Y8c535J5z/mdZDNtgi2P+E="
+script:
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=fanavarro_graphlib
     
 after_success:
   - bash <(curl -s https://codecov.io/bash)
