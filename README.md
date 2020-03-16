@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/fanavarro/graphlib.svg?branch=master)](https://travis-ci.org/fanavarro/graphlib) [![codecov](https://codecov.io/gh/fanavarro/graphlib/branch/master/graph/badge.svg)](https://codecov.io/gh/fanavarro/graphlib) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Build Status](https://travis-ci.org/fanavarro/graphlib.svg?branch=master)](https://travis-ci.org/fanavarro/graphlib) [![codecov](https://codecov.io/gh/fanavarro/graphlib/branch/master/graph/badge.svg)](https://codecov.io/gh/fanavarro/graphlib) [![Coverity Scan Build Status](https://scan.coverity.com/projects/20617/badge.svg)](https://scan.coverity.com/projects/fanavarro-graphlib) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 # graphlib
 Java library for graph management.
