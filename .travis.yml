@@ -1,6 +1,25 @@
 language: java
 jdk:
   - openjdk8
+  
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "UHu4g3FVo1d4aMNrCmdOTVGuCC4Yr5vCWEMUJhBXgogcp1F1UKKTCG0j+IZ8tNrKyPr706Q+glwTV+uMW74wJNUE2wkQFI9lmY4Ox5gHX13C/VHGtIFxgmEllcm2d2732fZpGz8qhCPFmYmjv/AGMbmpMWHp3p0XJODAC7XiBqilX9LftUMdBt+xx3I1jfcfrjSvM2DMs07UnKPs8XTcDOKcvwkSuu9xhiElLBxm5CKke9nkhTuBBcv/noquTalv76uGoXpVO04dLL5V5wA70rMgzTBVH+WMPLo0JffQZoA0+4c/cNqI14qKQ05r61wkcbT8+MbmQhzTmhGpEhEdZu8jZFVLbSaqGo5jmeomv8cZPr64SP8N8sTWKnG9MxkAiiS5DxI87hxTA9ViZXp6ZrRD7QzGDjCCvsxFXAqjAXkO60fUwUpavTyR3X8n76lt2PztDi9JrS7LJEeCG8BASIQNZeBvOgV5reqoDWS12a0779PlLo+zghAj7bT7sRxsMcXgBhZr/Hwhs2+ffJyzhCar1hYu14RmrsEHzXel3vTx70B47rzW8QmZMzfzETUbgZOjuS/ddwMlqsE0xLSlRwwtxxdo1ADzzN+rf/KszDLxdySulo68Ui/XDcxl3i4pMCKiAdaCHJOCDovQ3yfKpguNkNeGVUpV1yjNWeCnGok="
 
+before_install:
+  - echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+
+addons:
+  coverity_scan:
+    project:
+      name: "fanavarro/graphlib"
+      description: "Java library for graph management."
+    notification_email: francisco.abad@um.es
+    build_command_prepend: "mvn clean"
+    build_command: "mvn compile package"
+    branch_pattern: master
+    
 after_success:
   - bash <(curl -s https://codecov.io/bash)
