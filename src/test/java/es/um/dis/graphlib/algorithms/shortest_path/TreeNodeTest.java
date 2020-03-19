@@ -17,7 +17,7 @@ import org.meanbean.test.HashCodeMethodTester;
 import es.um.dis.graphlib.Graph;
 import es.um.dis.graphlib.test_config.GraphTestFactory;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class TreeNodeTest.
  */

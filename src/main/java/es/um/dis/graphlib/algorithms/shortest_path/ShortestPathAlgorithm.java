@@ -15,7 +15,7 @@ import es.um.dis.graphlib.algorithms.AlgorithmInput;
 
 
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class ShortestPathAlgorithm.
  *
@@ -90,7 +90,7 @@ public class ShortestPathAlgorithm<N, E> implements Algorithm<N, E> {
 		
 		while (!q.isEmpty()){
 			TreeNode<N, Set<E>> current = q.poll();
-			int depth = depthQueue.poll();
+			Integer depth = depthQueue.poll();
 			
 			/*
 			 * We have found the destiny class if current is equals to destiny

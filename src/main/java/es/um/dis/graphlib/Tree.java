@@ -4,7 +4,7 @@ import java.util.Set;
 
 
 
-// TODO: Auto-generated Javadoc
+
 /**
  * Class representing a tree, which a graph specialization containing a root and
  * a set of leaves elements.

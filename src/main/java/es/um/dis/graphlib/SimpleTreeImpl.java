@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 
-// TODO: Auto-generated Javadoc
+
 /**
  * Simple tree implementation. It is a simple graph that includes a root and a
  * set of leaves elements

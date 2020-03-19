@@ -1,6 +1,6 @@
 package es.um.dis.graphlib.algorithms;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Interface AlgorithmOutput.
  *

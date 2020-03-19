@@ -22,7 +22,7 @@ import es.um.dis.graphlib.Tree;
 import es.um.dis.graphlib.test_config.GraphTestFactory;
 import es.um.dis.graphlib.test_config.MeanBeanConfigurationBase;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class SubtreeOutputTest.
  */

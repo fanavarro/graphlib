@@ -7,7 +7,7 @@ import es.um.dis.graphlib.Tree;
 import es.um.dis.graphlib.algorithms.AlgorithmInput;
 import es.um.dis.graphlib.algorithms.AlgorithmOutput;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class SubtreeOutput.
  *

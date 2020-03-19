@@ -18,7 +18,7 @@ import es.um.dis.graphlib.algorithms.least_common_node.LeastCommonNodeOutput;
 
 
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class SubtreeAlgorithm.
  *

@@ -16,7 +16,7 @@ import es.um.dis.graphlib.algorithms.least_common_node.LeastCommonNodeInput;
 import es.um.dis.graphlib.algorithms.least_common_node.LeastCommonNodeOutput;
 
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class LeastCommonNodeAlgorithmTest.
  */

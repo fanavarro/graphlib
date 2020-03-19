@@ -7,7 +7,7 @@ import es.um.dis.graphlib.algorithms.AlgorithmInput;
 
 
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class SubtreeInput.
  *

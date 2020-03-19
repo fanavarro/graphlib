@@ -6,7 +6,7 @@ import es.um.dis.graphlib.FakeGraph;
 import es.um.dis.graphlib.Graph;
 
 
-// TODO: Auto-generated Javadoc
+
 /**
  * A factory for creating GraphTest objects.
  */
