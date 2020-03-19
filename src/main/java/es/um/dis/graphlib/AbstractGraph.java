@@ -26,25 +26,12 @@ import es.um.dis.graphlib.algorithms.AlgorithmOutput;
  *            Edge
  */
 public abstract class AbstractGraph<N, E> implements Graph<N, E> {
-	/**
-	 * Get the nodes in a graph.
-	 * 
-	 * @return Set of nodes
-	 */
-	@Override
-	public abstract Set<N> getNodes();
+
 
 	/**
-	 * Retrieve the adjacent nodes of the node passed as parameter. This method
-	 * returns a map where the key is an edge, and the value is a set of nodes
-	 * connected through the corresponding edge to the node passed as parameter.
-	 *
-	 * @param node
-	 *            the node
-	 * @return the adjacent nodes with edges
+	 * 
 	 */
-	@Override
-	public abstract Map<E, Set<N>> getAdjacentNodesWithEdges(N node);
+	private static final long serialVersionUID = -3585035402556938043L;
 
 	/**
 	 * Retrieve a set of adjacent nodes of the node passed as parameter.

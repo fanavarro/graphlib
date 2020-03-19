@@ -1,6 +1,5 @@
 package es.um.dis.graphlib;
 
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -14,6 +13,11 @@ import java.util.stream.Collectors;
  *            the edge type
  */
 public abstract class AbstractTree<N, E> extends AbstractGraph<N, E> implements Tree<N, E> {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1773262514460428150L;
 
 	/*
 	 * (non-Javadoc)
@@ -44,23 +48,4 @@ public abstract class AbstractTree<N, E> extends AbstractGraph<N, E> implements 
 	public Set<N> getLeaves() {
 		return this.getNodes().stream().filter(n -> (this.getAdjacentNodes(n).isEmpty())).collect(Collectors.toSet());
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see es.um.dis.graphlib.AbstractGraph#getNodes()
-	 */
-	@Override
-	public abstract Set<N> getNodes();
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * es.um.dis.graphlib.AbstractGraph#getAdjacentNodesWithEdges(java.lang.
-	 * Object)
-	 */
-	@Override
-	public abstract Map<E, Set<N>> getAdjacentNodesWithEdges(N node);
-
 }

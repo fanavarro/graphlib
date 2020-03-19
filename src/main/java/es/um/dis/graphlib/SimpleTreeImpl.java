@@ -5,8 +5,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-
-
 /**
  * Simple tree implementation. It is a simple graph that includes a root and a
  * set of leaves elements
@@ -19,10 +17,14 @@ import java.util.Set;
  */
 public class SimpleTreeImpl<N, E> extends AbstractTree<N, E> {
 
-	/** The adjacent nodes. */
-	/*
-	 * Key is a node, value is a map where the key is an edge and value is a set
-	 * of nodes connected thought the edge.
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 781782555797853026L;
+
+	/**
+	 * The adjacent nodes. Key is a node, value is a map where the key is an
+	 * edge and value is a set of nodes connected thought the edge.
 	 */
 	private Map<N, Map<E, Set<N>>> adjacentNodes;
 

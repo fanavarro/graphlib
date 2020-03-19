@@ -89,9 +89,8 @@ public class LeastCommonNodeOutput<N, E> implements Serializable, AlgorithmOutpu
 				return false;
 		} else if (!input.equals(other.input))
 			return false;
-		if (leastCommonNodes == null) {
-			if (other.leastCommonNodes != null)
-				return false;
+		if (leastCommonNodes == null && other.leastCommonNodes != null) {
+			return false;
 		} else if (!leastCommonNodes.equals(other.leastCommonNodes))
 			return false;
 		return true;

@@ -5,8 +5,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-
-
 /**
  * Map based graph implementation.
  *
@@ -18,10 +16,13 @@ import java.util.Set;
  */
 public class SimpleGraphImpl<N, E> extends AbstractGraph<N, E> {
 
-	/** The adjacent nodes. */
-	/*
-	 * Key is a node, value is a map where the key is an edge and value is a set
-	 * of nodes connected thought the edge.
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2726268195016138010L;
+	/**
+	 * The adjacent nodes. Key is a node, value is a map where the key is an
+	 * edge and value is a set of nodes connected thought the edge.
 	 */
 	private Map<N, Map<E, Set<N>>> adjacentNodes;
 

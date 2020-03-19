@@ -1,5 +1,6 @@
 package es.um.dis.graphlib;
 
+import java.io.Serializable;
 import java.util.Map;
 import java.util.Set;
 
@@ -16,7 +17,7 @@ import es.um.dis.graphlib.algorithms.AlgorithmOutput;
  * @param <N> the node type
  * @param <E> the edge type
  */
-public interface Graph<N, E> {
+public interface Graph<N, E> extends Serializable{
 	/**
 	 * Get the nodes in a graph.
 	 * 
