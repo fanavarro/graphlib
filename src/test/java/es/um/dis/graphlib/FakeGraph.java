@@ -14,6 +14,11 @@ import java.util.Set;
  */
 public class FakeGraph extends AbstractGraph<String, String> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4996387857511308304L;
+
 	/* (non-Javadoc)
 	 * @see es.um.dis.graphlib.AbstractGraph#getAdjacentNodesWithEdges(java.lang.Object)
 	 */

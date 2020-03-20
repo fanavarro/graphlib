@@ -1,7 +1,5 @@
 package es.um.dis.graphlib;
 
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -16,44 +14,28 @@ import java.util.Set;
  *            the edge type
  */
 public class SimpleTreeImpl<N, E> extends AbstractTree<N, E> {
-
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 781782555797853026L;
+	private static final long serialVersionUID = -7635999002152850671L;
 
 	/**
-	 * The adjacent nodes. Key is a node, value is a map where the key is an
-	 * edge and value is a set of nodes connected thought the edge.
+	 * The internal graph representation.
 	 */
-	private Map<N, Map<E, Set<N>>> adjacentNodes;
+	private SimpleGraphImpl<N, E> internalGraph;
 
-	/**
-	 * Instantiates a new simple tree impl.
-	 */
 	public SimpleTreeImpl() {
-		adjacentNodes = new HashMap<N, Map<E, Set<N>>>();
+		internalGraph = new SimpleGraphImpl<N, E>();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see es.um.dis.graphlib.AbstractTree#getNodes()
-	 */
 	@Override
 	public Set<N> getNodes() {
-		return adjacentNodes.keySet();
+		return internalGraph.getNodes();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see es.um.dis.graphlib.AbstractTree#getAdjacentNodesWithEdges(java.lang.
-	 * Object)
-	 */
 	@Override
 	public Map<E, Set<N>> getAdjacentNodesWithEdges(N node) {
-		return adjacentNodes.get(node);
+		return internalGraph.getAdjacentNodesWithEdges(node);
 	}
 
 	/**
@@ -63,9 +45,7 @@ public class SimpleTreeImpl<N, E> extends AbstractTree<N, E> {
 	 *            the node
 	 */
 	public void addNode(N node) {
-		if (!adjacentNodes.containsKey(node)) {
-			adjacentNodes.put(node, new HashMap<E, Set<N>>());
-		}
+		internalGraph.addNode(node);
 	}
 
 	/**
@@ -79,16 +59,7 @@ public class SimpleTreeImpl<N, E> extends AbstractTree<N, E> {
 	 *            the adjacent node
 	 */
 	public void addNode(N node, E edge, N adjacentNode) {
-		if (!adjacentNodes.containsKey(node)) {
-			this.addNode(node);
-		}
-		if (!adjacentNodes.containsKey(adjacentNode)) {
-			this.addNode(adjacentNode);
-		}
-		if (!adjacentNodes.get(node).containsKey(edge)) {
-			adjacentNodes.get(node).put(edge, new HashSet<N>());
-		}
-		adjacentNodes.get(node).get(edge).add(adjacentNode);
+		internalGraph.addNode(node, edge, adjacentNode);
 	}
 
 	/**
@@ -102,19 +73,27 @@ public class SimpleTreeImpl<N, E> extends AbstractTree<N, E> {
 	 *            the adjacent nodes
 	 */
 	public void addNode(N node, E edge, Set<N> adjacentNodes) {
-		for (N adjacentNode : adjacentNodes) {
-			this.addNode(node, edge, adjacentNode);
-		}
+		internalGraph.addNode(node, edge, adjacentNodes);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((adjacentNodes == null) ? 0 : adjacentNodes.hashCode());
+		result = prime * result + ((internalGraph == null) ? 0 : internalGraph.hashCode());
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -123,19 +102,18 @@ public class SimpleTreeImpl<N, E> extends AbstractTree<N, E> {
 		if (!super.equals(obj)) {
 			return false;
 		}
-		if (getClass() != obj.getClass()) {
+		if (!(obj instanceof SimpleTreeImpl)) {
 			return false;
 		}
 		SimpleTreeImpl<?, ?> other = (SimpleTreeImpl<?, ?>) obj;
-		if (adjacentNodes == null) {
-			if (other.adjacentNodes != null){
+		if (internalGraph == null) {
+			if (other.internalGraph != null) {
 				return false;
 			}
-		} else if (!adjacentNodes.equals(other.adjacentNodes)){
+		} else if (!internalGraph.equals(other.internalGraph)) {
 			return false;
 		}
 		return true;
 	}
-	
-	
+
 }
