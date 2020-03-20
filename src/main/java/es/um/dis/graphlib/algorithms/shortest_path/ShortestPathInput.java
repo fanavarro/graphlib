@@ -88,6 +88,7 @@ public class ShortestPathInput<N, E> implements AlgorithmInput<N, E>, Serializab
 	/* (non-Javadoc)
 	 * @see es.um.dis.graphlib.algorithms.AlgorithmInput#getGraph()
 	 */
+	@Override
 	public Graph<N, E> getGraph() {
 		return graph;
 	}
@@ -95,6 +96,7 @@ public class ShortestPathInput<N, E> implements AlgorithmInput<N, E>, Serializab
 	/* (non-Javadoc)
 	 * @see es.um.dis.graphlib.algorithms.AlgorithmInput#setGraph(es.um.dis.graphlib.Graph)
 	 */
+	@Override
 	public void setGraph(Graph<N, E> graph) {
 		this.graph = graph;
 	}
@@ -118,30 +120,40 @@ public class ShortestPathInput<N, E> implements AlgorithmInput<N, E>, Serializab
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		ShortestPathInput<?, ?> other = (ShortestPathInput<?, ?>) obj;
 		if (graph == null) {
-			if (other.graph != null)
+			if (other.graph != null) {
 				return false;
-		} else if (!graph.equals(other.graph))
+			}
+		} else if (!graph.equals(other.graph)) {
 			return false;
-		if (maxDepth != other.maxDepth)
+		}
+		if (maxDepth != other.maxDepth) {
 			return false;
+		}
 		if (sourceNode == null) {
-			if (other.sourceNode != null)
+			if (other.sourceNode != null) {
 				return false;
-		} else if (!sourceNode.equals(other.sourceNode))
+			}
+		} else if (!sourceNode.equals(other.sourceNode)) {
 			return false;
+		}
 		if (targetNode == null) {
-			if (other.targetNode != null)
+			if (other.targetNode != null) {
 				return false;
-		} else if (!targetNode.equals(other.targetNode))
+			}
+		} else if (!targetNode.equals(other.targetNode)) {
 			return false;
+		}
 		return true;
 	}
 	

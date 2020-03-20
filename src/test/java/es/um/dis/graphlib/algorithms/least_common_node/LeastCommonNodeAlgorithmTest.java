@@ -11,9 +11,6 @@ import java.util.HashSet;
 import org.junit.Test;
 
 import es.um.dis.graphlib.FakeGraph;
-import es.um.dis.graphlib.algorithms.least_common_node.LeastCommonNodeAlgorithm;
-import es.um.dis.graphlib.algorithms.least_common_node.LeastCommonNodeInput;
-import es.um.dis.graphlib.algorithms.least_common_node.LeastCommonNodeOutput;
 
 
 

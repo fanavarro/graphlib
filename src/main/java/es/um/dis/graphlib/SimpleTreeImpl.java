@@ -106,4 +106,36 @@ public class SimpleTreeImpl<N, E> extends AbstractTree<N, E> {
 			this.addNode(node, edge, adjacentNode);
 		}
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((adjacentNodes == null) ? 0 : adjacentNodes.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!super.equals(obj)) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		SimpleTreeImpl<?, ?> other = (SimpleTreeImpl<?, ?>) obj;
+		if (adjacentNodes == null) {
+			if (other.adjacentNodes != null){
+				return false;
+			}
+		} else if (!adjacentNodes.equals(other.adjacentNodes)){
+			return false;
+		}
+		return true;
+	}
+	
+	
 }

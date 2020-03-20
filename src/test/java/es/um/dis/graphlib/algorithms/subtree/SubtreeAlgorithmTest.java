@@ -14,9 +14,6 @@ import es.um.dis.graphlib.FakeGraph;
 import es.um.dis.graphlib.SimpleTreeImpl;
 import es.um.dis.graphlib.Tree;
 import es.um.dis.graphlib.algorithms.Algorithm;
-import es.um.dis.graphlib.algorithms.subtree.SubtreeAlgorithm;
-import es.um.dis.graphlib.algorithms.subtree.SubtreeInput;
-import es.um.dis.graphlib.algorithms.subtree.SubtreeOutput;
 
 
 

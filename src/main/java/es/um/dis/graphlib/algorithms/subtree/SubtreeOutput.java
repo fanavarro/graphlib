@@ -97,23 +97,30 @@ public class SubtreeOutput<N, E> implements AlgorithmOutput<N, E> {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		SubtreeOutput<?, ?> other = (SubtreeOutput<?, ?>) obj;
 		if (input == null) {
-			if (other.input != null)
+			if (other.input != null) {
 				return false;
-		} else if (!input.equals(other.input))
+			}
+		} else if (!input.equals(other.input)) {
 			return false;
+		}
 		if (trees == null) {
-			if (other.trees != null)
+			if (other.trees != null) {
 				return false;
-		} else if (!trees.equals(other.trees))
+			}
+		} else if (!trees.equals(other.trees)) {
 			return false;
+		}
 		return true;
 	}
 

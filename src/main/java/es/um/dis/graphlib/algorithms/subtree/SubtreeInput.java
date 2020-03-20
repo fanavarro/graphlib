@@ -73,23 +73,30 @@ public class SubtreeInput<N,E> implements AlgorithmInput<N,E>{
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		SubtreeInput<?, ?> other = (SubtreeInput<?, ?>) obj;
 		if (graph == null) {
-			if (other.graph != null)
+			if (other.graph != null) {
 				return false;
-		} else if (!graph.equals(other.graph))
+			}
+		} else if (!graph.equals(other.graph)) {
 			return false;
+		}
 		if (nodesToBeContained == null) {
-			if (other.nodesToBeContained != null)
+			if (other.nodesToBeContained != null) {
 				return false;
-		} else if (!nodesToBeContained.equals(other.nodesToBeContained))
+			}
+		} else if (!nodesToBeContained.equals(other.nodesToBeContained)) {
 			return false;
+		}
 		return true;
 	}
 

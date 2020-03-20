@@ -27,6 +27,7 @@ public class ShortestPathAlgorithm<N, E> implements Algorithm<N, E> {
 	/* (non-Javadoc)
 	 * @see es.um.dis.graphlib.algorithms.Algorithm#apply(es.um.dis.graphlib.algorithms.AlgorithmInput)
 	 */
+	@Override
 	public ShortestPathOutput<N, E> apply(AlgorithmInput<N, E> input) {
 		ShortestPathInput<N, E> shortestPathInput = (ShortestPathInput<N,E>)input;
 		N source = shortestPathInput.getSourceNode();
@@ -90,9 +91,6 @@ public class ShortestPathAlgorithm<N, E> implements Algorithm<N, E> {
 		
 		while (!q.isEmpty()){
 			TreeNode<N, Set<E>> current = q.poll();
-			if (current.getContent() == null){
-				break;
-			}
 			Integer depth = depthQueue.poll();
 			
 			/*
@@ -103,35 +101,40 @@ public class ShortestPathAlgorithm<N, E> implements Algorithm<N, E> {
 			}
 			
 			/* If the depth limit has been reached, the algorithm will not expand this branch. */
-			if (depth != null && depth > maxDepth){
+			if (depth > maxDepth){
 				continue;
 			}
 			
-			/* In the entry, E is an edge and set N is a set of nodes reached from current node throug E edge */
-			for(Entry<E, Set<N>> entry : graph.getAdjacentNodesWithEdges(current.getContent()).entrySet()){
-				E edge = entry.getKey();
-				for(N node : entry.getValue()){
-					/* This is needed to store all edges linking two nodes */
-					TreeNode<N, Set<E>> n = getTreeNodeFromCollection(node, current.getContent(), q);
-					if(n == null){
-						n = new TreeNode<N, Set<E>>(node);
-						n.setRelationToParent(new HashSet<E>());
-					}
-					
-					if(!visited(n, visited, depth+1)){
-						n.setHeight(depth + 1);
-						n.setParent(current);
-						n.getRelationToParent().add(edge);
-						current.addChild(n);
-						q.add(n);
-						visited.add(n);
-						depthQueue.add(depth+1);
-					}
-				}
-			}
+			expand(graph, visited, q, depthQueue, current, depth);
 		}
 		return null;
 		
+	}
+
+	private void expand(Graph<N, E> graph, Set<TreeNode<N, Set<E>>> visited, Queue<TreeNode<N, Set<E>>> q,
+			Queue<Integer> depthQueue, TreeNode<N, Set<E>> current, Integer depth) {
+		/* In the entry, E is an edge and set N is a set of nodes reached from current node throug E edge */
+		for(Entry<E, Set<N>> entry : graph.getAdjacentNodesWithEdges(current.getContent()).entrySet()){
+			E edge = entry.getKey();
+			for(N node : entry.getValue()){
+				/* This is needed to store all edges linking two nodes */
+				TreeNode<N, Set<E>> n = getTreeNodeFromCollection(node, current.getContent(), q);
+				if(n == null){
+					n = new TreeNode<N, Set<E>>(node);
+					n.setRelationToParent(new HashSet<E>());
+				}
+				
+				if(!visited(n, visited, depth+1)){
+					n.setHeight(depth + 1);
+					n.setParent(current);
+					n.getRelationToParent().add(edge);
+					current.addChild(n);
+					q.add(n);
+					visited.add(n);
+					depthQueue.add(depth+1);
+				}
+			}
+		}
 	}
 	
 	/**

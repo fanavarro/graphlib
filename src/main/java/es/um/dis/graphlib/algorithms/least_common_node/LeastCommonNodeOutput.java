@@ -71,23 +71,30 @@ public class LeastCommonNodeOutput<N, E> implements Serializable, AlgorithmOutpu
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		LeastCommonNodeOutput<?,?> other = (LeastCommonNodeOutput<?,?>) obj;
 		if (input == null) {
-			if (other.input != null)
+			if (other.input != null) {
 				return false;
-		} else if (!input.equals(other.input))
+			}
+		} else if (!input.equals(other.input)) {
 			return false;
+		}
 		if (leastCommonNodes == null) {
-			if (other.leastCommonNodes != null)
+			if (other.leastCommonNodes != null){
 				return false;
-		} else if (!leastCommonNodes.equals(other.leastCommonNodes))
+			}
+		} else if (!leastCommonNodes.equals(other.leastCommonNodes)){
 			return false;
+		}
 		return true;
 	}
 

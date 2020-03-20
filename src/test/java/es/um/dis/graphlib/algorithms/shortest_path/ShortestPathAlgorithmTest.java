@@ -1,13 +1,13 @@
 package es.um.dis.graphlib.algorithms.shortest_path;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 import es.um.dis.graphlib.FakeGraph;
-import es.um.dis.graphlib.algorithms.shortest_path.ShortestPathAlgorithm;
-import es.um.dis.graphlib.algorithms.shortest_path.ShortestPathInput;
-import es.um.dis.graphlib.algorithms.shortest_path.ShortestPathOutput;
 
 
 

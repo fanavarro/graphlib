@@ -33,6 +33,7 @@ public class LeastCommonNodeInput<N, E> implements Serializable, AlgorithmInput<
 	/* (non-Javadoc)
 	 * @see es.um.dis.graphlib.algorithms.AlgorithmInput#getGraph()
 	 */
+	@Override
 	public Graph<N, E> getGraph() {
 		return graph;
 	}
@@ -40,6 +41,7 @@ public class LeastCommonNodeInput<N, E> implements Serializable, AlgorithmInput<
 	/* (non-Javadoc)
 	 * @see es.um.dis.graphlib.algorithms.AlgorithmInput#setGraph(es.um.dis.graphlib.Graph)
 	 */
+	@Override
 	public void setGraph(Graph<N, E> graph) {
 		this.graph = graph;
 	}
@@ -99,25 +101,33 @@ public class LeastCommonNodeInput<N, E> implements Serializable, AlgorithmInput<
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		LeastCommonNodeInput<?,?> other = (LeastCommonNodeInput<?,?>) obj;
 		if (graph == null) {
-			if (other.graph != null)
+			if (other.graph != null) {
 				return false;
-		} else if (!graph.equals(other.graph))
+			}
+		} else if (!graph.equals(other.graph)){
 			return false;
+		}
 		if (nodes == null) {
-			if (other.nodes != null)
+			if (other.nodes != null){
 				return false;
-		} else if (!nodes.equals(other.nodes))
+			}
+		} else if (!nodes.equals(other.nodes)){
 			return false;
-		if (reverse != other.reverse)
+		}
+		if (reverse != other.reverse){
 			return false;
+		}
 		return true;
 	}
 

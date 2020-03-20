@@ -77,23 +77,30 @@ public class ShortestPathOutput<N,E> implements AlgorithmOutput<N,E>, Serializab
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		ShortestPathOutput<?,?> other = (ShortestPathOutput<?,?>) obj;
 		if (input == null) {
-			if (other.input != null)
+			if (other.input != null) {
 				return false;
-		} else if (!input.equals(other.input))
+			}
+		} else if (!input.equals(other.input)) {
 			return false;
+		}
 		if (path == null) {
-			if (other.path != null)
+			if (other.path != null) {
 				return false;
-		} else if (!path.equals(other.path))
+			}
+		} else if (!path.equals(other.path)) {
 			return false;
+		}
 		return true;
 	}
 
