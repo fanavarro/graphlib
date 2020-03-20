@@ -100,7 +100,7 @@ public class ShortestPathAlgorithm<N, E> implements Algorithm<N, E> {
 			}
 			
 			/* If the depth limit has been reached, the algorithm will not expand this branch. */
-			if (depth > maxDepth){
+			if (depth != null && depth > maxDepth){
 				continue;
 			}
 			
