@@ -60,9 +60,6 @@ public class LeastCommonNodeOutput<N, E> implements Serializable, AlgorithmOutpu
 		this.leastCommonNodes = leastCommonNodes;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -72,9 +69,6 @@ public class LeastCommonNodeOutput<N, E> implements Serializable, AlgorithmOutpu
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -89,8 +83,9 @@ public class LeastCommonNodeOutput<N, E> implements Serializable, AlgorithmOutpu
 				return false;
 		} else if (!input.equals(other.input))
 			return false;
-		if (leastCommonNodes == null && other.leastCommonNodes != null) {
-			return false;
+		if (leastCommonNodes == null) {
+			if (other.leastCommonNodes != null)
+				return false;
 		} else if (!leastCommonNodes.equals(other.leastCommonNodes))
 			return false;
 		return true;

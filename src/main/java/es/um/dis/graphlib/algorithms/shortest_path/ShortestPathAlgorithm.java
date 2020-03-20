@@ -90,6 +90,9 @@ public class ShortestPathAlgorithm<N, E> implements Algorithm<N, E> {
 		
 		while (!q.isEmpty()){
 			TreeNode<N, Set<E>> current = q.poll();
+			if (current.getContent() == null){
+				break;
+			}
 			Integer depth = depthQueue.poll();
 			
 			/*
