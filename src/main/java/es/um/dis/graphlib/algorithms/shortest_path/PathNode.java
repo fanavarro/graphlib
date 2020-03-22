@@ -3,6 +3,8 @@ package es.um.dis.graphlib.algorithms.shortest_path;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.EqualsBuilder;
 
 
 
@@ -91,62 +93,34 @@ public class PathNode<N, E> implements Serializable {
 		this.target = target;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
+
+
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public boolean equals(final Object other) {
+		if (this == other) {
+			return true;
+		}
+		if (!(other instanceof PathNode)) {
+			return false;
+		}
+		PathNode<N,E> castOther = (PathNode<N, E>) other;
+		return new EqualsBuilder().append(source, castOther.source).append(edges, castOther.edges)
+				.append(target, castOther.target).isEquals();
+	}
+
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((edges == null) ? 0 : edges.hashCode());
-		result = prime * result + ((source == null) ? 0 : source.hashCode());
-		result = prime * result + ((target == null) ? 0 : target.hashCode());
-		return result;
+		return new HashCodeBuilder().append(source).append(edges).append(target).toHashCode();
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@SuppressWarnings("rawtypes")
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		PathNode other = (PathNode) obj;
-		if (edges == null) {
-			if (other.edges != null) {
-				return false;
-			}
-		} else if (!edges.equals(other.edges)) {
-			return false;
-		}
-		if (source == null) {
-			if (other.source != null) {
-				return false;
-			}
-		} else if (!source.equals(other.source)) {
-			return false;
-		}
-		if (target == null) {
-			if (other.target != null) {
-				return false;
-			}
-		} else if (!target.equals(other.target)) {
-			return false;
-		}
-		return true;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

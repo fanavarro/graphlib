@@ -17,6 +17,7 @@
 		<junit.version>4.12</junit.version>
 		<jacoco.version>0.8.5</jacoco.version>
 		<meanbean.version>2.0.3</meanbean.version>
+		<apache.commons.lang.version>3.9</apache.commons.lang.version>
 	</properties>
 
 	<build>
@@ -60,6 +61,14 @@
 			<version>${meanbean.version}</version>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${apache.commons.lang.version}</version>
+		</dependency>
+
 
 	</dependencies>
 </project>

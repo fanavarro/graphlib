@@ -2,6 +2,8 @@ package es.um.dis.graphlib.algorithms.shortest_path;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.EqualsBuilder;
 
 
 
@@ -173,6 +175,30 @@ public class TreeNode <N, E> {
 	public void setHeight(Integer height) {
 		this.height = height;
 	}
+	/**
+	 * {@inheritDoc}
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean equals(final Object other) {
+		if (this == other) {
+			return true;
+		}
+		if (!(other instanceof TreeNode)) {
+			return false;
+		}
+		TreeNode<N,E> castOther = (TreeNode<N, E>) other;
+		return new EqualsBuilder().append(content, castOther.content).isEquals();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(content).toHashCode();
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -185,40 +211,5 @@ public class TreeNode <N, E> {
 		return builder.toString();
 	}
 	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((content == null) ? 0 : content.hashCode());
-		return result;
-	}
-	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		TreeNode<N, E> other = (TreeNode<N,E>) obj;
-		if (content == null) {
-			if (other.content != null) {
-				return false;
-			}
-		} else if (!content.equals(other.content)) {
-			return false;
-		}
-		return true;
-	}
+
 }
