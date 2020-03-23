@@ -3,6 +3,9 @@ package es.um.dis.graphlib;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 /**
  * Simple tree implementation. It is a simple graph that includes a root and a
  * set of leaves elements
@@ -15,7 +18,7 @@ import java.util.Set;
  */
 public class SimpleTreeImpl<N, E> extends AbstractTree<N, E> {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -7635999002152850671L;
 
@@ -76,44 +79,27 @@ public class SimpleTreeImpl<N, E> extends AbstractTree<N, E> {
 		internalGraph.addNode(node, edge, adjacentNodes);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#hashCode()
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean equals(final Object other) {
+		if (this == other) {
+			return true;
+		}
+		if (!(other instanceof SimpleTreeImpl)) {
+			return false;
+		}
+		SimpleTreeImpl<?, ?> castOther = (SimpleTreeImpl<?, ?>) other;
+		return new EqualsBuilder().append(internalGraph, castOther.internalGraph).isEquals();
+	}
+
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((internalGraph == null) ? 0 : internalGraph.hashCode());
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (!super.equals(obj)) {
-			return false;
-		}
-		if (!(obj instanceof SimpleTreeImpl)) {
-			return false;
-		}
-		SimpleTreeImpl<?, ?> other = (SimpleTreeImpl<?, ?>) obj;
-		if (internalGraph == null) {
-			if (other.internalGraph != null) {
-				return false;
-			}
-		} else if (!internalGraph.equals(other.internalGraph)) {
-			return false;
-		}
-		return true;
+		return new HashCodeBuilder().append(internalGraph).toHashCode();
 	}
 
 }

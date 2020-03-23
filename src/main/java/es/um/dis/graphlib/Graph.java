@@ -8,19 +8,18 @@ import es.um.dis.graphlib.algorithms.Algorithm;
 import es.um.dis.graphlib.algorithms.AlgorithmInput;
 import es.um.dis.graphlib.algorithms.AlgorithmOutput;
 
-
-
-
 /**
  * The Interface Graph.
  *
- * @param <N> the node type
- * @param <E> the edge type
+ * @param <N>
+ *            the node type
+ * @param <E>
+ *            the edge type
  */
-public interface Graph<N, E> extends Serializable{
+public interface Graph<N, E> extends Serializable {
 	/**
 	 * Get the nodes in a graph.
-	 * 
+	 *
 	 * @return Set of nodes
 	 */
 	Set<N> getNodes();
@@ -31,7 +30,8 @@ public interface Graph<N, E> extends Serializable{
 	 * connected through the corresponding edge FROM the node passed as
 	 * parameter.
 	 *
-	 * @param node the node
+	 * @param node
+	 *            the node
 	 * @return the adjacent nodes with edges
 	 */
 	Map<E, Set<N>> getAdjacentNodesWithEdges(N node);
@@ -41,7 +41,8 @@ public interface Graph<N, E> extends Serializable{
 	 * Information about the edges connecting this node with its adjacent is not
 	 * retrieved.
 	 *
-	 * @param node the node
+	 * @param node
+	 *            the node
 	 * @return the adjacent nodes
 	 */
 	Set<N> getAdjacentNodes(N node);
@@ -51,7 +52,8 @@ public interface Graph<N, E> extends Serializable{
 	 * returns a map where the key is an edge, and the value is a set of nodes
 	 * connected through the corresponding edge TO the node passed as parameter.
 	 *
-	 * @param node the node
+	 * @param node
+	 *            the node
 	 * @return the incoming nodes withedges
 	 */
 	Map<E, Set<N>> getIncomingNodesWithedges(N node);
@@ -60,14 +62,15 @@ public interface Graph<N, E> extends Serializable{
 	 * Retrieve the incoming nodes of the node passed as parameter. Information
 	 * about the edges connecting incoming nodes to this node is not retrieved.
 	 *
-	 * @param node the node
+	 * @param node
+	 *            the node
 	 * @return the incoming nodes
 	 */
 	Set<N> getIncomingNodes(N node);
 
 	/**
 	 * Execute an algorithm on the graph.
-	 * 
+	 *
 	 * @param algorithm
 	 *            The algorithm to be executed.
 	 * @param input

@@ -18,12 +18,11 @@ import org.meanbean.test.HashCodeMethodTester;
 import es.um.dis.graphlib.Graph;
 import es.um.dis.graphlib.test_config.GraphTestFactory;
 
-
 /**
  * The Class PathNodeTest.
  */
 public class PathNodeTest {
-	
+
 	/** The configuration. */
 	private Configuration configuration = new ConfigurationBuilder().overrideFactory("source", new NodeFactory())
 			.overrideFactory("target", new NodeFactory()).build();
@@ -45,7 +44,7 @@ public class PathNodeTest {
 		tester.getFactoryCollection().addFactory(Graph.class, new GraphTestFactory());
 		tester.testEqualsMethod(new PathNodeFactory(), configuration);
 	}
-	
+
 	/**
 	 * Test equals.
 	 */
@@ -53,7 +52,7 @@ public class PathNodeTest {
 	public void testEquals2() {
 		PathNode<String, String> pathNode1;
 		PathNode<String, String> pathNode2;
-		
+
 		pathNode1 = new PathNodeFactory().create();
 		pathNode2 = new PathNodeFactory().create();
 		assertTrue(pathNode1.equals(pathNode2));
@@ -61,7 +60,7 @@ public class PathNodeTest {
 		assertTrue(pathNode1.equals(pathNode1));
 		assertTrue(pathNode2.equals(pathNode2));
 		assertTrue(pathNode1.hashCode() == pathNode2.hashCode());
-		
+
 		pathNode1 = new PathNodeFactory().create();
 		pathNode2 = new PathNodeFactory().create();
 		pathNode1.setEdges(null);
@@ -70,7 +69,7 @@ public class PathNodeTest {
 		assertTrue(pathNode1.equals(pathNode1));
 		assertTrue(pathNode2.equals(pathNode2));
 		assertFalse(pathNode1.hashCode() == pathNode2.hashCode());
-		
+
 		pathNode1 = new PathNodeFactory().create();
 		pathNode2 = new PathNodeFactory().create();
 		pathNode1.setSource(null);
@@ -79,7 +78,7 @@ public class PathNodeTest {
 		assertTrue(pathNode1.equals(pathNode1));
 		assertTrue(pathNode2.equals(pathNode2));
 		assertFalse(pathNode1.hashCode() == pathNode2.hashCode());
-		
+
 		pathNode1 = new PathNodeFactory().create();
 		pathNode2 = new PathNodeFactory().create();
 		pathNode1.setTarget(null);
@@ -105,7 +104,9 @@ public class PathNodeTest {
 	 */
 	private class NodeFactory implements Factory<String> {
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see org.meanbean.lang.Factory#create()
 		 */
 		@Override
@@ -113,13 +114,15 @@ public class PathNodeTest {
 			return "A";
 		}
 	}
-	
+
 	/**
 	 * A factory for creating PathNode objects.
 	 */
-	private class PathNodeFactory implements EquivalentFactory<PathNode<String, String>>{
+	private class PathNodeFactory implements EquivalentFactory<PathNode<String, String>> {
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see org.meanbean.lang.EquivalentFactory#create()
 		 */
 		@Override

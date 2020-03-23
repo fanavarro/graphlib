@@ -9,9 +9,6 @@ import org.junit.Test;
 
 import es.um.dis.graphlib.FakeGraph;
 
-
-
-
 /**
  * The Class ShortestPathAlgorithmTest.
  */
@@ -23,11 +20,12 @@ public class ShortestPathAlgorithmTest {
 	@Test
 	public void testShortestPath1() {
 		FakeGraph graph = new FakeGraph();
-		ShortestPathInput<String, String> shortestPathInput = new ShortestPathInput<String,String>();
+		ShortestPathInput<String, String> shortestPathInput = new ShortestPathInput<String, String>();
 		shortestPathInput.setSourceNode("A");
 		shortestPathInput.setTargetNode("C");
-		ShortestPathAlgorithm<String, String> algorithm= new ShortestPathAlgorithm<String, String>();
-		ShortestPathOutput<String, String> output = (ShortestPathOutput<String, String>) graph.applyAlgorithm(algorithm, shortestPathInput);
+		ShortestPathAlgorithm<String, String> algorithm = new ShortestPathAlgorithm<String, String>();
+		ShortestPathOutput<String, String> output = (ShortestPathOutput<String, String>) graph.applyAlgorithm(algorithm,
+				shortestPathInput);
 		assertNotNull(output);
 		assertEquals(2, output.getPath().size());
 		assertEquals("A", output.getPath().get(0).getSource());
@@ -44,11 +42,12 @@ public class ShortestPathAlgorithmTest {
 	@Test
 	public void testShortestPath2() {
 		FakeGraph graph = new FakeGraph();
-		ShortestPathInput<String, String> shortestPathInput = new ShortestPathInput<String,String>();
+		ShortestPathInput<String, String> shortestPathInput = new ShortestPathInput<String, String>();
 		shortestPathInput.setSourceNode("C");
 		shortestPathInput.setTargetNode("F");
-		ShortestPathAlgorithm<String, String> algorithm= new ShortestPathAlgorithm<String, String>();
-		ShortestPathOutput<String, String> output = (ShortestPathOutput<String, String>) graph.applyAlgorithm(algorithm, shortestPathInput);
+		ShortestPathAlgorithm<String, String> algorithm = new ShortestPathAlgorithm<String, String>();
+		ShortestPathOutput<String, String> output = (ShortestPathOutput<String, String>) graph.applyAlgorithm(algorithm,
+				shortestPathInput);
 		assertNotNull(output);
 		assertEquals(4, output.getPath().size());
 		assertEquals("C", output.getPath().get(0).getSource());
@@ -66,50 +65,53 @@ public class ShortestPathAlgorithmTest {
 		assertTrue(output.getPath().get(3).getEdges().contains("6"));
 		assertEquals("F", output.getPath().get(3).getTarget());
 	}
-	
+
 	/**
 	 * Test shortest path 3.
 	 */
 	@Test
 	public void testShortestPath3() {
 		FakeGraph graph = new FakeGraph();
-		ShortestPathInput<String, String> shortestPathInput = new ShortestPathInput<String,String>();
+		ShortestPathInput<String, String> shortestPathInput = new ShortestPathInput<String, String>();
 		shortestPathInput.setSourceNode("C");
 		shortestPathInput.setTargetNode("F");
 		shortestPathInput.setMaxDepth(2);
-		ShortestPathAlgorithm<String, String> algorithm= new ShortestPathAlgorithm<String, String>();
-		ShortestPathOutput<String, String> output = (ShortestPathOutput<String, String>) graph.applyAlgorithm(algorithm, shortestPathInput);
+		ShortestPathAlgorithm<String, String> algorithm = new ShortestPathAlgorithm<String, String>();
+		ShortestPathOutput<String, String> output = (ShortestPathOutput<String, String>) graph.applyAlgorithm(algorithm,
+				shortestPathInput);
 		assertNotNull(output);
 		assertNull(output.getPath());
-		
+
 	}
-	
+
 	/**
 	 * Test shortest path 4.
 	 */
 	@Test
 	public void testShortestPath4() {
 		FakeGraph graph = new FakeGraph();
-		ShortestPathInput<String, String> shortestPathInput = new ShortestPathInput<String,String>();
+		ShortestPathInput<String, String> shortestPathInput = new ShortestPathInput<String, String>();
 		shortestPathInput.setSourceNode("F");
 		shortestPathInput.setTargetNode("A");
-		ShortestPathAlgorithm<String, String> algorithm= new ShortestPathAlgorithm<String, String>();
-		ShortestPathOutput<String, String> output = (ShortestPathOutput<String, String>) graph.applyAlgorithm(algorithm, shortestPathInput);
+		ShortestPathAlgorithm<String, String> algorithm = new ShortestPathAlgorithm<String, String>();
+		ShortestPathOutput<String, String> output = (ShortestPathOutput<String, String>) graph.applyAlgorithm(algorithm,
+				shortestPathInput);
 		assertNotNull(output);
 		assertNull(output.getPath());
 	}
-	
+
 	/**
 	 * Test shortest path 5.
 	 */
 	@Test
 	public void testShortestPath5() {
 		FakeGraph graph = new FakeGraph();
-		ShortestPathInput<String, String> shortestPathInput = new ShortestPathInput<String,String>();
+		ShortestPathInput<String, String> shortestPathInput = new ShortestPathInput<String, String>();
 		shortestPathInput.setSourceNode("E");
 		shortestPathInput.setTargetNode("A");
-		ShortestPathAlgorithm<String, String> algorithm= new ShortestPathAlgorithm<String, String>();
-		ShortestPathOutput<String, String> output = (ShortestPathOutput<String, String>) graph.applyAlgorithm(algorithm, shortestPathInput);
+		ShortestPathAlgorithm<String, String> algorithm = new ShortestPathAlgorithm<String, String>();
+		ShortestPathOutput<String, String> output = (ShortestPathOutput<String, String>) graph.applyAlgorithm(algorithm,
+				shortestPathInput);
 		assertNotNull(output);
 		assertNull(output.getPath());
 	}

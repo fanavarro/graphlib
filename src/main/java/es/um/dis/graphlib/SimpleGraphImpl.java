@@ -5,6 +5,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 /**
  * Map based graph implementation.
  *
@@ -17,7 +20,7 @@ import java.util.Set;
 public class SimpleGraphImpl<N, E> extends AbstractGraph<N, E> {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 2726268195016138010L;
 	/**
@@ -35,7 +38,7 @@ public class SimpleGraphImpl<N, E> extends AbstractGraph<N, E> {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see es.um.dis.graphlib.AbstractGraph#getNodes()
 	 */
 	@Override
@@ -45,7 +48,7 @@ public class SimpleGraphImpl<N, E> extends AbstractGraph<N, E> {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * es.um.dis.graphlib.AbstractGraph#getAdjacentNodesWithEdges(java.lang.
 	 * Object)
@@ -106,34 +109,27 @@ public class SimpleGraphImpl<N, E> extends AbstractGraph<N, E> {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((adjacentNodes == null) ? 0 : adjacentNodes.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
+	public boolean equals(final Object other) {
+		if (this == other) {
 			return true;
 		}
-		if (!super.equals(obj)) {
+		if (!(other instanceof SimpleGraphImpl)) {
 			return false;
 		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		SimpleGraphImpl<?,?> other = (SimpleGraphImpl<?,?>) obj;
-		if (adjacentNodes == null) {
-			if (other.adjacentNodes != null){
-				return false;
-			}
-		} else if (!adjacentNodes.equals(other.adjacentNodes)){
-			return false;
-		}
-		return true;
+		SimpleGraphImpl<?, ?> castOther = (SimpleGraphImpl<?, ?>) other;
+		return new EqualsBuilder().append(adjacentNodes, castOther.adjacentNodes).isEquals();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(adjacentNodes).toHashCode();
 	}
 
 }

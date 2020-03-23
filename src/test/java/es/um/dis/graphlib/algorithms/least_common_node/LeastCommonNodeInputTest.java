@@ -20,7 +20,6 @@ import es.um.dis.graphlib.Graph;
 import es.um.dis.graphlib.test_config.GraphTestFactory;
 import es.um.dis.graphlib.test_config.MeanBeanConfigurationBase;
 
-
 /**
  * The Class LeastCommonNodeInputTest.
  */
@@ -46,7 +45,7 @@ public class LeastCommonNodeInputTest {
 	public void testEquals1() {
 		LeastCommonNodeInput<String, String> input1 = new LeastCommonNodeInputEquivalentFactory().create();
 		LeastCommonNodeInput<String, String> input2 = new LeastCommonNodeInputEquivalentFactory().create();
-		
+
 		input1.setGraph(null);
 		assertFalse(input1.equals(input2));
 		assertFalse(input2.equals(input1));
@@ -54,7 +53,7 @@ public class LeastCommonNodeInputTest {
 		assertTrue(input1.hashCode() == input1.hashCode());
 		assertTrue(input2.hashCode() == input2.hashCode());
 	}
-	
+
 	/**
 	 * Test equals.
 	 */
@@ -62,7 +61,7 @@ public class LeastCommonNodeInputTest {
 	public void testEquals2() {
 		LeastCommonNodeInput<String, String> input1 = new LeastCommonNodeInputEquivalentFactory().create();
 		LeastCommonNodeInput<String, String> input2 = new LeastCommonNodeInputEquivalentFactory().create();
-		
+
 		input1.setNodes(null);
 		assertFalse(input1.equals(input2));
 		assertFalse(input2.equals(input1));
@@ -70,7 +69,7 @@ public class LeastCommonNodeInputTest {
 		assertTrue(input1.hashCode() == input1.hashCode());
 		assertTrue(input2.hashCode() == input2.hashCode());
 	}
-	
+
 	/**
 	 * Test equals.
 	 */
@@ -97,7 +96,9 @@ public class LeastCommonNodeInputTest {
 	private class LeastCommonNodeInputEquivalentFactory
 			implements EquivalentFactory<LeastCommonNodeInput<String, String>> {
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see org.meanbean.lang.EquivalentFactory#create()
 		 */
 		@Override
@@ -116,7 +117,9 @@ public class LeastCommonNodeInputTest {
 	 */
 	private class NodesFactory implements Factory<Set<String>> {
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see org.meanbean.lang.Factory#create()
 		 */
 		@Override

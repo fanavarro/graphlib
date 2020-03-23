@@ -22,7 +22,6 @@ import es.um.dis.graphlib.Tree;
 import es.um.dis.graphlib.test_config.GraphTestFactory;
 import es.um.dis.graphlib.test_config.MeanBeanConfigurationBase;
 
-
 /**
  * The Class SubtreeOutputTest.
  */
@@ -49,7 +48,7 @@ public class SubtreeOutputTest {
 		tester.getFactoryCollection().addFactory(Graph.class, new GraphTestFactory());
 		tester.testEqualsMethod(new SubtreeOutputEquivalentFactory(), configuration);
 	}
-	
+
 	/**
 	 * Test equals.
 	 */
@@ -57,7 +56,7 @@ public class SubtreeOutputTest {
 	public void testEquals2() {
 		SubtreeOutput<String, String> o1;
 		SubtreeOutput<String, String> o2;
-		
+
 		o1 = new SubtreeOutputEquivalentFactory().create();
 		o2 = new SubtreeOutputEquivalentFactory().create();
 		assertTrue(o1.equals(o2));
@@ -65,7 +64,7 @@ public class SubtreeOutputTest {
 		assertTrue(o1.equals(o1));
 		assertTrue(o2.equals(o2));
 		assertTrue(o1.hashCode() == o2.hashCode());
-		
+
 		o1 = new SubtreeOutputEquivalentFactory().create();
 		o2 = new SubtreeOutputEquivalentFactory().create();
 		o2.setInput(null);
@@ -74,7 +73,7 @@ public class SubtreeOutputTest {
 		assertTrue(o1.equals(o1));
 		assertTrue(o2.equals(o2));
 		assertFalse(o1.hashCode() == o2.hashCode());
-		
+
 		o1 = new SubtreeOutputEquivalentFactory().create();
 		o2 = new SubtreeOutputEquivalentFactory().create();
 		o2.setTrees(null);
@@ -100,7 +99,9 @@ public class SubtreeOutputTest {
 	 */
 	private class SubtreeOutputEquivalentFactory implements EquivalentFactory<SubtreeOutput<String, String>> {
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see org.meanbean.lang.EquivalentFactory#create()
 		 */
 		@Override
@@ -119,7 +120,9 @@ public class SubtreeOutputTest {
 	 */
 	private class InputFactory implements Factory<SubtreeInput<String, String>> {
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see org.meanbean.lang.Factory#create()
 		 */
 		@Override
@@ -131,7 +134,7 @@ public class SubtreeOutputTest {
 		}
 
 	}
-	
+
 	/**
 	 * Creates the sample trees.
 	 *
@@ -144,7 +147,6 @@ public class SubtreeOutputTest {
 		tree1.addNode("D", "4", "E");
 		tree1.addNode("E", "5", "F");
 		tree1.addNode("E", "6", "F");
-		
 
 		SimpleTreeImpl<String, String> tree2 = new SimpleTreeImpl<String, String>();
 		tree2.addNode("C", "8", "B");
@@ -152,15 +154,13 @@ public class SubtreeOutputTest {
 		tree2.addNode("D", "4", "E");
 		tree2.addNode("E", "5", "F");
 		tree2.addNode("E", "6", "F");
-		
-		
+
 		SimpleTreeImpl<String, String> tree3 = new SimpleTreeImpl<String, String>();
 		tree3.addNode("E", "7", "C");
 		tree3.addNode("C", "8", "B");
 		tree3.addNode("E", "5", "F");
 		tree3.addNode("E", "6", "F");
-		
-		
+
 		Set<Tree<String, String>> exampleTrees = new HashSet<Tree<String, String>>();
 		exampleTrees.add(tree1);
 		exampleTrees.add(tree2);

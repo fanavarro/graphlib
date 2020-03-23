@@ -3,7 +3,6 @@ package es.um.dis.graphlib;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-
 /**
  * The Class AbstractTree.
  *
@@ -15,13 +14,13 @@ import java.util.stream.Collectors;
 public abstract class AbstractTree<N, E> extends AbstractGraph<N, E> implements Tree<N, E> {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -1773262514460428150L;
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see es.um.dis.graphlib.Tree#getRoot()
 	 */
 	@Override
@@ -41,7 +40,7 @@ public abstract class AbstractTree<N, E> extends AbstractGraph<N, E> implements 
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see es.um.dis.graphlib.Tree#getLeaves()
 	 */
 	@Override

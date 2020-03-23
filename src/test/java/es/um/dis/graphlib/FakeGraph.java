@@ -6,21 +6,22 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-
-
-
 /**
  * The Class FakeGraph.
  */
 public class FakeGraph extends AbstractGraph<String, String> {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -4996387857511308304L;
 
-	/* (non-Javadoc)
-	 * @see es.um.dis.graphlib.AbstractGraph#getAdjacentNodesWithEdges(java.lang.Object)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * es.um.dis.graphlib.AbstractGraph#getAdjacentNodesWithEdges(java.lang.
+	 * Object)
 	 */
 	@Override
 	public Map<String, Set<String>> getAdjacentNodesWithEdges(String node) {
@@ -40,10 +41,10 @@ public class FakeGraph extends AbstractGraph<String, String> {
 			adjacentNodes.put("7", new HashSet<String>(Arrays.asList("C")));
 		} else if ("F".equals(node)) {
 			// no edges
-		} else if ("G".equals(node)){
+		} else if ("G".equals(node)) {
 			adjacentNodes.put("9", new HashSet<String>(Arrays.asList("I")));
 			adjacentNodes.put("10", new HashSet<String>(Arrays.asList("J")));
-		} else if ("H".equals(node)){
+		} else if ("H".equals(node)) {
 			adjacentNodes.put("11", new HashSet<String>(Arrays.asList("I")));
 			adjacentNodes.put("12", new HashSet<String>(Arrays.asList("J")));
 		} else if ("I".equals(node)) {
@@ -54,7 +55,9 @@ public class FakeGraph extends AbstractGraph<String, String> {
 		return adjacentNodes;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see es.um.dis.graphlib.AbstractGraph#getNodes()
 	 */
 	@Override

@@ -12,8 +12,6 @@ import java.util.Set;
 
 import org.junit.Test;
 
-
-
 /**
  * The Class GraphTest.
  */
@@ -49,14 +47,13 @@ public class GraphTest {
 	public void testEquals1() {
 		FakeGraph g1 = new FakeGraph();
 		FakeGraph g2 = new FakeGraph();
-		
 
 		assertTrue(g1.equals(g1));
 		assertTrue(g1.equals(g2));
 		assertTrue(g2.equals(g1));
 		assertFalse(g1.equals(null));
 	}
-	
+
 	/**
 	 * Test equals 2.
 	 */

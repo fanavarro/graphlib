@@ -15,19 +15,21 @@ import es.um.dis.graphlib.Graph;
 import es.um.dis.graphlib.algorithms.Algorithm;
 import es.um.dis.graphlib.algorithms.AlgorithmInput;
 
-
-
-
 /**
  * The Class LeastCommonNodeAlgorithm.
  *
- * @param <N> the node type
- * @param <E> the edge type
+ * @param <N>
+ *            the node type
+ * @param <E>
+ *            the edge type
  */
 public class LeastCommonNodeAlgorithm<N, E> implements Algorithm<N, E> {
-	
-	/* (non-Javadoc)
-	 * @see es.um.dis.graphlib.algorithms.Algorithm#apply(es.um.dis.graphlib.algorithms.AlgorithmInput)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see es.um.dis.graphlib.algorithms.Algorithm#apply(es.um.dis.graphlib.
+	 * algorithms.AlgorithmInput)
 	 */
 	@Override
 	public LeastCommonNodeOutput<N, E> apply(AlgorithmInput<N, E> input) {
@@ -43,13 +45,15 @@ public class LeastCommonNodeAlgorithm<N, E> implements Algorithm<N, E> {
 		return leastCommonNodeOutput;
 	}
 
-
 	/**
 	 * Gets the least common node.
 	 *
-	 * @param graph the graph
-	 * @param nodes the nodes
-	 * @param reverse the reverse
+	 * @param graph
+	 *            the graph
+	 * @param nodes
+	 *            the nodes
+	 * @param reverse
+	 *            the reverse
 	 * @return the least common node
 	 */
 	private Set<N> getLeastCommonNode(Graph<N, E> graph, Set<N> nodes, boolean reverse) {
@@ -67,21 +71,22 @@ public class LeastCommonNodeAlgorithm<N, E> implements Algorithm<N, E> {
 	/**
 	 * Gets the least common node.
 	 *
-	 * @param nodesByLevels the nodes by levels
+	 * @param nodesByLevels
+	 *            the nodes by levels
 	 * @return the least common node
 	 */
 	private Set<N> getLeastCommonNode(List<SortedMap<Integer, Set<N>>> nodesByLevels) {
 		Set<N> leastCommonNodes = new HashSet<N>();
 		int minLevel = Integer.MAX_VALUE;
-		
+
 		Set<N> commonNodes = getCommonNodes(nodesByLevels);
-		for(N node : commonNodes){
+		for (N node : commonNodes) {
 			int level = getMaxLevel(nodesByLevels, node);
-			if (level < minLevel){
+			if (level < minLevel) {
 				minLevel = level;
 				leastCommonNodes.clear();
 				leastCommonNodes.add(node);
-			} else if(level == minLevel){
+			} else if (level == minLevel) {
 				leastCommonNodes.add(node);
 			}
 		}
@@ -91,18 +96,20 @@ public class LeastCommonNodeAlgorithm<N, E> implements Algorithm<N, E> {
 	/**
 	 * Gets the max level.
 	 *
-	 * @param nodesByLevels the nodes by levels
-	 * @param node the node
+	 * @param nodesByLevels
+	 *            the nodes by levels
+	 * @param node
+	 *            the node
 	 * @return the max level
 	 */
 	private int getMaxLevel(List<SortedMap<Integer, Set<N>>> nodesByLevels, N node) {
 		int max = Integer.MIN_VALUE;
-		for(SortedMap<Integer, Set<N>> nodesByLevel : nodesByLevels){
-			for(Entry<Integer, Set<N>> entry : nodesByLevel.entrySet()){
-				if(entry.getValue().contains(node)){
-					if (entry.getKey() > max){
+		for (SortedMap<Integer, Set<N>> nodesByLevel : nodesByLevels) {
+			for (Entry<Integer, Set<N>> entry : nodesByLevel.entrySet()) {
+				if (entry.getValue().contains(node)) {
+					if (entry.getKey() > max) {
 						max = entry.getKey();
-					}		
+					}
 				}
 			}
 		}
@@ -112,7 +119,8 @@ public class LeastCommonNodeAlgorithm<N, E> implements Algorithm<N, E> {
 	/**
 	 * Gets the common nodes.
 	 *
-	 * @param nodesByLevels the nodes by levels
+	 * @param nodesByLevels
+	 *            the nodes by levels
 	 * @return the common nodes
 	 */
 	private Set<N> getCommonNodes(List<SortedMap<Integer, Set<N>>> nodesByLevels) {
@@ -125,32 +133,36 @@ public class LeastCommonNodeAlgorithm<N, E> implements Algorithm<N, E> {
 		return commonNodes;
 	}
 
-
 	/**
 	 * Fill the map nodesByLevel whose values are a set of nodes related with
 	 * node passed as parameter, and whose keys are the number of edges from the
 	 * node passed as parameter to the nodes in the value.
 	 *
-	 * @param graph the graph
-	 * @param nodesByLevel the nodes by level
-	 * @param node the node
-	 * @param level the level
-	 * @param reverse the reverse
+	 * @param graph
+	 *            the graph
+	 * @param nodesByLevel
+	 *            the nodes by level
+	 * @param node
+	 *            the node
+	 * @param level
+	 *            the level
+	 * @param reverse
+	 *            the reverse
 	 * @return the related nodes by level
 	 */
-	private void getRelatedNodesByLevel(Graph<N, E> graph, Map<Integer, Set<N>> nodesByLevel, N node,
-			int level, boolean reverse) {
+	private void getRelatedNodesByLevel(Graph<N, E> graph, Map<Integer, Set<N>> nodesByLevel, N node, int level,
+			boolean reverse) {
 		if (nodesByLevel.get(level) == null) {
 			nodesByLevel.put(level, new HashSet<N>());
 		}
 		nodesByLevel.get(level).add(node);
 		Set<N> relatedNodes;
-		if(reverse){
+		if (reverse) {
 			relatedNodes = graph.getIncomingNodes(node);
 		} else {
 			relatedNodes = graph.getAdjacentNodes(node);
 		}
-		 
+
 		for (N relatedNode : relatedNodes) {
 			// We skip the current node if it has been visited before (cycle
 			// supporting)
@@ -164,7 +176,8 @@ public class LeastCommonNodeAlgorithm<N, E> implements Algorithm<N, E> {
 	/**
 	 * Find intersection.
 	 *
-	 * @param nodes the nodes
+	 * @param nodes
+	 *            the nodes
 	 * @return the sets the
 	 */
 	public Set<N> findIntersection(List<Set<N>> nodes) {

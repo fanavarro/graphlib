@@ -3,20 +3,20 @@ package es.um.dis.graphlib.algorithms.shortest_path;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
-
-
-
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
  * Class representing a node in a path. It contains source and target nodes, and
  * a set of edges that relate both nodes.
- * 
+ *
  * @author fabad
  *
- * @param <N> Node type
- * @param <E> Edge type
+ * @param <N>
+ *            Node type
+ * @param <E>
+ *            Edge type
  */
 public class PathNode<N, E> implements Serializable {
 
@@ -25,20 +25,20 @@ public class PathNode<N, E> implements Serializable {
 
 	/** The source. */
 	private N source;
-	
+
 	/** The edges. */
 	private Set<E> edges;
-	
+
 	/** The target. */
 	private N target;
 
 	/**
 	 * Instantiates a new path node.
 	 */
-	public PathNode(){
+	public PathNode() {
 		edges = new HashSet<E>();
 	}
-	
+
 	/**
 	 * Gets the source.
 	 *
@@ -51,7 +51,8 @@ public class PathNode<N, E> implements Serializable {
 	/**
 	 * Sets the source.
 	 *
-	 * @param source the new source
+	 * @param source
+	 *            the new source
 	 */
 	public void setSource(N source) {
 		this.source = source;
@@ -69,7 +70,8 @@ public class PathNode<N, E> implements Serializable {
 	/**
 	 * Sets the edges.
 	 *
-	 * @param edges the new edges
+	 * @param edges
+	 *            the new edges
 	 */
 	public void setEdges(Set<E> edges) {
 		this.edges = edges;
@@ -87,14 +89,12 @@ public class PathNode<N, E> implements Serializable {
 	/**
 	 * Sets the target.
 	 *
-	 * @param target the new target
+	 * @param target
+	 *            the new target
 	 */
 	public void setTarget(N target) {
 		this.target = target;
 	}
-
-
-
 
 	/**
 	 * {@inheritDoc}
@@ -108,7 +108,7 @@ public class PathNode<N, E> implements Serializable {
 		if (!(other instanceof PathNode)) {
 			return false;
 		}
-		PathNode<N,E> castOther = (PathNode<N, E>) other;
+		PathNode<N, E> castOther = (PathNode<N, E>) other;
 		return new EqualsBuilder().append(source, castOther.source).append(edges, castOther.edges)
 				.append(target, castOther.target).isEquals();
 	}

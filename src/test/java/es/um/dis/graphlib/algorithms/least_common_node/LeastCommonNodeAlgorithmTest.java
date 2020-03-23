@@ -12,8 +12,6 @@ import org.junit.Test;
 
 import es.um.dis.graphlib.FakeGraph;
 
-
-
 /**
  * The Class LeastCommonNodeAlgorithmTest.
  */

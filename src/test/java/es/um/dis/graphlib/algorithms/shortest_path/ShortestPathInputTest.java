@@ -16,7 +16,6 @@ import es.um.dis.graphlib.Graph;
 import es.um.dis.graphlib.test_config.GraphTestFactory;
 import es.um.dis.graphlib.test_config.MeanBeanConfigurationBase;
 
-
 /**
  * The Class ShortestPathInputTest.
  */
@@ -44,7 +43,7 @@ public class ShortestPathInputTest {
 		tester.getFactoryCollection().addFactory(Graph.class, new GraphTestFactory());
 		tester.testEqualsMethod(new ShortestPathInputFactory(), configuration);
 	}
-	
+
 	/**
 	 * Test equals.
 	 */
@@ -52,7 +51,7 @@ public class ShortestPathInputTest {
 	public void testEquals2() {
 		ShortestPathInput<String, String> input1;
 		ShortestPathInput<String, String> input2;
-		
+
 		input1 = new ShortestPathInputFactory().create();
 		input2 = new ShortestPathInputFactory().create();
 		assertTrue(input1.equals(input2));
@@ -60,7 +59,7 @@ public class ShortestPathInputTest {
 		assertTrue(input1.equals(input1));
 		assertTrue(input2.equals(input2));
 		assertTrue(input1.hashCode() == input2.hashCode());
-		
+
 		input1 = new ShortestPathInputFactory().create();
 		input2 = new ShortestPathInputFactory().create();
 		input1.setGraph(null);
@@ -69,7 +68,7 @@ public class ShortestPathInputTest {
 		assertTrue(input1.equals(input1));
 		assertTrue(input2.equals(input2));
 		assertFalse(input1.hashCode() == input2.hashCode());
-		
+
 		input1 = new ShortestPathInputFactory().create();
 		input2 = new ShortestPathInputFactory().create();
 		input1.setSourceNode(null);
@@ -78,7 +77,7 @@ public class ShortestPathInputTest {
 		assertTrue(input1.equals(input1));
 		assertTrue(input2.equals(input2));
 		assertFalse(input1.hashCode() == input2.hashCode());
-		
+
 		input1 = new ShortestPathInputFactory().create();
 		input2 = new ShortestPathInputFactory().create();
 		input1.setTargetNode(null);
@@ -104,7 +103,9 @@ public class ShortestPathInputTest {
 	 */
 	private class SourceNodeFactory implements Factory<String> {
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see org.meanbean.lang.Factory#create()
 		 */
 		@Override
@@ -119,7 +120,9 @@ public class ShortestPathInputTest {
 	 */
 	private class TargetNodeFactory implements Factory<String> {
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see org.meanbean.lang.Factory#create()
 		 */
 		@Override
@@ -128,13 +131,15 @@ public class ShortestPathInputTest {
 		}
 
 	}
-	
+
 	/**
 	 * A factory for creating ShortestPathInput objects.
 	 */
-	private class ShortestPathInputFactory implements EquivalentFactory<ShortestPathInput<String, String>>{
+	private class ShortestPathInputFactory implements EquivalentFactory<ShortestPathInput<String, String>> {
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see org.meanbean.lang.EquivalentFactory#create()
 		 */
 		@Override
@@ -146,6 +151,6 @@ public class ShortestPathInputTest {
 			input.setMaxDepth(5);
 			return input;
 		}
-		
+
 	}
 }

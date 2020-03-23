@@ -18,13 +18,11 @@ import es.um.dis.graphlib.Graph;
 import es.um.dis.graphlib.test_config.GraphTestFactory;
 import es.um.dis.graphlib.test_config.MeanBeanConfigurationBase;
 
-
-
 /**
  * The Class SubtreeInputTest.
  */
 public class SubtreeInputTest {
-	
+
 	/** The configuration. */
 	private final Configuration configuration = MeanBeanConfigurationBase.getConfigurationBuilderBase().build();
 
@@ -35,25 +33,25 @@ public class SubtreeInputTest {
 	public void testGettersAndSetters() {
 		new BeanTester().testBean(SubtreeInput.class, configuration);
 	}
-	
+
 	/**
 	 * Test equals.
 	 */
 	@Test
-	public void testEquals(){
+	public void testEquals() {
 		EqualsMethodTester tester = new EqualsMethodTester();
 		tester.getFactoryCollection().addFactory(Graph.class, new GraphTestFactory());
 		tester.testEqualsMethod(new SubtreeInputEquivalentFactory(), configuration);
 	}
-	
+
 	/**
 	 * Test equals.
 	 */
 	@Test
-	public void testEquals2(){
+	public void testEquals2() {
 		SubtreeInput<String, String> o1;
 		SubtreeInput<String, String> o2;
-		
+
 		o1 = new SubtreeInputEquivalentFactory().create();
 		o2 = new SubtreeInputEquivalentFactory().create();
 		assertTrue(o1.equals(o2));
@@ -61,7 +59,7 @@ public class SubtreeInputTest {
 		assertTrue(o1.equals(o1));
 		assertTrue(o2.equals(o2));
 		assertTrue(o1.hashCode() == o2.hashCode());
-		
+
 		o1 = new SubtreeInputEquivalentFactory().create();
 		o2 = new SubtreeInputEquivalentFactory().create();
 		o2.setGraph(null);
@@ -70,7 +68,7 @@ public class SubtreeInputTest {
 		assertTrue(o1.equals(o1));
 		assertTrue(o2.equals(o2));
 		assertFalse(o1.hashCode() == o2.hashCode());
-		
+
 		o1 = new SubtreeInputEquivalentFactory().create();
 		o2 = new SubtreeInputEquivalentFactory().create();
 		o2.setNodesToBeContained(null);
@@ -80,23 +78,25 @@ public class SubtreeInputTest {
 		assertTrue(o2.equals(o2));
 		assertFalse(o1.hashCode() == o2.hashCode());
 	}
-	
+
 	/**
 	 * Test hash.
 	 */
 	@Test
-	public void testHash(){
+	public void testHash() {
 		HashCodeMethodTester tester = new HashCodeMethodTester();
 		tester.getFactoryCollection().addFactory(Graph.class, new GraphTestFactory());
 		tester.testHashCodeMethod(new SubtreeInputEquivalentFactory());
 	}
-	
+
 	/**
 	 * A factory for creating SubtreeInputEquivalent objects.
 	 */
-	private class SubtreeInputEquivalentFactory implements EquivalentFactory<SubtreeInput<String, String>>{
+	private class SubtreeInputEquivalentFactory implements EquivalentFactory<SubtreeInput<String, String>> {
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see org.meanbean.lang.EquivalentFactory#create()
 		 */
 		@Override
@@ -106,7 +106,7 @@ public class SubtreeInputTest {
 			input.setNodesToBeContained(new HashSet<String>(Arrays.asList("A", "B", "C")));
 			return input;
 		}
-		
+
 	}
 
 }

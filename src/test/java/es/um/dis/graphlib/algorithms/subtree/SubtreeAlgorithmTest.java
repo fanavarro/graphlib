@@ -15,9 +15,6 @@ import es.um.dis.graphlib.SimpleTreeImpl;
 import es.um.dis.graphlib.Tree;
 import es.um.dis.graphlib.algorithms.Algorithm;
 
-
-
-
 /**
  * The Class SubtreeAlgorithmTests.
  */
@@ -36,16 +33,15 @@ public class SubtreeAlgorithmTest {
 		input.setGraph(graph);
 		input.setNodesToBeContained(nodesToContain);
 
-		
 		SubtreeOutput<String, String> output = (SubtreeOutput<String, String>) algorithm.apply(input);
 		assertNotNull(output);
 		assertNotNull(output.getTrees());
 		assertTrue(!output.getTrees().isEmpty());
-		
+
 		Set<Tree<String, String>> expectedTrees = createExpectedTreesForTest1();
 		assertEquals(expectedTrees, output.getTrees());
 	}
-	
+
 	/**
 	 * Subtree algorithm test 2.
 	 */
@@ -63,12 +59,11 @@ public class SubtreeAlgorithmTest {
 		assertNotNull(output);
 		assertNotNull(output.getTrees());
 		assertTrue(!output.getTrees().isEmpty());
-		
+
 		Set<Tree<String, String>> expectedTrees = createExpectedTreesForTest2();
 		assertEquals(expectedTrees, output.getTrees());
 	}
-	
-	
+
 	/**
 	 * Subtree algorithm test 3.
 	 */
@@ -87,7 +82,7 @@ public class SubtreeAlgorithmTest {
 		assertNotNull(output.getTrees());
 		assertTrue(output.getTrees().isEmpty());
 	}
-	
+
 	/**
 	 * Subtree algorithm test 4.
 	 */
@@ -105,7 +100,7 @@ public class SubtreeAlgorithmTest {
 		assertNotNull(output);
 		assertNotNull(output.getTrees());
 		assertTrue(!output.getTrees().isEmpty());
-		
+
 		Set<Tree<String, String>> expectedTrees = createExpectedTreesForTest4();
 		assertEquals(expectedTrees, output.getTrees());
 	}
@@ -122,7 +117,6 @@ public class SubtreeAlgorithmTest {
 		tree1.addNode("D", "4", "E");
 		tree1.addNode("E", "5", "F");
 		tree1.addNode("E", "6", "F");
-		
 
 		SimpleTreeImpl<String, String> tree2 = new SimpleTreeImpl<String, String>();
 		tree2.addNode("C", "8", "B");
@@ -130,22 +124,20 @@ public class SubtreeAlgorithmTest {
 		tree2.addNode("D", "4", "E");
 		tree2.addNode("E", "5", "F");
 		tree2.addNode("E", "6", "F");
-		
-		
+
 		SimpleTreeImpl<String, String> tree3 = new SimpleTreeImpl<String, String>();
 		tree3.addNode("E", "7", "C");
 		tree3.addNode("C", "8", "B");
 		tree3.addNode("E", "5", "F");
 		tree3.addNode("E", "6", "F");
-		
-		
+
 		Set<Tree<String, String>> expectedTrees = new HashSet<Tree<String, String>>();
 		expectedTrees.add(tree1);
 		expectedTrees.add(tree2);
 		expectedTrees.add(tree3);
 		return expectedTrees;
 	}
-	
+
 	/**
 	 * Creates the expected trees for test 2.
 	 *
@@ -155,12 +147,12 @@ public class SubtreeAlgorithmTest {
 		SimpleTreeImpl<String, String> tree1 = new SimpleTreeImpl<String, String>();
 		tree1.addNode("G", "9", "I");
 		tree1.addNode("G", "10", "J");
-		
+
 		Set<Tree<String, String>> expectedTrees = new HashSet<Tree<String, String>>();
 		expectedTrees.add(tree1);
 		return expectedTrees;
 	}
-	
+
 	/**
 	 * Creates the expected trees for test 4.
 	 *
@@ -170,11 +162,11 @@ public class SubtreeAlgorithmTest {
 		SimpleTreeImpl<String, String> tree1 = new SimpleTreeImpl<String, String>();
 		tree1.addNode("G", "9", "I");
 		tree1.addNode("G", "10", "J");
-		
+
 		SimpleTreeImpl<String, String> tree2 = new SimpleTreeImpl<String, String>();
 		tree2.addNode("H", "11", "I");
 		tree2.addNode("H", "12", "J");
-		
+
 		Set<Tree<String, String>> expectedTrees = new HashSet<Tree<String, String>>();
 		expectedTrees.add(tree1);
 		expectedTrees.add(tree2);

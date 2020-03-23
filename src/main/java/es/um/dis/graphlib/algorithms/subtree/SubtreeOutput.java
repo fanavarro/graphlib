@@ -7,7 +7,6 @@ import es.um.dis.graphlib.Tree;
 import es.um.dis.graphlib.algorithms.AlgorithmInput;
 import es.um.dis.graphlib.algorithms.AlgorithmOutput;
 
-
 /**
  * The Class SubtreeOutput.
  *
@@ -23,19 +22,18 @@ public class SubtreeOutput<N, E> implements AlgorithmOutput<N, E> {
 
 	/** The input. */
 	private SubtreeInput<N, E> input;
-	
+
 	/**
-
+	 * 
 	 * Instantiates a new subtree output.
-
+	 * 
 	 */
 
-	public SubtreeOutput(){
+	public SubtreeOutput() {
 
-		this.trees = new HashSet<Tree<N,E>>();
+		this.trees = new HashSet<Tree<N, E>>();
 
 	}
-
 
 	/**
 	 * Gets the trees.
@@ -49,13 +47,16 @@ public class SubtreeOutput<N, E> implements AlgorithmOutput<N, E> {
 	/**
 	 * Sets the trees.
 	 *
-	 * @param trees the trees
+	 * @param trees
+	 *            the trees
 	 */
 	public void setTrees(Set<Tree<N, E>> trees) {
 		this.trees = trees;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see es.um.dis.graphlib.algorithms.AlgorithmOutput#getInput()
 	 */
 	@Override
@@ -63,8 +64,12 @@ public class SubtreeOutput<N, E> implements AlgorithmOutput<N, E> {
 		return input;
 	}
 
-	/* (non-Javadoc)
-	 * @see es.um.dis.graphlib.algorithms.AlgorithmOutput#setInput(es.um.dis.graphlib.algorithms.AlgorithmInput)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * es.um.dis.graphlib.algorithms.AlgorithmOutput#setInput(es.um.dis.graphlib
+	 * .algorithms.AlgorithmInput)
 	 */
 	@Override
 	public void setInput(AlgorithmInput<N, E> input) {
@@ -74,13 +79,16 @@ public class SubtreeOutput<N, E> implements AlgorithmOutput<N, E> {
 	/**
 	 * Adds the tree.
 	 *
-	 * @param tree the tree
+	 * @param tree
+	 *            the tree
 	 */
 	public void addTree(Tree<N, E> tree) {
 		this.getTrees().add(tree);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -92,7 +100,9 @@ public class SubtreeOutput<N, E> implements AlgorithmOutput<N, E> {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -124,7 +134,9 @@ public class SubtreeOutput<N, E> implements AlgorithmOutput<N, E> {
 		return true;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

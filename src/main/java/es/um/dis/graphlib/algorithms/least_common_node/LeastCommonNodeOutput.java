@@ -3,30 +3,34 @@ package es.um.dis.graphlib.algorithms.least_common_node;
 import java.io.Serializable;
 import java.util.Set;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import es.um.dis.graphlib.algorithms.AlgorithmInput;
 import es.um.dis.graphlib.algorithms.AlgorithmOutput;
-
-
-
 
 /**
  * The Class LeastCommonNodeOutput.
  *
- * @param <N> the node type
- * @param <E> the edge type
+ * @param <N>
+ *            the node type
+ * @param <E>
+ *            the edge type
  */
 public class LeastCommonNodeOutput<N, E> implements Serializable, AlgorithmOutput<N, E> {
-	
+
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 8021326381257947314L;
-	
+
 	/** The input. */
 	private LeastCommonNodeInput<N, E> input;
-	
+
 	/** The least common nodes. */
 	private Set<N> leastCommonNodes;
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see es.um.dis.graphlib.algorithms.AlgorithmOutput#getInput()
 	 */
 	@Override
@@ -34,8 +38,12 @@ public class LeastCommonNodeOutput<N, E> implements Serializable, AlgorithmOutpu
 		return input;
 	}
 
-	/* (non-Javadoc)
-	 * @see es.um.dis.graphlib.algorithms.AlgorithmOutput#setInput(es.um.dis.graphlib.algorithms.AlgorithmInput)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * es.um.dis.graphlib.algorithms.AlgorithmOutput#setInput(es.um.dis.graphlib
+	 * .algorithms.AlgorithmInput)
 	 */
 	@Override
 	public void setInput(AlgorithmInput<N, E> input) {
@@ -54,51 +62,16 @@ public class LeastCommonNodeOutput<N, E> implements Serializable, AlgorithmOutpu
 	/**
 	 * Sets the least common nodes.
 	 *
-	 * @param leastCommonNodes the new least common nodes
+	 * @param leastCommonNodes
+	 *            the new least common nodes
 	 */
 	public void setLeastCommonNodes(Set<N> leastCommonNodes) {
 		this.leastCommonNodes = leastCommonNodes;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((input == null) ? 0 : input.hashCode());
-		result = prime * result + ((leastCommonNodes == null) ? 0 : leastCommonNodes.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		LeastCommonNodeOutput<?,?> other = (LeastCommonNodeOutput<?,?>) obj;
-		if (input == null) {
-			if (other.input != null) {
-				return false;
-			}
-		} else if (!input.equals(other.input)) {
-			return false;
-		}
-		if (leastCommonNodes == null) {
-			if (other.leastCommonNodes != null){
-				return false;
-			}
-		} else if (!leastCommonNodes.equals(other.leastCommonNodes)){
-			return false;
-		}
-		return true;
-	}
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -112,7 +85,28 @@ public class LeastCommonNodeOutput<N, E> implements Serializable, AlgorithmOutpu
 		return builder.toString();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean equals(final Object other) {
+		if (this == other) {
+			return true;
+		}
+		if (!(other instanceof LeastCommonNodeOutput)) {
+			return false;
+		}
+		LeastCommonNodeOutput<?, ?> castOther = (LeastCommonNodeOutput<?, ?>) other;
+		return new EqualsBuilder().append(input, castOther.input).append(leastCommonNodes, castOther.leastCommonNodes)
+				.isEquals();
+	}
 
-
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(input).append(leastCommonNodes).toHashCode();
+	}
 
 }

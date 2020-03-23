@@ -13,11 +13,10 @@ import es.um.dis.graphlib.algorithms.Algorithm;
 import es.um.dis.graphlib.algorithms.AlgorithmInput;
 import es.um.dis.graphlib.algorithms.AlgorithmOutput;
 
-
 /**
  * Class representing a graph. It defines all methods for applying graph
  * algorithms
- * 
+ *
  * @author fabad
  *
  * @param <N>
@@ -27,9 +26,8 @@ import es.um.dis.graphlib.algorithms.AlgorithmOutput;
  */
 public abstract class AbstractGraph<N, E> implements Graph<N, E> {
 
-
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -3585035402556938043L;
 
@@ -50,7 +48,7 @@ public abstract class AbstractGraph<N, E> implements Graph<N, E> {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see es.um.dis.graphlib.Graph#getIncomingNodesWithedges(java.lang.Object)
 	 */
 	@Override
@@ -75,7 +73,7 @@ public abstract class AbstractGraph<N, E> implements Graph<N, E> {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see es.um.dis.graphlib.Graph#getIncomingNodes(java.lang.Object)
 	 */
 	@Override
@@ -86,7 +84,7 @@ public abstract class AbstractGraph<N, E> implements Graph<N, E> {
 
 	/**
 	 * Execute an algorithm on the graph.
-	 * 
+	 *
 	 * @param algorithm
 	 *            The algorithm to be executed.
 	 * @param input
@@ -99,7 +97,9 @@ public abstract class AbstractGraph<N, E> implements Graph<N, E> {
 		return algorithm.apply(input);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -117,7 +117,9 @@ public abstract class AbstractGraph<N, E> implements Graph<N, E> {
 		return h;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@SuppressWarnings("unchecked")

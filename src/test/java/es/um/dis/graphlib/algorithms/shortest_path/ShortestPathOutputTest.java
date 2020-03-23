@@ -21,12 +21,11 @@ import es.um.dis.graphlib.Graph;
 import es.um.dis.graphlib.test_config.GraphTestFactory;
 import es.um.dis.graphlib.test_config.MeanBeanConfigurationBase;
 
-
 /**
  * The Class ShortestPathOutputTest.
  */
 public class ShortestPathOutputTest {
-	
+
 	/** The configuration. */
 	private final Configuration configuration = MeanBeanConfigurationBase.getConfigurationBuilderBase()
 			.overrideFactory("input", new InputFactory()).build();
@@ -90,7 +89,9 @@ public class ShortestPathOutputTest {
 	 */
 	private class ShortestPathOutputEquivalentFactory implements EquivalentFactory<ShortestPathOutput<String, String>> {
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see org.meanbean.lang.EquivalentFactory#create()
 		 */
 		@Override
@@ -124,7 +125,9 @@ public class ShortestPathOutputTest {
 	 */
 	private class InputFactory implements Factory<ShortestPathInput<String, String>> {
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see org.meanbean.lang.Factory#create()
 		 */
 		@Override

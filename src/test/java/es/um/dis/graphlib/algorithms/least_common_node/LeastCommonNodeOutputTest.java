@@ -20,12 +20,11 @@ import es.um.dis.graphlib.Graph;
 import es.um.dis.graphlib.test_config.GraphTestFactory;
 import es.um.dis.graphlib.test_config.MeanBeanConfigurationBase;
 
-
 /**
  * The Class LeastCommonNodeOutputTest.
  */
 public class LeastCommonNodeOutputTest {
-	
+
 	/** The configuration. */
 	private final Configuration configuration = MeanBeanConfigurationBase.getConfigurationBuilderBase()
 			.overrideFactory("leastCommonNodes", new LeastCommonNodesFactory())
@@ -101,7 +100,9 @@ public class LeastCommonNodeOutputTest {
 	private class LeastCommonNodeOutputEquivalentFactory
 			implements EquivalentFactory<LeastCommonNodeOutput<String, String>> {
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see org.meanbean.lang.EquivalentFactory#create()
 		 */
 		@Override
@@ -123,7 +124,9 @@ public class LeastCommonNodeOutputTest {
 	 */
 	private class LeastCommonNodesFactory implements Factory<Set<String>> {
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see org.meanbean.lang.Factory#create()
 		 */
 		@Override
@@ -138,7 +141,9 @@ public class LeastCommonNodeOutputTest {
 	 */
 	private class InputFactory implements Factory<LeastCommonNodeInput<String, String>> {
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see org.meanbean.lang.Factory#create()
 		 */
 		@Override

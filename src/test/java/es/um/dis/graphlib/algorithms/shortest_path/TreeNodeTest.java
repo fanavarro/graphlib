@@ -17,7 +17,6 @@ import org.meanbean.test.HashCodeMethodTester;
 import es.um.dis.graphlib.Graph;
 import es.um.dis.graphlib.test_config.GraphTestFactory;
 
-
 /**
  * The Class TreeNodeTest.
  */
@@ -44,9 +43,10 @@ public class TreeNodeTest {
 	public void testEquals() {
 		EqualsMethodTester tester = new EqualsMethodTester();
 		tester.getFactoryCollection().addFactory(Graph.class, new GraphTestFactory());
-		tester.testEqualsMethod(new TreeNodeEquivalentFactory(), configuration, "parent", "children", "relationToParent", "height");
+		tester.testEqualsMethod(new TreeNodeEquivalentFactory(), configuration, "parent", "children",
+				"relationToParent", "height");
 	}
-	
+
 	/**
 	 * Test equals.
 	 */
@@ -54,8 +54,7 @@ public class TreeNodeTest {
 	public void testEquals2() {
 		TreeNode<String, String> o1;
 		TreeNode<String, String> o2;
-		
-		
+
 		o1 = new TreeNodeEquivalentFactory().create();
 		o2 = new TreeNodeEquivalentFactory().create();
 		assertTrue(o1.equals(o2));
@@ -63,7 +62,7 @@ public class TreeNodeTest {
 		assertTrue(o1.equals(o1));
 		assertTrue(o2.equals(o2));
 		assertTrue(o1.hashCode() == o2.hashCode());
-		
+
 		o1 = new TreeNodeEquivalentFactory().create();
 		o2 = new TreeNodeEquivalentFactory().create();
 		o2.setContent(null);
@@ -89,7 +88,9 @@ public class TreeNodeTest {
 	 */
 	private class TreeNodeEquivalentFactory implements EquivalentFactory<TreeNode<String, String>> {
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see org.meanbean.lang.EquivalentFactory#create()
 		 */
 		@Override
@@ -99,7 +100,7 @@ public class TreeNodeTest {
 
 			TreeNode<String, String> treeNodeB = new TreeNode<String, String>();
 			treeNodeB.setContent("B");
-			
+
 			TreeNode<String, String> treeNodeC = new TreeNode<String, String>();
 			treeNodeC.setContent("C");
 
@@ -110,7 +111,7 @@ public class TreeNodeTest {
 			treeNodeB.setHeight(1);
 			treeNodeB.setRelationToParent("1");
 			treeNodeB.addChild(treeNodeC);
-			
+
 			treeNodeC.setParent(treeNodeB);
 			treeNodeC.setHeight(2);
 			treeNodeC.setRelationToParent("2");
@@ -125,7 +126,9 @@ public class TreeNodeTest {
 	 */
 	private class TreeNodeFactory implements Factory<TreeNode<String, String>> {
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see org.meanbean.lang.Factory#create()
 		 */
 		@Override
@@ -154,7 +157,9 @@ public class TreeNodeTest {
 	 */
 	private class ChildrenFactory implements Factory<List<TreeNode<String, String>>> {
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see org.meanbean.lang.Factory#create()
 		 */
 		@Override
@@ -183,7 +188,9 @@ public class TreeNodeTest {
 	 */
 	private class RelationToParentFactory implements Factory<String> {
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see org.meanbean.lang.Factory#create()
 		 */
 		@Override
@@ -198,7 +205,9 @@ public class TreeNodeTest {
 	 */
 	private class ContentFactory implements Factory<String> {
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see org.meanbean.lang.Factory#create()
 		 */
 		@Override
