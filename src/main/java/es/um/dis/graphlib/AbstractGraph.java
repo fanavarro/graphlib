@@ -52,7 +52,7 @@ public abstract class AbstractGraph<N, E> implements Graph<N, E> {
 	 * @see es.um.dis.graphlib.Graph#getIncomingNodesWithedges(java.lang.Object)
 	 */
 	@Override
-	public Map<E, Set<N>> getIncomingNodesWithedges(N node) {
+	public Map<E, Set<N>> getIncomingNodesWithEdges(N node) {
 		Map<E, Set<N>> incomingNodes = new HashMap<E, Set<N>>();
 		for (N otherNode : getNodes()) {
 			if (otherNode.equals(node)) {
@@ -78,7 +78,7 @@ public abstract class AbstractGraph<N, E> implements Graph<N, E> {
 	 */
 	@Override
 	public Set<N> getIncomingNodes(N node) {
-		return this.getIncomingNodesWithedges(node).values().stream().flatMap(Collection::stream)
+		return this.getIncomingNodesWithEdges(node).values().stream().flatMap(Collection::stream)
 				.collect(Collectors.toSet());
 	}
 

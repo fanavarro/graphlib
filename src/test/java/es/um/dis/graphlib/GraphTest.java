@@ -33,8 +33,8 @@ public class GraphTest {
 	@Test
 	public void testGetIncomingNodes() {
 		FakeGraph graph = new FakeGraph();
-		assertEquals(incomingNodesB(), graph.getIncomingNodesWithedges("B"));
-		assertEquals(incomingNodesF(), graph.getIncomingNodesWithedges("F"));
+		assertEquals(incomingNodesB(), graph.getIncomingNodesWithEdges("B"));
+		assertEquals(incomingNodesF(), graph.getIncomingNodesWithEdges("F"));
 		assertEquals(new HashSet<String>(Arrays.asList("A", "C")), graph.getIncomingNodes("B"));
 		assertEquals(new HashSet<String>(Arrays.asList("E")), graph.getIncomingNodes("F"));
 		assertEquals(new HashSet<String>(Arrays.asList("E", "B")), graph.getIncomingNodes("C"));

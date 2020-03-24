@@ -36,6 +36,7 @@ The following parameters could be specified in ShortestPathInput class:
 #### Output
 The algorithm returns an object with the following fields:
 
+* **input**: the input that generated this output.
 * **path**: the path from *sourceNode* to *targetNode* found.
 
 
@@ -53,8 +54,7 @@ The following parameters could be specified in LeastCommonNodeInput class:
 #### Output
 The algorithm returns a LeastCommonNodeOutput object with the following fields:
 
-* **nodes**: the original *nodes* from which the least common node has been calculated.
-* **reverse**: the *reverse* parameter specified in the input.
+* **input**: the input that generated this output.
 * **leastCommonNodes**: the node or nodes which are the least common nodes of *nodes*.
 
 
@@ -71,11 +71,28 @@ The following parameters could be specified in SubtreeInput class:
 #### Output
 The algorithm returns a SubtreeOutput object with the following fields:
 
+* **input**: the input that generated this output.
 * **trees**: a set of trees that contain the nodes specified in *nodesToBeContained*.
 
 
+
+### Islands algorithm
+The islands algorithm (IslandsAlgorithm class) extracts a set of islands from the given graph.
+
+#### Input
+The following parameters can be specified in IslandsInput class:
+
+* **graph**: the graph in which the algorithm will be applied.
+* **ignoreEdgeDirection**: boolean indicating if the islands should be computed by ignoring the direction of the edges or not. If true, islands will be build from a seed node by obtaining incoming and adjacent nodes. If false, only adjacent nodes will be used for building the islands.
+
+#### Output
+The algorithm returns an IslandOutput object with the following fields:
+
+* **input**: the input that generated this output.
+* **islands**: a set of graphs, which are islands of the original graph passed in the input.
+
 ## Simple example
-In this section, we are going to create a simple graph called FakeGraph, used for testing, in which we could apply the available algorithms. Both nodes and edges of this graph will be text strings. Nodes are denoted by letters from "A" to "J", while edges are denoted by numbers from "1" to "12". The next figure shows the FakeGraph. As you can see, it is a cyclic, directed graph, and it contains two islands. Moreover, two nodes could be connected by more than one edge.
+In this section, we are going to create a simple graph called FakeGraph, used for testing, in which we could apply the available algorithms. Both nodes and edges of this graph will be text strings. Nodes are denoted by letters from "A" to "J", while edges are denoted by numbers from "1" to "12". The next figure shows the FakeGraph. As you can see, it is a cyclic, directed graph, and it contains two or three islands, depending if we consider computing islands ignoring the direction of the edges or not, respectively. Moreover, two nodes could be connected by more than one edge.
 
 ![](./assets/FakeGraph.png)
 

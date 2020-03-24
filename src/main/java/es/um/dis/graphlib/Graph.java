@@ -56,7 +56,7 @@ public interface Graph<N, E> extends Serializable {
 	 *            the node
 	 * @return the incoming nodes withedges
 	 */
-	Map<E, Set<N>> getIncomingNodesWithedges(N node);
+	Map<E, Set<N>> getIncomingNodesWithEdges(N node);
 
 	/**
 	 * Retrieve the incoming nodes of the node passed as parameter. Information
