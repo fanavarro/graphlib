@@ -27,4 +27,3 @@ deploy:
     branch: master
     tags: true
   name: $project_version
-  tag_name: $project_version
