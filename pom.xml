@@ -8,7 +8,25 @@
 	<packaging>jar</packaging>
 
 	<name>graphlib</name>
+	<description>Java library for graph management.</description>
 	<url>https://github.com/fanavarro/graphlib</url>
+
+	<licenses>
+		<license>
+			<name>MIT License</name>
+			<url>http://www.opensource.org/licenses/mit-license.php</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<name>Francisco Abad Navarro</name>
+			<email>francisco.abad@um.es</email>
+			<organization>Universidad de Murcia</organization>
+			<organizationUrl>www.um.es</organizationUrl>
+		</developer>
+	</developers>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
