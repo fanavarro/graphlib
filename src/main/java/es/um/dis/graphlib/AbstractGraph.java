@@ -4,6 +4,7 @@ import java.util.AbstractMap;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -80,6 +81,45 @@ public abstract class AbstractGraph<N, E> implements Graph<N, E> {
 	public Set<N> getIncomingNodes(N node) {
 		return this.getIncomingNodesWithEdges(node).values().stream().flatMap(Collection::stream)
 				.collect(Collectors.toSet());
+	}
+	
+	@Override
+	public boolean isContainedIn(Graph<N, E> other){
+		boolean isSubGraph = true;
+		Set<N> thisNodes = this.getNodes();
+		if(other != null && other.getNodes().containsAll(thisNodes)){
+			for(N node : thisNodes){
+				Map<E, Set<N>> adjacentNodes = this.getAdjacentNodesWithEdges(node);
+				Map<E, Set<N>> otherAdjacentNodes = other.getAdjacentNodesWithEdges(node);
+				otherAdjacentNodes = this.removeNodesNotContainedInCurrentGraph(otherAdjacentNodes, thisNodes);
+				if(!adjacentNodes.equals(otherAdjacentNodes)){
+					isSubGraph = false;
+					break;
+				}
+			}
+		} else {
+			isSubGraph = false;
+		}
+		return isSubGraph;
+	}
+
+	private Map<E, Set<N>> removeNodesNotContainedInCurrentGraph(Map<E, Set<N>> otherAdjacentNodes, Set<N> thisNodes) {
+		Map<E, Set<N>> filteredAdjacentNodes = new HashMap<E, Set<N>>();
+		for(Entry<E, Set<N>> entry : otherAdjacentNodes.entrySet()){
+			E edge = entry.getKey();
+			Set<N> nodes = new HashSet<N>(entry.getValue());
+			Iterator<N> iterator = nodes.iterator();
+			while(iterator.hasNext()){
+				N node = iterator.next();
+				if(!thisNodes.contains(node)){
+					iterator.remove();
+				}
+			}
+			if(!nodes.isEmpty()){
+				filteredAdjacentNodes.put(edge, nodes);
+			}
+		}
+		return filteredAdjacentNodes;
 	}
 
 	/**

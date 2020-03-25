@@ -39,6 +39,55 @@ public class GraphTest {
 		assertEquals(new HashSet<String>(Arrays.asList("E")), graph.getIncomingNodes("F"));
 		assertEquals(new HashSet<String>(Arrays.asList("E", "B")), graph.getIncomingNodes("C"));
 	}
+	
+	@Test
+	public void testIsContainedIn(){
+		Graph<String, String> graph = new FakeGraph();
+		
+		assertTrue(getContainedGraph1().isContainedIn(graph));
+		assertTrue(getContainedGraph2().isContainedIn(graph));
+		assertTrue(getEmptyGraph().isContainedIn(graph));
+		assertFalse(getNotContainedGraph1().isContainedIn(graph));
+		assertFalse(getNotContainedGraph2().isContainedIn(graph));
+		assertFalse(getNotContainedGraph3().isContainedIn(graph));
+		assertFalse(getNotContainedGraph3().isContainedIn(null));
+	}
+
+	private Graph<String, String> getContainedGraph1() {
+		SimpleGraphImpl<String, String> g = new SimpleGraphImpl<String, String>();
+		g.addNode("G", "9", "I");
+		g.addNode("G", "10", "J");
+		g.addNode("H", "11", "I");
+		g.addNode("H", "12", "J");
+		return g;
+	}
+	
+	private Graph<String, String> getContainedGraph2() {
+		SimpleGraphImpl<String, String> g = new SimpleGraphImpl<String, String>();
+		g.addNode("G");
+		return g;
+	}
+	
+	private Graph<String, String> getEmptyGraph() {
+		SimpleGraphImpl<String, String> g = new SimpleGraphImpl<String, String>();
+		return g;
+	}
+	
+	private Graph<String, String> getNotContainedGraph1() {
+		SimpleGraphImpl<String, String> g = new SimpleGraphImpl<String, String>();
+		g.addNode("D", "1", "G");
+		return g;
+	}
+	private Graph<String, String> getNotContainedGraph2() {
+		SimpleGraphImpl<String, String> g = new SimpleGraphImpl<String, String>();
+		g.addNode("X", "1", "Y");
+		return g;
+	}
+	private Graph<String, String> getNotContainedGraph3() {
+		SimpleGraphImpl<String, String> g = new SimpleGraphImpl<String, String>();
+		g.addNode("A", "1", "G");
+		return g;
+	}
 
 	/**
 	 * Test equals 1.

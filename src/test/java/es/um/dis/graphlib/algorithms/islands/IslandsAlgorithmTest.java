@@ -40,6 +40,19 @@ public class IslandsAlgorithmTest {
 		assertEquals(3, output.getIslands().size());
 		assertEquals(getExpectedIslandsNotIgnoringEdgeDirection(), output.getIslands());
 	}
+	
+	@Test
+	public void testConflictiveGraph() {
+		Algorithm<String, String> algorithm = new IslandsAlgorithm<String, String>();
+		IslandsInput<String, String> input = new IslandsInput<String, String>();
+		input.setGraph(new AnotherFakeGraph());
+		input.setIgnoreEdgeDirection(false);
+		IslandsOutput<String, String> output = (IslandsOutput<String, String>) algorithm.apply(input);
+		assertNotNull(output);
+		assertNotNull(output.getIslands());
+		assertEquals(2, output.getIslands().size());
+		assertEquals(getExpectedIslandsConflictiveGraph(), output.getIslands());
+	}
 
 	private Set<Graph<String, String>> getExpectedIslandsIgnoringEdgeDirection(){
 		Set<Graph<String, String>> islands = new HashSet<Graph<String, String>>();
@@ -53,6 +66,13 @@ public class IslandsAlgorithmTest {
 		islands.add(getExpectedIsland1());
 		islands.add(getExpectedIsland3());
 		islands.add(getExpectedIsland4());
+		return islands;
+	}
+	
+	private Set<Graph<String, String>> getExpectedIslandsConflictiveGraph(){
+		Set<Graph<String, String>> islands = new HashSet<Graph<String, String>>();
+		islands.add(getExpectedIsland5());
+		islands.add(getExpectedIsland6());
 		return islands;
 	}
 
@@ -90,5 +110,34 @@ public class IslandsAlgorithmTest {
 		g.addNode("H", "11", "I");
 		g.addNode("H", "12", "J");
 		return g;
+	}
+	
+	private Graph<String, String> getExpectedIsland5() {
+		SimpleGraphImpl<String, String> g = new SimpleGraphImpl<String, String>();
+		g.addNode("C", "1", "A");
+		g.addNode("C", "2", "B");
+		return g;
+	}
+	
+	private Graph<String, String> getExpectedIsland6() {
+		SimpleGraphImpl<String, String> g = new SimpleGraphImpl<String, String>();
+		g.addNode("D", "3", "A");
+		g.addNode("D", "4", "B");
+		return g;
+	}
+	
+	private class AnotherFakeGraph extends SimpleGraphImpl<String, String>{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1924974165350966390L;
+
+		public AnotherFakeGraph(){
+			super();
+			this.addNode("C", "1", "A");
+			this.addNode("C", "2", "B");
+			this.addNode("D", "3", "A");
+			this.addNode("D", "4", "B");
+		}
 	}
 }

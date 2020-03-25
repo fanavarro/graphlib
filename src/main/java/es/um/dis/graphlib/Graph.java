@@ -79,4 +79,16 @@ public interface Graph<N, E> extends Serializable {
 	 */
 	AlgorithmOutput<N, E> applyAlgorithm(Algorithm<N, E> algorithm, AlgorithmInput<N, E> input);
 
+	/**
+	 * Return true if this graph is contained in the graph passed as parameter.
+	 * Every node and every edge between the nodes in the current graph should
+	 * exist in the other one
+	 * 
+	 * @param other
+	 *            The other graph to check if this one is contained.
+	 * @return True if this graph is contained in the other graph, false
+	 *         otherwise.
+	 */
+	boolean isContainedIn(Graph<N, E> other);
+
 }
