@@ -1,32 +1,28 @@
 language: java
 jdk:
-  - openjdk8
-  
-env:
-  global:
-   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
-   #   via the "travis encrypt" command using the project repo's public key
-   - secure: "UHu4g3FVo1d4aMNrCmdOTVGuCC4Yr5vCWEMUJhBXgogcp1F1UKKTCG0j+IZ8tNrKyPr706Q+glwTV+uMW74wJNUE2wkQFI9lmY4Ox5gHX13C/VHGtIFxgmEllcm2d2732fZpGz8qhCPFmYmjv/AGMbmpMWHp3p0XJODAC7XiBqilX9LftUMdBt+xx3I1jfcfrjSvM2DMs07UnKPs8XTcDOKcvwkSuu9xhiElLBxm5CKke9nkhTuBBcv/noquTalv76uGoXpVO04dLL5V5wA70rMgzTBVH+WMPLo0JffQZoA0+4c/cNqI14qKQ05r61wkcbT8+MbmQhzTmhGpEhEdZu8jZFVLbSaqGo5jmeomv8cZPr64SP8N8sTWKnG9MxkAiiS5DxI87hxTA9ViZXp6ZrRD7QzGDjCCvsxFXAqjAXkO60fUwUpavTyR3X8n76lt2PztDi9JrS7LJEeCG8BASIQNZeBvOgV5reqoDWS12a0779PlLo+zghAj7bT7sRxsMcXgBhZr/Hwhs2+ffJyzhCar1hYu14RmrsEHzXel3vTx70B47rzW8QmZMzfzETUbgZOjuS/ddwMlqsE0xLSlRwwtxxdo1ADzzN+rf/KszDLxdySulo68Ui/XDcxl3i4pMCKiAdaCHJOCDovQ3yfKpguNkNeGVUpV1yjNWeCnGok="
-
-before_install:
-  - echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+- openjdk8
 
 addons:
-  coverity_scan:
-    project:
-      name: "fanavarro/graphlib"
-      description: "Java library for graph management."
-    notification_email: francisco.abad@um.es
-    build_command_prepend: "mvn clean"
-    build_command: "mvn compile package"
-    branch_pattern: master
   sonarcloud:
-    organization: "fanavarro" # the key of the org you chose at step #3
+    organization: fanavarro
     token:
-      secure: "YuO2owvWo5HNWScthbSkiFOjuSBp7UslhhdnSx+DLG8oOnE1rXLoJG6YAwP3X6S6xSNLtFk1SC+lg9saSGWPDYf+v55T79er5cf+nhLEiPu4uKtf/mikUuohuKo75skyBkGgT5Fu69WF/oihM4000JA+Q7AYYzI8meIQiEtPCPpdsWJiFY2JkcLicCPMScd6tDmhgoUkhvGrx1jh9dFrJi5HNQ60CsXO9FrsKazgL4+tKKkgVRci2Fcg+9zVk5IOPqhpCdAPPjTy68OiSmCoX7M86VaugeAZMdoXn3OdgNQWhuTWGmRS6MnbH9Qs19JDpbabl7rIoDi7UVYxg/9f7iGf9tT3IGvIUXQHtA+7sFgokChPdQKB/62M4vJ/i0RlJnQ9AoGZNaXjPUogBXpYobBX6cXcOGJfXbC2oxhuhSnuUNKiOVt826p5uQK5B9hgdwS+hOkDC5dKk8BaDZqghPmGD3kpWsN3lAduWA7LbovjXRttd0oeCYNJdvrVNKEzajGojdhCV8gupEW9JZ9Y+D1vV3FQgDQikmETDbADd2meeVuXN7+KZX0LPG1QFS6t0LrG2ij2vXI4CcZf10JxkOAyWw8hMDnDlZ9cX4oKr2b9TKOPFsF+oYHYJbQl0WOqoWW4+E9rNS3LACe/Tha81Y8c535J5z/mdZDNtgi2P+E="
+      secure: YuO2owvWo5HNWScthbSkiFOjuSBp7UslhhdnSx+DLG8oOnE1rXLoJG6YAwP3X6S6xSNLtFk1SC+lg9saSGWPDYf+v55T79er5cf+nhLEiPu4uKtf/mikUuohuKo75skyBkGgT5Fu69WF/oihM4000JA+Q7AYYzI8meIQiEtPCPpdsWJiFY2JkcLicCPMScd6tDmhgoUkhvGrx1jh9dFrJi5HNQ60CsXO9FrsKazgL4+tKKkgVRci2Fcg+9zVk5IOPqhpCdAPPjTy68OiSmCoX7M86VaugeAZMdoXn3OdgNQWhuTWGmRS6MnbH9Qs19JDpbabl7rIoDi7UVYxg/9f7iGf9tT3IGvIUXQHtA+7sFgokChPdQKB/62M4vJ/i0RlJnQ9AoGZNaXjPUogBXpYobBX6cXcOGJfXbC2oxhuhSnuUNKiOVt826p5uQK5B9hgdwS+hOkDC5dKk8BaDZqghPmGD3kpWsN3lAduWA7LbovjXRttd0oeCYNJdvrVNKEzajGojdhCV8gupEW9JZ9Y+D1vV3FQgDQikmETDbADd2meeVuXN7+KZX0LPG1QFS6t0LrG2ij2vXI4CcZf10JxkOAyWw8hMDnDlZ9cX4oKr2b9TKOPFsF+oYHYJbQl0WOqoWW4+E9rNS3LACe/Tha81Y8c535J5z/mdZDNtgi2P+E=
 script:
-  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=fanavarro_graphlib
-    
+- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=fanavarro_graphlib
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+- bash <(curl -s https://codecov.io/bash)
+
+before_deploy:
+  - mvn help:evaluate -N -Dexpression=project.version|grep -v '\['
+  - export project_version=$(mvn help:evaluate -N -Dexpression=project.version|grep -v '\[')
+deploy:
+  provider: releases
+  api_key:
+    secure: C7P0s4E+b8JeE3tN8JYsRBMGHb/KIGrUN9g14GCK5Wb5grLQPccAeiai/STu1lttF3xvBynRL8USM5Mav+O23gSxp93/R1sDNF1/1knmjnVf0pEtLoF9YFX75DWclelSyCDzenyb/6LK8GqRFjdbCWzCFgDtHeQdpPYSQNzq+WBtfXL5D7xU9vl8pQGarbVID5J6odhGomUzB9bi4fw5UpooVvWFrtx8FM58iBITwsdFQNXKhtQXvipCHA+85Y/ioRtR/kr+HY5Re2JHiSDK0o3g3W81zAypGMfzfyZA2rgBxXoIWS7NWVfoiZrqxg1AKcSdfk2bsRaO4LeIzlgSUu8Ve/C8N5vgPkz0Rq4T6N9lAb2sO7OCV7iXaNVAeG/SdYU43FhW8+q7H82d+0FBgKHc5SjuZ7MtdrSx1+cHpLQ0XaDOMBy1J3d3P3kztzco4vsoyIqMOQFzmUzP4by6tvhB3o7rht116BiCsTegANhngHfswSJP85Ad1dg64f8w7ZjZDD4CZfPYe0NEOiYpHfodSuGM71jNUJ4u1QDGHQxmkt33JVXPpOc7jCywuhhol+e4GeV4nmOPNvl60DgRakUhOhcCQGYqjlShAP5l/21AiDw1k5/SAkCBd9nVyo/5PJ/gJJrZ5rUKvOSZtIU1jrJ+hp5KstQYDjGeNymQCzM=
+  file:
+    - target/graphlib-$project_version.jar
+  skip_cleanup: true
+  on:
+    repo: fanavarro/graphlib
+    branch: master
+  name: $project_version
