@@ -12,18 +12,32 @@ script:
 after_success:
 - bash <(curl -s https://codecov.io/bash)
 
+## export GPG details
+before_install:
+    - echo $GPG_SECRET_KEYS | base64 --decode | $GPG_EXECUTABLE --import
+    - echo $GPG_OWNERTRUST | base64 --decode | $GPG_EXECUTABLE --import-ownertrust
+    
+install:
+    mvn --settings .maven.xml install -DskipTests=true -Dgpg.skip -Dmaven.javadoc.skip=true -B -V
+
 before_deploy:
   - mvn help:evaluate -N -Dexpression=project.version|grep -v '\['
   - export project_version=$(mvn help:evaluate -N -Dexpression=project.version|grep -v '\[')
 deploy:
-  provider: releases
-  api_key:
-    secure: C7P0s4E+b8JeE3tN8JYsRBMGHb/KIGrUN9g14GCK5Wb5grLQPccAeiai/STu1lttF3xvBynRL8USM5Mav+O23gSxp93/R1sDNF1/1knmjnVf0pEtLoF9YFX75DWclelSyCDzenyb/6LK8GqRFjdbCWzCFgDtHeQdpPYSQNzq+WBtfXL5D7xU9vl8pQGarbVID5J6odhGomUzB9bi4fw5UpooVvWFrtx8FM58iBITwsdFQNXKhtQXvipCHA+85Y/ioRtR/kr+HY5Re2JHiSDK0o3g3W81zAypGMfzfyZA2rgBxXoIWS7NWVfoiZrqxg1AKcSdfk2bsRaO4LeIzlgSUu8Ve/C8N5vgPkz0Rq4T6N9lAb2sO7OCV7iXaNVAeG/SdYU43FhW8+q7H82d+0FBgKHc5SjuZ7MtdrSx1+cHpLQ0XaDOMBy1J3d3P3kztzco4vsoyIqMOQFzmUzP4by6tvhB3o7rht116BiCsTegANhngHfswSJP85Ad1dg64f8w7ZjZDD4CZfPYe0NEOiYpHfodSuGM71jNUJ4u1QDGHQxmkt33JVXPpOc7jCywuhhol+e4GeV4nmOPNvl60DgRakUhOhcCQGYqjlShAP5l/21AiDw1k5/SAkCBd9nVyo/5PJ/gJJrZ5rUKvOSZtIU1jrJ+hp5KstQYDjGeNymQCzM=
-  file:
-    - target/graphlib-$project_version.jar
-  skip_cleanup: true
-  on:
-    repo: fanavarro/graphlib
-    branch: master
-    tags: true
-  name: $project_version
+  - provider: releases
+    api_key:
+      secure: C7P0s4E+b8JeE3tN8JYsRBMGHb/KIGrUN9g14GCK5Wb5grLQPccAeiai/STu1lttF3xvBynRL8USM5Mav+O23gSxp93/R1sDNF1/1knmjnVf0pEtLoF9YFX75DWclelSyCDzenyb/6LK8GqRFjdbCWzCFgDtHeQdpPYSQNzq+WBtfXL5D7xU9vl8pQGarbVID5J6odhGomUzB9bi4fw5UpooVvWFrtx8FM58iBITwsdFQNXKhtQXvipCHA+85Y/ioRtR/kr+HY5Re2JHiSDK0o3g3W81zAypGMfzfyZA2rgBxXoIWS7NWVfoiZrqxg1AKcSdfk2bsRaO4LeIzlgSUu8Ve/C8N5vgPkz0Rq4T6N9lAb2sO7OCV7iXaNVAeG/SdYU43FhW8+q7H82d+0FBgKHc5SjuZ7MtdrSx1+cHpLQ0XaDOMBy1J3d3P3kztzco4vsoyIqMOQFzmUzP4by6tvhB3o7rht116BiCsTegANhngHfswSJP85Ad1dg64f8w7ZjZDD4CZfPYe0NEOiYpHfodSuGM71jNUJ4u1QDGHQxmkt33JVXPpOc7jCywuhhol+e4GeV4nmOPNvl60DgRakUhOhcCQGYqjlShAP5l/21AiDw1k5/SAkCBd9nVyo/5PJ/gJJrZ5rUKvOSZtIU1jrJ+hp5KstQYDjGeNymQCzM=
+    file:
+      - target/graphlib-$project_version.jar
+    skip_cleanup: true
+    on:
+      repo: fanavarro/graphlib
+      branch: master
+      tags: true
+    name: $project_version
+  - provider: script
+    script: mvn clean deploy --settings .maven.xml -DskipTests=true -B -U -Prelease
+    on:
+      repo: fanavarro/graphlib
+      branch: master
+      tags: true
