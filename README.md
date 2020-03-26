@@ -192,4 +192,4 @@ public void leastCommonNodeTest1() {
 }
 ```
 
-For more examples, please check the [test cases](./src/test/java/es/um/dis/graphlib/algorithms) provided for each algorithm.
+For more examples, please check the [test cases](./src/test/java/com/github/fanavarro/graphlib/algorithms) provided for each algorithm.
