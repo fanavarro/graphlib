@@ -17,6 +17,7 @@ public class JGFSerializerTest {
 		String serialization = serializer.serialize(graph, "Fake Graph");
 		assertNotNull(serialization);
 		assertTrue(!serialization.isEmpty());
+		System.out.println(serialization);
 	}
 
 }
