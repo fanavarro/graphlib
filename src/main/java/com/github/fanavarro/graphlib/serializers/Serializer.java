@@ -23,16 +23,18 @@ public interface Serializer <N, E>{
 	/**
 	 * Serialize the node passed as argument.
 	 * @param node The node to serialize.
+	 * @param graph The graph that contains the node.
 	 * @return A string representing the node.
 	 */
-	String serializeNode(N node);
+	String serializeNode(N node, Graph<N, E> graph);
 	
 	/**
 	 * Serialize the edge with its adjacent nodes passed as parameter.
 	 * @param sourceNode The source node of the edge.
 	 * @param edge The edge.
 	 * @param targetNodes The target nodes of the edge.
+	 * @param graph The graph that contains the edge.
 	 * @return A string representing the edge.
 	 */
-	String serializeEdge(N sourceNode, E edge, Set<N> targetNodes);
+	String serializeEdge(N sourceNode, E edge, Set<N> targetNodes, Graph<N, E> graph);
 }

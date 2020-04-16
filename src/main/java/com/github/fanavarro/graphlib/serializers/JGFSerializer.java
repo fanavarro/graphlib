@@ -23,15 +23,16 @@ import com.github.fanavarro.graphlib.Graph;
  */
 public class JGFSerializer<N, E> implements Serializer<N, E> {
 
-	private static final String RELATION = "relation";
-	private static final String TARGET = "target";
-	private static final String SOURCE = "source";
-	private static final String ID = "id";
-	private static final String GRAPH2 = "graph";
-	private static final String EDGES = "edges";
-	private static final String NODES = "nodes";
-	private static final String DIRECTED = "directed";
-	private static final String LABEL = "label";
+	protected static final String ARRAY_SEPARATOR = ", ";
+	protected static final String RELATION = "relation";
+	protected static final String TARGET = "target";
+	protected static final String SOURCE = "source";
+	protected static final String ID = "id";
+	protected static final String GRAPH2 = "graph";
+	protected static final String EDGES = "edges";
+	protected static final String NODES = "nodes";
+	protected static final String DIRECTED = "directed";
+	protected static final String LABEL = "label";
 	private ObjectMapper mapper;
 
 	public JGFSerializer() {
@@ -53,7 +54,7 @@ public class JGFSerializer<N, E> implements Serializer<N, E> {
 	private ArrayNode createNodes(Graph<N, E> graph) {
 		ArrayNode jsonGraphNodes = mapper.createArrayNode();
 		for (N node : graph.getNodes()) {
-			String jsonGraphNode = this.serializeNode(node);
+			String jsonGraphNode = this.serializeNode(node, graph);
 			jsonGraphNodes.addRawValue(new RawValue(jsonGraphNode));
 		}
 		return jsonGraphNodes;
@@ -65,9 +66,10 @@ public class JGFSerializer<N, E> implements Serializer<N, E> {
 			for (Entry<E, Set<N>> entry : graph.getAdjacentNodesWithEdges(node).entrySet()) {
 				E edge = entry.getKey();
 				Set<N> adjacentNodes = entry.getValue();
-				String edgeJson = this.serializeEdge(node, edge, adjacentNodes);
-
-				jsonGraphEdges.addRawValue(new RawValue(edgeJson));
+				if(!adjacentNodes.isEmpty()){
+					String edgeJson = this.serializeEdge(node, edge, adjacentNodes, graph);
+					jsonGraphEdges.addRawValue(new RawValue(edgeJson));
+				}
 
 			}
 		}
@@ -75,7 +77,7 @@ public class JGFSerializer<N, E> implements Serializer<N, E> {
 	}
 
 	@Override
-	public String serializeNode(N node) {
+	public String serializeNode(N node, Graph<N, E> graph) {
 		ObjectNode jsonGraphNode = mapper.createObjectNode();
 		jsonGraphNode.put(ID, node.toString());
 		jsonGraphNode.put(LABEL, node.toString());
@@ -83,7 +85,7 @@ public class JGFSerializer<N, E> implements Serializer<N, E> {
 	}
 
 	@Override
-	public String serializeEdge(N sourceNode, E edge, Set<N> targetNodes) {
+	public String serializeEdge(N sourceNode, E edge, Set<N> targetNodes, Graph<N, E> graph) {
 		StringBuilder sb = new StringBuilder();
 		List<ObjectNode> jsonGraphEdges = new ArrayList<ObjectNode>();
 		for (N targetNode : targetNodes) {
@@ -94,7 +96,16 @@ public class JGFSerializer<N, E> implements Serializer<N, E> {
 			jsonGraphEdge.put(LABEL, edge.toString());
 			jsonGraphEdges.add(jsonGraphEdge);
 			sb.append(jsonGraphEdge.toString()).append(System.lineSeparator());
+			sb.append(ARRAY_SEPARATOR);
 		}
-		return sb.toString();
+		String resultString = sb.toString();
+		if(resultString.endsWith(ARRAY_SEPARATOR)){
+			resultString = resultString.substring(0, resultString.lastIndexOf(ARRAY_SEPARATOR));
+		}
+		return resultString;
+	}
+	
+	protected ObjectMapper getMapper(){
+		return this.mapper;
 	}
 }
