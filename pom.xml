@@ -35,6 +35,7 @@
 		<meanbean.version>2.0.3</meanbean.version>
 		<apache.commons.lang.version>3.9</apache.commons.lang.version>
 		<jackson.version>2.10.3</jackson.version>
+		<org.everit.json.schema.version>1.5.1</org.everit.json.schema.version>
 	</properties>
 
 	<scm>
@@ -93,6 +94,13 @@
 			<artifactId>meanbean</artifactId>
 			<version>${meanbean.version}</version>
 			<scope>test</scope>
+		</dependency>
+		
+		<!-- For json schema validation -->
+		<dependency>
+			<groupId>org.everit.json</groupId>
+			<artifactId>org.everit.json.schema</artifactId>
+			<version>${org.everit.json.schema.version}</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
