@@ -105,6 +105,7 @@ public class SubtreeInputTest {
 			SubtreeInput<String, String> input = new SubtreeInput<String, String>();
 			input.setGraph(new FakeGraph());
 			input.setNodesToBeContained(new HashSet<String>(Arrays.asList("A", "B", "C")));
+			input.setEdgesToBeContained(new HashSet<String>(Arrays.asList("1", "2", "3")));
 			return input;
 		}
 

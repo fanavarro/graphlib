@@ -7,6 +7,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import com.github.fanavarro.graphlib.Graph;
 import com.github.fanavarro.graphlib.algorithms.AlgorithmInput;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * The Class SubtreeInput.
@@ -23,6 +24,9 @@ public class SubtreeInput<N, E> implements AlgorithmInput<N, E> {
 
 	/** The nodes to be contained. */
 	private Set<N> nodesToBeContained;
+	
+	/** The edges to be contained. */
+	private Set<E> edgesToBeContained;
 
 	/*
 	 * (non-Javadoc)
@@ -65,20 +69,18 @@ public class SubtreeInput<N, E> implements AlgorithmInput<N, E> {
 		this.nodesToBeContained = nodesToBeContained;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.lang.Object#toString()
+	/**
+	 * @return the edgesToBeContained
 	 */
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("SubtreeInput [graph=");
-		builder.append(graph);
-		builder.append(", nodesToBeContained=");
-		builder.append(nodesToBeContained);
-		builder.append("]");
-		return builder.toString();
+	public Set<E> getEdgesToBeContained() {
+		return edgesToBeContained;
+	}
+
+	/**
+	 * @param edgesToBeContained the edgesToBeContained to set
+	 */
+	public void setEdgesToBeContained(Set<E> edgesToBeContained) {
+		this.edgesToBeContained = edgesToBeContained;
 	}
 
 	/**
@@ -94,7 +96,8 @@ public class SubtreeInput<N, E> implements AlgorithmInput<N, E> {
 		}
 		SubtreeInput<?, ?> castOther = (SubtreeInput<?, ?>) other;
 		return new EqualsBuilder().append(graph, castOther.graph)
-				.append(nodesToBeContained, castOther.nodesToBeContained).isEquals();
+				.append(nodesToBeContained, castOther.nodesToBeContained)
+				.append(edgesToBeContained, castOther.edgesToBeContained).isEquals();
 	}
 
 	/**
@@ -102,7 +105,18 @@ public class SubtreeInput<N, E> implements AlgorithmInput<N, E> {
 	 */
 	@Override
 	public int hashCode() {
-		return new HashCodeBuilder().append(graph).append(nodesToBeContained).toHashCode();
+		return new HashCodeBuilder().append(graph).append(nodesToBeContained).append(edgesToBeContained).toHashCode();
 	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this).append("graph", graph).append("nodesToBeContained", nodesToBeContained)
+				.append("edgesToBeContained", edgesToBeContained).toString();
+	}
+
+
 
 }

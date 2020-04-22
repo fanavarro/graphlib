@@ -34,6 +34,16 @@ public class SimpleTreeImplTest {
 		assertTrue(tree.getAdjacentNodes("B").isEmpty());
 		assertEquals(new HashSet<String>(Arrays.asList("D")), tree.getAdjacentNodes("C"));
 	}
+	
+	/**
+	 * Test remove node.
+	 */
+	@Test
+	public void testRemoveNode() {
+		SimpleTreeImpl<String, String> tree = (SimpleTreeImpl<String, String>) this.createCorrectTree();
+		tree.removeNode("E");
+		assertEquals(this.expectedTreeTestRemove(), tree);
+	}
 
 	/**
 	 * Test equals 1.
@@ -148,6 +158,19 @@ public class SimpleTreeImplTest {
 		tree.addNode("C", "3", "D");
 		tree.addNode("C", "4", "E");
 		tree.addNode("B", "5", "A");
+		return tree;
+	}
+	
+	/**
+	 * Creates the correct tree.
+	 *
+	 * @return the tree
+	 */
+	private Tree<String, String> expectedTreeTestRemove() {
+		SimpleTreeImpl<String, String> tree = new SimpleTreeImpl<String, String>();
+		tree.addNode("A", "1", "B");
+		tree.addNode("A", "2", "C");
+		tree.addNode("C", "3", "D");
 		return tree;
 	}
 }

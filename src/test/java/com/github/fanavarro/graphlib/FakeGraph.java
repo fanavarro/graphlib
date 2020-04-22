@@ -26,7 +26,7 @@ public class FakeGraph extends AbstractGraph<String, String> {
 	 * Object)
 	 */
 	@Override
-	public Map<String, Set<String>> getAdjacentNodesWithEdges(String node) {
+	public Map<String, Set<String>> getAdjacentNodesByEdgeMap(String node) {
 		Map<String, Set<String>> adjacentNodes = new HashMap<String, Set<String>>();
 		if ("A".equals(node)) {
 			adjacentNodes.put("1", new HashSet<String>(Arrays.asList("B")));

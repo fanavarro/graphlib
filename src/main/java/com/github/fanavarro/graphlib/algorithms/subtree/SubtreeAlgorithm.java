@@ -2,6 +2,7 @@ package com.github.fanavarro.graphlib.algorithms.subtree;
 
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import com.github.fanavarro.graphlib.Graph;
@@ -51,13 +52,16 @@ public class SubtreeAlgorithm<N, E> implements Algorithm<N, E> {
 	private SubtreeOutput<N, E> getTreeContainingNodes(SubtreeInput<N, E> subtreeInput) {
 		SubtreeOutput<N, E> output = new SubtreeOutput<N, E>();
 		output.setInput(subtreeInput);
-		Set<N> nodesToBeContained = subtreeInput.getNodesToBeContained();
+		Set<N> nodesToBeContained = subtreeInput.getNodesToBeContained() != null ? subtreeInput.getNodesToBeContained()
+				: new HashSet<N>();
+		Set<E> edgesToBeContained = subtreeInput.getEdgesToBeContained() != null ? subtreeInput.getEdgesToBeContained()
+				: new HashSet<E>();
 		Graph<N, E> graph = subtreeInput.getGraph();
 		Set<N> commonAncestors = this.getCommonAncestors(graph, nodesToBeContained);
 		Set<N> possibleRoots = new HashSet<N>(nodesToBeContained);
 		possibleRoots.addAll(commonAncestors);
 		for (N rootNode : possibleRoots) {
-			Tree<N, E> subtree = getTreeContainingNodes(graph, nodesToBeContained, rootNode);
+			Tree<N, E> subtree = getTreeContainingNodes(graph, nodesToBeContained, edgesToBeContained, rootNode);
 			if (subtree != null) {
 				output.addTree(subtree);
 			}
@@ -100,32 +104,58 @@ public class SubtreeAlgorithm<N, E> implements Algorithm<N, E> {
 	 *            the root node
 	 * @return the tree containing nodes
 	 */
-	private Tree<N, E> getTreeContainingNodes(Graph<N, E> graph, Set<N> nodesToBeContained, N rootNode) {
+	private Tree<N, E> getTreeContainingNodes(Graph<N, E> graph, Set<N> nodesToBeContained, Set<E> edgesToBeContained,
+			N rootNode) {
 		SimpleTreeImpl<N, E> output = new SimpleTreeImpl<N, E>();
 		Set<N> nodesToVisit = new HashSet<N>(nodesToBeContained);
-		Queue<N> q = new LinkedList<N>();
-		q.add(rootNode);
+		Set<E> edgesToVisit = new HashSet<E>(edgesToBeContained);
+		Queue<N> queuedNodes = new LinkedList<N>();
+		Queue<Set<E>> queuedEdges = new LinkedList<Set<E>>();
+		Queue<N> queuedSourceNodes = new LinkedList<N>();
+		queuedNodes.add(rootNode);
 		nodesToVisit.remove(rootNode);
-		Set<N> visited = new HashSet<N>();
-		while (!q.isEmpty()) {
-			N current = q.poll();
-			output.addNode(current);
-			nodesToVisit.remove(current);
-			visited.add(current);
-			if (nodesToVisit.isEmpty()) {
+		Set<N> visitedNodes = new HashSet<N>();
+
+		while (!queuedNodes.isEmpty()) {
+			N currentNode = queuedNodes.poll();
+			Set<E> prevEdges = queuedEdges.poll();
+			N prevNode = queuedSourceNodes.poll();
+
+			if (prevNode == null && prevEdges == null) {
+				output.addNode(currentNode);
+			} else {
+				output.addNode(prevNode, prevEdges, currentNode);
+				edgesToVisit.removeAll(prevEdges);
+			}
+			nodesToVisit.remove(currentNode);
+
+			visitedNodes.add(currentNode);
+			if (nodesToVisit.isEmpty() && edgesToVisit.isEmpty()) {
+				/*
+				 * TODO: Limpiar el arbol de nodos que se han incluido pero que
+				 * son innecesarios (subtreeAlgorithmTest7). Empezar por la hoja
+				 * e ir eliminando hacia arriba hasta que se llegue a un nodo
+				 * que deba estar en el arbol.
+				 */
 				return output;
 			}
 
-			for (Entry<E, Set<N>> entry : graph.getAdjacentNodesWithEdges(current).entrySet()) {
-				E edge = entry.getKey();
-				for (N adjacentNode : entry.getValue()) {
-					if (!visited.contains(adjacentNode)) {
-						output.addNode(current, edge, adjacentNode);
-						q.add(adjacentNode);
-					}
+			Map<N, Set<E>> adjacentNodesWithEdges = graph.getEdgesByAdjacentNodeMap(currentNode);
+			for (Entry<N, Set<E>> entry : adjacentNodesWithEdges.entrySet()) {
+				N adjacentNode = entry.getKey();
+				Set<E> edges = entry.getValue();
+				if (!visitedNodes.contains(adjacentNode)) {
+					queuedSourceNodes.add(currentNode);
+					queuedEdges.add(edges);
+					queuedNodes.add(adjacentNode);
 				}
+
 			}
 		}
 		return null;
+	}
+	
+	private void pruneTree(Tree<N, E> originalTree, Set<N> nodesToBeContained, Set<E> edgesToBeContained){
+		
 	}
 }

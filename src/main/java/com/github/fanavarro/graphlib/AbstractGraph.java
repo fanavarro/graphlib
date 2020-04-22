@@ -31,6 +31,22 @@ public abstract class AbstractGraph<N, E> implements Graph<N, E> {
 	 *
 	 */
 	private static final long serialVersionUID = -3585035402556938043L;
+	
+	@Override
+	public Map<N, Set<E>> getEdgesByAdjacentNodeMap(N node){
+		Map<N, Set<E>> edgesByAdjacentNodeMap = new HashMap<>();
+		Map<E, Set<N>> adjacentNodesByEdgeMap = this.getAdjacentNodesByEdgeMap(node);
+		for(Entry<E, Set<N>> entry : adjacentNodesByEdgeMap.entrySet()){
+			E edge = entry.getKey();
+			for (N adjacentNode : entry.getValue()){
+				if(!edgesByAdjacentNodeMap.containsKey(adjacentNode)){
+					edgesByAdjacentNodeMap.put(adjacentNode, new HashSet<E>());
+				}
+				edgesByAdjacentNodeMap.get(adjacentNode).add(edge);
+			}
+		}
+		return edgesByAdjacentNodeMap;
+	}
 
 	/**
 	 * Retrieve a set of adjacent nodes of the node passed as parameter.
@@ -43,7 +59,7 @@ public abstract class AbstractGraph<N, E> implements Graph<N, E> {
 	 */
 	@Override
 	public Set<N> getAdjacentNodes(N node) {
-		return this.getAdjacentNodesWithEdges(node).values().stream().flatMap(Collection::stream)
+		return this.getAdjacentNodesByEdgeMap(node).values().stream().flatMap(Collection::stream)
 				.collect(Collectors.toSet());
 	}
 
@@ -60,7 +76,7 @@ public abstract class AbstractGraph<N, E> implements Graph<N, E> {
 				continue;
 			}
 
-			Map<E, Set<N>> adjacentNodes = this.getAdjacentNodesWithEdges(otherNode);
+			Map<E, Set<N>> adjacentNodes = this.getAdjacentNodesByEdgeMap(otherNode);
 			for (Entry<E, Set<N>> entry : adjacentNodes.entrySet()) {
 				if (entry.getValue().contains(node)) {
 					E edge = entry.getKey();
@@ -89,8 +105,8 @@ public abstract class AbstractGraph<N, E> implements Graph<N, E> {
 		Set<N> thisNodes = this.getNodes();
 		if(other != null && other.getNodes().containsAll(thisNodes)){
 			for(N node : thisNodes){
-				Map<E, Set<N>> adjacentNodes = this.getAdjacentNodesWithEdges(node);
-				Map<E, Set<N>> otherAdjacentNodes = other.getAdjacentNodesWithEdges(node);
+				Map<E, Set<N>> adjacentNodes = this.getAdjacentNodesByEdgeMap(node);
+				Map<E, Set<N>> otherAdjacentNodes = other.getAdjacentNodesByEdgeMap(node);
 				otherAdjacentNodes = this.removeNodesNotContainedInCurrentGraph(otherAdjacentNodes, thisNodes);
 				if(!adjacentNodes.equals(otherAdjacentNodes)){
 					isSubGraph = false;
@@ -150,7 +166,7 @@ public abstract class AbstractGraph<N, E> implements Graph<N, E> {
 		 */
 		int h = 0;
 		for (N node : this.getNodes()) {
-			Map<E, Set<N>> adjacentNodes = getAdjacentNodesWithEdges(node);
+			Map<E, Set<N>> adjacentNodes = getAdjacentNodesByEdgeMap(node);
 			Entry<N, Map<E, Set<N>>> entry = new AbstractMap.SimpleEntry<N, Map<E, Set<N>>>(node, adjacentNodes);
 			h += entry.hashCode();
 		}
@@ -181,7 +197,7 @@ public abstract class AbstractGraph<N, E> implements Graph<N, E> {
 			return false;
 		}
 		for (N node : this.getNodes()) {
-			if (!this.getAdjacentNodesWithEdges(node).equals(otherGraph.getAdjacentNodesWithEdges(node))) {
+			if (!this.getAdjacentNodesByEdgeMap(node).equals(otherGraph.getAdjacentNodesByEdgeMap(node))) {
 				return false;
 			}
 		}

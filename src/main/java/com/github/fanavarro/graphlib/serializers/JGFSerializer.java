@@ -63,7 +63,7 @@ public class JGFSerializer<N, E> implements Serializer<N, E> {
 	private ArrayNode createEdges(Graph<N, E> graph) {
 		ArrayNode jsonGraphEdges = mapper.createArrayNode();
 		for (N node : graph.getNodes()) {
-			for (Entry<E, Set<N>> entry : graph.getAdjacentNodesWithEdges(node).entrySet()) {
+			for (Entry<E, Set<N>> entry : graph.getAdjacentNodesByEdgeMap(node).entrySet()) {
 				E edge = entry.getKey();
 				Set<N> adjacentNodes = entry.getValue();
 				if(!adjacentNodes.isEmpty()){

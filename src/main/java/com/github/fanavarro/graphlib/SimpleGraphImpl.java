@@ -2,7 +2,9 @@ package com.github.fanavarro.graphlib;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -54,7 +56,7 @@ public class SimpleGraphImpl<N, E> extends AbstractGraph<N, E> {
 	 * Object)
 	 */
 	@Override
-	public Map<E, Set<N>> getAdjacentNodesWithEdges(N node) {
+	public Map<E, Set<N>> getAdjacentNodesByEdgeMap(N node) {
 		return adjacentNodes.get(node);
 	}
 
@@ -108,6 +110,41 @@ public class SimpleGraphImpl<N, E> extends AbstractGraph<N, E> {
 			this.addNode(node, edge, adjacentNode);
 		}
 	}
+	
+	/**
+	 * Adds the node.
+	 *
+	 * @param node the node
+	 * @param edges the edges
+	 * @param adjacentNode the adjacent node
+	 */
+	public void addNode(N node, Set<E> edges, N adjacentNode) {
+		for(E edge : edges){
+			this.addNode(node, edge, adjacentNode);
+		}
+	}
+	
+	/**
+	 * Remove the node passed as argument. Also, references to this node are also removed.
+	 * @param nodeToRemove
+	 */
+	public void removeNode(N nodeToRemove){
+		/* Remove the entry in the adjacent nodes map */
+		this.adjacentNodes.remove(nodeToRemove);
+		
+		/* Remove references */
+		for(Entry<N,Map<E,Set<N>>> entry : this.adjacentNodes.entrySet()){
+			N node = entry.getKey();
+			Iterator<E> edgeIterator = adjacentNodes.get(node).keySet().iterator();
+			while(edgeIterator.hasNext()){
+				E edge = edgeIterator.next();
+				this.adjacentNodes.get(node).get(edge).remove(nodeToRemove);
+				if(this.adjacentNodes.get(node).get(edge).isEmpty()){
+					edgeIterator.remove();
+				}
+			}
+		}
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -131,5 +168,7 @@ public class SimpleGraphImpl<N, E> extends AbstractGraph<N, E> {
 	public int hashCode() {
 		return new HashCodeBuilder().append(adjacentNodes).toHashCode();
 	}
+
+
 
 }

@@ -34,7 +34,19 @@ public interface Graph<N, E> extends Serializable {
 	 *            the node
 	 * @return the adjacent nodes with edges
 	 */
-	Map<E, Set<N>> getAdjacentNodesWithEdges(N node);
+	Map<E, Set<N>> getAdjacentNodesByEdgeMap(N node);
+	
+	/**
+	 * Retrieve the adjacent nodes of the node passed as parameter. This method
+	 * returns a map where the key is a node, and the value is a set of edges
+	 * connecting the corresponding node FROM the node passed as
+	 * parameter.
+	 *
+	 * @param node
+	 *            the node
+	 * @return the adjacent nodes with edges
+	 */
+	Map<N, Set<E>> getEdgesByAdjacentNodeMap(N node);
 
 	/**
 	 * Retrieve a set of adjacent nodes of the node passed as parameter.
