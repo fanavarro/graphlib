@@ -99,7 +99,7 @@ public class IslandsAlgorithm<N, E> implements Algorithm<N, E> {
 
 		/* Incoming nodes are also expanded if ignoreEdgeDirection is true. */
 		if (ignoreEdgeDirection) {
-			Map<E, Set<N>> incomingNodesWithEdges = graph.getIncomingNodesWithEdges(node);
+			Map<E, Set<N>> incomingNodesWithEdges = graph.getIncomingNodesByEdgeMap(node);
 			visit(node, graph, island, visited, incomingNodesWithEdges, RelationType.INCOMING_NODE,
 					ignoreEdgeDirection);
 		}

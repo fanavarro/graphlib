@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Queue;
+import java.util.Set;
 
 import com.github.fanavarro.graphlib.Graph;
 import com.github.fanavarro.graphlib.SimpleTreeImpl;
@@ -14,9 +16,7 @@ import com.github.fanavarro.graphlib.algorithms.AlgorithmOutput;
 import com.github.fanavarro.graphlib.algorithms.least_common_node.LeastCommonNodeAlgorithm;
 import com.github.fanavarro.graphlib.algorithms.least_common_node.LeastCommonNodeInput;
 import com.github.fanavarro.graphlib.algorithms.least_common_node.LeastCommonNodeOutput;
-
-import java.util.Queue;
-import java.util.Set;
+import com.google.common.collect.Sets;
 
 /**
  * The Class SubtreeAlgorithm.
@@ -94,7 +94,9 @@ public class SubtreeAlgorithm<N, E> implements Algorithm<N, E> {
 	}
 
 	/**
-	 * Gets the tree containing nodes.
+	 * Gets the tree containing nodes. First, a breadth first traversal is
+	 * performed to create a tree containing all desired nodes. Then, this tree
+	 * is pruned for removing extra nodes included during the traversal.
 	 *
 	 * @param graph
 	 *            the graph
@@ -131,12 +133,8 @@ public class SubtreeAlgorithm<N, E> implements Algorithm<N, E> {
 
 			visitedNodes.add(currentNode);
 			if (nodesToVisit.isEmpty() && edgesToVisit.isEmpty()) {
-				/*
-				 * TODO: Limpiar el arbol de nodos que se han incluido pero que
-				 * son innecesarios (subtreeAlgorithmTest7). Empezar por la hoja
-				 * e ir eliminando hacia arriba hasta que se llegue a un nodo
-				 * que deba estar en el arbol.
-				 */
+				/* The tree is pruned in order to remove not desired nodes */
+				pruneTree(output, nodesToBeContained, edgesToBeContained);
 				return output;
 			}
 
@@ -154,8 +152,33 @@ public class SubtreeAlgorithm<N, E> implements Algorithm<N, E> {
 		}
 		return null;
 	}
-	
-	private void pruneTree(Tree<N, E> originalTree, Set<N> nodesToBeContained, Set<E> edgesToBeContained){
-		
+
+	private void pruneTree(Tree<N, E> tree, Set<N> nodesToBeContained, Set<E> edgesToBeContained) {
+		/*
+		 * Finish condition: all leaves are included in nodesToBeContained or
+		 * their edges are contained in edgesToBeContained
+		 */
+		while (!pruneTreeFinishCondition(tree, nodesToBeContained, edgesToBeContained)) {
+			for (N leaf : tree.getLeaves()) {
+				Map<E, Set<N>> leafParents = tree.getIncomingNodesByEdgeMap(leaf);
+				if (!nodesToBeContained.contains(leaf)
+						&& Sets.intersection(leafParents.keySet(), edgesToBeContained).isEmpty()) {
+					((SimpleTreeImpl<N, E>) tree).removeNode(leaf);
+				}
+			}
+		}
+
 	}
+
+	private boolean pruneTreeFinishCondition(Tree<N, E> tree, Set<N> nodesToBeContained, Set<E> edgesToBeContained) {
+		for (N leaf : tree.getLeaves()) {
+			if (!nodesToBeContained.contains(leaf)) {
+				if (!tree.getIncomingEdges(leaf).stream().anyMatch(edge -> (edgesToBeContained.contains(edge)))) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
 }
