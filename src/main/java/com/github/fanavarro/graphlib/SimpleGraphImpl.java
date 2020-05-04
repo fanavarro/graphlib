@@ -169,6 +169,14 @@ public class SimpleGraphImpl<N, E> extends AbstractGraph<N, E> {
 		return new HashCodeBuilder().append(adjacentNodes).toHashCode();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return this.adjacentNodes.toString();
+	}
+
 
 
 }

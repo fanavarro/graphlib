@@ -122,6 +122,14 @@ public class SimpleTreeImpl<N, E> extends AbstractTree<N, E> {
 		return new HashCodeBuilder().append(internalGraph).toHashCode();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return this.internalGraph.toString();
+	}
+
 
 
 }
