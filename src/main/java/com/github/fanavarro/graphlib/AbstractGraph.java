@@ -61,7 +61,7 @@ public abstract class AbstractGraph<N, E> implements Graph<N, E> {
 	}
 	
 	@Override
-	public Set<E> getAdjacentEdges(N node){
+	public Set<E> getOutgoingEdges(N node){
 		return this.getAdjacentNodesByEdgeMap(node).keySet();
 	}
 
@@ -90,6 +90,7 @@ public abstract class AbstractGraph<N, E> implements Graph<N, E> {
 		return incomingNodes;
 	}
 	
+	@Override
 	public Map<N, Set<E>> getEdgesByIncomingNodesMap(N node){
 		Map<E, Set<N>> incomingNodesByEdgeMap = this.getIncomingNodesByEdgeMap(node);
 		return this.trasposeMap(incomingNodesByEdgeMap);
@@ -109,6 +110,16 @@ public abstract class AbstractGraph<N, E> implements Graph<N, E> {
 	@Override
 	public Set<E> getIncomingEdges(N node){
 		return this.getIncomingNodesByEdgeMap(node).keySet();
+	}
+	
+	@Override
+	public Set<N> getSourceNodes(E edge){
+		 return this.getNodes().stream().filter(n -> (this.getOutgoingEdges(n).contains(edge))).collect(Collectors.toSet());
+	}
+	
+	@Override
+	public Set<N> getTargetNodes(E edge){
+		return this.getNodes().stream().filter(n -> (this.getIncomingEdges(n).contains(edge))).collect(Collectors.toSet());
 	}
 	
 	@Override

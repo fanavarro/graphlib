@@ -55,10 +55,10 @@ public class GraphTest {
 	@Test
 	public void testGetAdjacentEdges(){
 		FakeGraph graph = new FakeGraph();
-		assertEquals(new HashSet<String>(Arrays.asList("1")), graph.getAdjacentEdges("A"));
-		assertEquals(new HashSet<String>(Arrays.asList("3", "2")), graph.getAdjacentEdges("B"));
-		assertEquals(new HashSet<String>(Arrays.asList("8")), graph.getAdjacentEdges("C"));
-		assertEquals(new HashSet<String>(), graph.getAdjacentEdges("F"));
+		assertEquals(new HashSet<String>(Arrays.asList("1")), graph.getOutgoingEdges("A"));
+		assertEquals(new HashSet<String>(Arrays.asList("3", "2")), graph.getOutgoingEdges("B"));
+		assertEquals(new HashSet<String>(Arrays.asList("8")), graph.getOutgoingEdges("C"));
+		assertEquals(new HashSet<String>(), graph.getOutgoingEdges("F"));
 	}
 	
 	@Test

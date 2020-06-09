@@ -57,6 +57,13 @@ public class SubtreeAlgorithm<N, E> implements Algorithm<N, E> {
 		Set<E> edgesToBeContained = subtreeInput.getEdgesToBeContained() != null ? subtreeInput.getEdgesToBeContained()
 				: new HashSet<E>();
 		Graph<N, E> graph = subtreeInput.getGraph();
+		
+		if(nodesToBeContained.isEmpty()){
+			for(E edge : edgesToBeContained){
+				Set<N> sourceNodes = graph.getSourceNodes(edge);
+				nodesToBeContained.addAll(sourceNodes);
+			}
+		}
 		Set<N> commonAncestors = this.getCommonAncestors(graph, nodesToBeContained);
 		Set<N> possibleRoots = new HashSet<N>(nodesToBeContained);
 		possibleRoots.addAll(commonAncestors);

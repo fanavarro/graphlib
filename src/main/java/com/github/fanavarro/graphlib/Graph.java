@@ -66,7 +66,7 @@ public interface Graph<N, E> extends Serializable {
 	 *            the node
 	 * @return the adjacent edges
 	 */
-	Set<E> getAdjacentEdges(N node);
+	Set<E> getOutgoingEdges(N node);
 
 	/**
 	 * Retrieve the incoming nodes of the node passed as parameter. This method
@@ -108,6 +108,20 @@ public interface Graph<N, E> extends Serializable {
 	 * @return the incoming edges
 	 */
 	Set<E> getIncomingEdges(N node);
+	
+	/**
+	 * Get the nodes which are the source of the edge passed as argument.
+	 * @param edge
+	 * @return A set of nodes from which the edge starts.
+	 */
+	Set<N> getSourceNodes(E edge);
+	
+	/**
+	 * Get the nodes which are the target of the edge passed as argument,
+	 * @param edge
+	 * @return A set of nodes from which the edge ends.
+	 */
+	Set<N> getTargetNodes(E edge);
 
 	/**
 	 * Execute an algorithm on the graph.
