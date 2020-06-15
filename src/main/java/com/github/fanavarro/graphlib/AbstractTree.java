@@ -55,7 +55,6 @@ public abstract class AbstractTree<N, E> extends AbstractGraph<N, E> implements 
 
 	@Override
 	public boolean isLeaf(N node) {
-		// TODO Auto-generated method stub
 		return this.getAdjacentNodes(node).isEmpty();
 	}
 }

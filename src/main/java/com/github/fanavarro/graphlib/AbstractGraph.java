@@ -168,6 +168,11 @@ public abstract class AbstractGraph<N, E> implements Graph<N, E> {
 		return algorithm.apply(input);
 	}
 
+	@Override
+	public boolean isEmpty(){
+		return this.getNodes().isEmpty();
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 

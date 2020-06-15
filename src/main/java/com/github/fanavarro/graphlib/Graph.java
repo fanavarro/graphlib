@@ -145,5 +145,11 @@ public interface Graph<N, E> extends Serializable {
 	 *         otherwise.
 	 */
 	boolean isContainedIn(Graph<N, E> other);
+	
+	/**
+	 * Return true if the graph is empty; false otherwise.
+	 * @return true if the graph is empty; false otherwise.
+	 */
+	boolean isEmpty();
 
 }
