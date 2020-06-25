@@ -57,7 +57,7 @@ public class SimpleGraphImpl<N, E> extends AbstractGraph<N, E> {
 	 */
 	@Override
 	public Map<E, Set<N>> getAdjacentNodesByEdgeMap(N node) {
-		return adjacentNodes.get(node);
+		return adjacentNodes.getOrDefault(node, new HashMap<E, Set<N>>());
 	}
 
 	/**
