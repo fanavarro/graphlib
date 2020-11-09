@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Queue;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.github.fanavarro.graphlib.Graph;
 import com.github.fanavarro.graphlib.SimpleTreeImpl;
@@ -57,6 +58,9 @@ public class SubtreeAlgorithm<N, E> implements Algorithm<N, E> {
 		Set<E> edgesToBeContained = subtreeInput.getEdgesToBeContained() != null ? subtreeInput.getEdgesToBeContained()
 				: new HashSet<E>();
 		Graph<N, E> graph = subtreeInput.getGraph();
+		Integer maxDepth = subtreeInput.getMaxDepth() != null ? subtreeInput.getMaxDepth()
+				: Integer.MAX_VALUE;
+		boolean computeCommonAncestors = subtreeInput.isComputeCommonAncestor();
 		
 		if(nodesToBeContained.isEmpty()){
 			for(E edge : edgesToBeContained){
@@ -64,11 +68,16 @@ public class SubtreeAlgorithm<N, E> implements Algorithm<N, E> {
 				nodesToBeContained.addAll(sourceNodes);
 			}
 		}
-		Set<N> commonAncestors = this.getCommonAncestors(graph, nodesToBeContained);
+		
+		Set<N> commonAncestors = new HashSet<N>();
+		if (computeCommonAncestors){
+			commonAncestors = this.getCommonAncestors(graph, nodesToBeContained);
+		}
+		
 		Set<N> possibleRoots = new HashSet<N>(nodesToBeContained);
 		possibleRoots.addAll(commonAncestors);
 		for (N rootNode : possibleRoots) {
-			Tree<N, E> subtree = getTreeContainingNodes(graph, nodesToBeContained, edgesToBeContained, rootNode);
+			Tree<N, E> subtree = getTreeContainingNodes(graph, nodesToBeContained, edgesToBeContained, rootNode, maxDepth);
 			if (subtree != null) {
 				output.addTree(subtree);
 			}
@@ -114,13 +123,15 @@ public class SubtreeAlgorithm<N, E> implements Algorithm<N, E> {
 	 * @return the tree containing nodes
 	 */
 	private Tree<N, E> getTreeContainingNodes(Graph<N, E> graph, Set<N> nodesToBeContained, Set<E> edgesToBeContained,
-			N rootNode) {
+			N rootNode, Integer maxDepth) {
 		SimpleTreeImpl<N, E> output = new SimpleTreeImpl<N, E>();
 		Set<N> nodesToVisit = new HashSet<N>(nodesToBeContained);
 		Set<E> edgesToVisit = new HashSet<E>(edgesToBeContained);
 		Queue<N> queuedNodes = new LinkedList<N>();
 		Queue<Set<E>> queuedEdges = new LinkedList<Set<E>>();
 		Queue<N> queuedSourceNodes = new LinkedList<N>();
+		Queue<Integer> depthQueue = new LinkedList<Integer>();
+		depthQueue.add(1);
 		queuedNodes.add(rootNode);
 		nodesToVisit.remove(rootNode);
 		Set<N> visitedNodes = new HashSet<N>();
@@ -129,7 +140,8 @@ public class SubtreeAlgorithm<N, E> implements Algorithm<N, E> {
 			N currentNode = queuedNodes.poll();
 			Set<E> prevEdges = queuedEdges.poll();
 			N prevNode = queuedSourceNodes.poll();
-
+			Integer depth = depthQueue.poll();
+			
 			if (prevNode == null && prevEdges == null) {
 				output.addNode(currentNode);
 			} else {
@@ -145,6 +157,10 @@ public class SubtreeAlgorithm<N, E> implements Algorithm<N, E> {
 				return output;
 			}
 
+			if (depth >= maxDepth){
+				continue;
+			}
+			
 			Map<N, Set<E>> adjacentNodesWithEdges = graph.getEdgesByAdjacentNodeMap(currentNode);
 			for (Entry<N, Set<E>> entry : adjacentNodesWithEdges.entrySet()) {
 				N adjacentNode = entry.getKey();
@@ -153,6 +169,7 @@ public class SubtreeAlgorithm<N, E> implements Algorithm<N, E> {
 					queuedSourceNodes.add(currentNode);
 					queuedEdges.add(edges);
 					queuedNodes.add(adjacentNode);
+					depthQueue.add(depth + 1);
 				}
 
 			}
@@ -167,9 +184,12 @@ public class SubtreeAlgorithm<N, E> implements Algorithm<N, E> {
 		 */
 		while (!pruneTreeFinishCondition(tree, nodesToBeContained, edgesToBeContained)) {
 			for (N leaf : tree.getLeaves()) {
-				Map<E, Set<N>> leafParents = tree.getIncomingNodesByEdgeMap(leaf);
-				if (!nodesToBeContained.contains(leaf)
-						&& Sets.intersection(leafParents.keySet(), edgesToBeContained).isEmpty()) {
+//				Map<E, Set<N>> leafParents = tree.getIncomingNodesByEdgeMap(leaf);
+//				if (!nodesToBeContained.contains(leaf)
+//						&& (Sets.intersection(leafParents.keySet(), edgesToBeContained).isEmpty())) {
+//					((SimpleTreeImpl<N, E>) tree).removeNode(leaf);
+//				}
+				if(shouldPruneLeaf(tree, nodesToBeContained, edgesToBeContained, leaf)){
 					((SimpleTreeImpl<N, E>) tree).removeNode(leaf);
 				}
 			}
@@ -177,6 +197,36 @@ public class SubtreeAlgorithm<N, E> implements Algorithm<N, E> {
 
 	}
 
+	private boolean shouldPruneLeaf(Tree<N, E> tree, Set<N> nodesToBeContained, Set<E> edgesToBeContained, N leaf){
+		boolean prune = false;
+		if (!nodesToBeContained.contains(leaf)){
+			Map<E, Set<N>> leafIncomingNodesWithEdges = tree.getIncomingNodesByEdgeMap(leaf);
+			Set<E> edgeIntersection = Sets.intersection(leafIncomingNodesWithEdges.keySet(), edgesToBeContained);
+			if (edgeIntersection.isEmpty()){
+				prune = true;
+			}
+			for (N otherLeaf : tree.getLeaves()){
+				if (otherLeaf == leaf){
+					continue;
+				}
+				if(nodesToBeContained.contains(otherLeaf)){
+					for(E edge : edgeIntersection){
+						Set <N> incomingNodesThroughEdgeInOtherLeaf = tree.getIncomingNodesByEdgeMap(otherLeaf).get(edge);
+						if (incomingNodesThroughEdgeInOtherLeaf == null){
+							prune = true;
+						}
+						else if(incomingNodesThroughEdgeInOtherLeaf.containsAll(leafIncomingNodesWithEdges.get(edge))){
+							prune = true;
+							
+						} else {
+							prune = prune && false;
+						}
+					}
+				}
+			}
+		}
+		return prune;
+	}
 	private boolean pruneTreeFinishCondition(Tree<N, E> tree, Set<N> nodesToBeContained, Set<E> edgesToBeContained) {
 		for (N leaf : tree.getLeaves()) {
 			if (!nodesToBeContained.contains(leaf)) {

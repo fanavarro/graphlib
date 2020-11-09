@@ -35,6 +35,7 @@ public class SubtreeAlgorithmTest {
 		SubtreeInput<String, String> input = new SubtreeInput<String, String>();
 		input.setGraph(graph);
 		input.setNodesToBeContained(nodesToContain);
+		input.setComputeCommonAncestor(true);
 
 		SubtreeOutput<String, String> output = (SubtreeOutput<String, String>) algorithm.apply(input);
 		assertNotNull(output);
@@ -98,7 +99,8 @@ public class SubtreeAlgorithmTest {
 		SubtreeInput<String, String> input = new SubtreeInput<String, String>();
 		input.setGraph(graph);
 		input.setNodesToBeContained(nodesToContain);
-
+		input.setComputeCommonAncestor(true);
+		
 		SubtreeOutput<String, String> output = (SubtreeOutput<String, String>) algorithm.apply(input);
 		assertNotNull(output);
 		assertNotNull(output.getTrees());
@@ -222,6 +224,28 @@ public class SubtreeAlgorithmTest {
 
 		Set<Tree<String, String>> expectedTrees = createExpectedTreesForTest9();
 		assertEquals(expectedTrees, output.getTrees());
+	}
+	
+	/**
+	 * Subtree algorithm test 10.
+	 */
+	@Test
+	public void subtreeAlgorithmTest10() {
+		FakeGraph graph = new FakeGraph();
+		Algorithm<String, String> algorithm = new SubtreeAlgorithm<String, String>();
+
+		Set<String> nodesToContain = new HashSet<String>(Arrays.asList("A", "F"));
+		Set<String> edgesToContain = new HashSet<String>();
+		SubtreeInput<String, String> input = new SubtreeInput<String, String>();
+		input.setGraph(graph);
+		input.setNodesToBeContained(nodesToContain);
+		input.setEdgesToBeContained(edgesToContain);
+		input.setMaxDepth(4);
+
+		SubtreeOutput<String, String> output = (SubtreeOutput<String, String>) algorithm.apply(input);
+		assertNotNull(output);
+		assertNotNull(output.getTrees());
+		assertTrue(output.getTrees().isEmpty());
 	}
 
 	/**

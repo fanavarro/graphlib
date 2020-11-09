@@ -98,6 +98,17 @@ public class SimpleTreeImpl<N, E> extends AbstractTree<N, E> {
 	public void removeNode(N nodeToRemove){
 		internalGraph.removeNode(nodeToRemove);
 	}
+	
+	/**
+	 * Remove the relation between source and target through edge in the graph.
+	 * @param source The source node.
+	 * @param edge The edge.
+	 * @param target The target node.
+	 * @see {@link com.github.fanavarro.graphlib.SimpleGraphImpl#removeLink(N, E, N)}
+	 */
+	public void removeLink(N source, E edge, N target){
+		internalGraph.removeLink(source, edge, target);
+	}
 
 	/**
 	 * {@inheritDoc}

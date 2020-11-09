@@ -145,6 +145,26 @@ public class SimpleGraphImpl<N, E> extends AbstractGraph<N, E> {
 			}
 		}
 	}
+	
+	/**
+	 * Remove the relation between source and target through edge in the graph.
+	 * @param source The source node.
+	 * @param edge The edge.
+	 * @param target The target node.
+	 */
+	public void removeLink(N source, E edge, N target){
+		if (this.adjacentNodes.containsKey(source)){
+			if(this.adjacentNodes.get(source).containsKey(edge)){
+				this.adjacentNodes.get(source).get(edge).remove(target);
+				if(this.adjacentNodes.get(source).get(edge).isEmpty()){
+					this.adjacentNodes.get(source).remove(edge);
+				}
+				if(this.adjacentNodes.get(source).isEmpty()){
+					this.removeNode(source);
+				}
+			}
+		}
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -174,7 +194,17 @@ public class SimpleGraphImpl<N, E> extends AbstractGraph<N, E> {
 	 */
 	@Override
 	public String toString() {
-		return this.adjacentNodes.toString();
+		StringBuilder sb = new StringBuilder();
+		for(Entry <N, Map<E, Set<N>>> entry : adjacentNodes.entrySet()){
+			N node = entry.getKey();
+			Map<E, Set<N>> adjacentNodesWithEdge = entry.getValue();
+			for(Entry<E, Set<N>> entry2 : adjacentNodesWithEdge.entrySet()){
+				E edge = entry2.getKey();
+				Set<N> adjacentNodes = entry2.getValue();
+				sb.append(String.format("%s -[%s]->  %s\n", node, edge, adjacentNodes));
+			}
+		}
+		return sb.toString();
 	}
 
 
