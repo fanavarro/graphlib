@@ -179,20 +179,35 @@ public class SubtreeAlgorithm<N, E> implements Algorithm<N, E> {
 
 	private void pruneTree(Tree<N, E> tree, Set<N> nodesToBeContained, Set<E> edgesToBeContained) {
 		/*
-		 * Finish condition: all leaves are included in nodesToBeContained or
+		 * Prune leaves: finish condition: all leaves are included in nodesToBeContained or
 		 * their edges are contained in edgesToBeContained
 		 */
 		while (!pruneTreeFinishCondition(tree, nodesToBeContained, edgesToBeContained)) {
 			for (N leaf : tree.getLeaves()) {
-//				Map<E, Set<N>> leafParents = tree.getIncomingNodesByEdgeMap(leaf);
-//				if (!nodesToBeContained.contains(leaf)
-//						&& (Sets.intersection(leafParents.keySet(), edgesToBeContained).isEmpty())) {
-//					((SimpleTreeImpl<N, E>) tree).removeNode(leaf);
-//				}
 				if(shouldPruneLeaf(tree, nodesToBeContained, edgesToBeContained, leaf)){
 					((SimpleTreeImpl<N, E>) tree).removeNode(leaf);
 				}
 			}
+		}
+		
+		/*
+		 * Remove extra edges: if two nodes are connected by an edge to be contained, remove the others.
+		 */
+		for (N node : tree.getNodes()){
+			Map<N, Set<E>> edgesByAdjacentNodes = tree.getEdgesByAdjacentNodeMap(node);
+			for (Entry<N, Set<E>> edgesByAdjacentNode : edgesByAdjacentNodes.entrySet()){
+				N adjacentNode = edgesByAdjacentNode.getKey();
+				Set<E> edges = edgesByAdjacentNode.getValue();
+				
+				if (edgesToBeContained.stream().anyMatch(edges::contains)){
+					for (E edge : edges){
+						if (!edgesToBeContained.contains(edge)){
+							((SimpleTreeImpl<N, E>) tree).removeLink(node, edge, adjacentNode);
+						}
+					}
+				}
+			}
+			
 		}
 
 	}
