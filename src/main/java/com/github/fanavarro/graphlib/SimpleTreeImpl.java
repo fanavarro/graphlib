@@ -6,6 +6,10 @@ import java.util.Set;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import com.github.fanavarro.graphlib.algorithms.shortest_path.ShortestPathAlgorithm;
+import com.github.fanavarro.graphlib.algorithms.shortest_path.ShortestPathInput;
+import com.github.fanavarro.graphlib.algorithms.shortest_path.ShortestPathOutput;
+
 /**
  * Simple tree implementation. It is a simple graph that includes a root and a
  * set of leaves elements
@@ -139,6 +143,38 @@ public class SimpleTreeImpl<N, E> extends AbstractTree<N, E> {
 	@Override
 	public String toString() {
 		return this.internalGraph.toString();
+	}
+
+	@Override
+	public int getHeight() {
+		N root = this.getRoot();
+		Set<N> leaves = this.getLeaves();
+		int height = 0;
+		ShortestPathAlgorithm<N, E> shortestPathAlgorithm = new ShortestPathAlgorithm<N, E>();
+		for (N leaf : leaves){
+			ShortestPathInput<N, E> input = new ShortestPathInput<N, E>();
+			input.setGraph(this);
+			input.setMaxDepth(Integer.MAX_VALUE);
+			input.setSourceNode(root);
+			input.setTargetNode(leaf);
+			ShortestPathOutput<N, E> output = shortestPathAlgorithm.apply(input);
+			if (output != null && output.getPath() != null && output.getPath().size() > height){
+				height = output.getPath().size();
+			}
+		}
+		return height + 1;
+	}
+
+	@Override
+	public int getMaxWidth() {
+		int maxWidth = 0;
+		for (N node : this.getNodes()){
+			Set<N> adjacentNodes = this.getAdjacentNodes(node);
+			if (adjacentNodes != null && adjacentNodes.size() > maxWidth){
+				maxWidth = adjacentNodes.size();
+			}
+		}
+		return maxWidth;
 	}
 
 

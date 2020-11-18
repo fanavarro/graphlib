@@ -96,6 +96,18 @@ public class SimpleTreeImplTest {
 		Tree<String, String> tree = createIncorrectTree2();
 		tree.getRoot();
 	}
+	
+	@Test
+	public void testGetHeight(){
+		Tree<String, String> tree = this.createCorrectTree();
+		assertEquals(3, tree.getHeight());
+	}
+	
+	@Test
+	public void testGetMaxWidth(){
+		Tree<String, String> tree = this.createCorrectTree();
+		assertEquals(2, tree.getMaxWidth());
+	}
 
 	/**
 	 * Test equals 2.
