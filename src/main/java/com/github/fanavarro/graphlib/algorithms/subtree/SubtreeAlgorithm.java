@@ -227,10 +227,7 @@ public class SubtreeAlgorithm<N, E> implements Algorithm<N, E> {
 				if(nodesToBeContained.contains(otherLeaf)){
 					for(E edge : edgeIntersection){
 						Set <N> incomingNodesThroughEdgeInOtherLeaf = tree.getIncomingNodesByEdgeMap(otherLeaf).get(edge);
-						if (incomingNodesThroughEdgeInOtherLeaf == null){
-							prune = true;
-						}
-						else if(incomingNodesThroughEdgeInOtherLeaf.containsAll(leafIncomingNodesWithEdges.get(edge))){
+						if(incomingNodesThroughEdgeInOtherLeaf != null && incomingNodesThroughEdgeInOtherLeaf.containsAll(leafIncomingNodesWithEdges.get(edge))){
 							prune = true;
 							
 						} else {
