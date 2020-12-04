@@ -36,11 +36,29 @@ public class GraphTest {
 	@Test
 	public void testGetIncomingNodes() {
 		FakeGraph graph = new FakeGraph();
-		assertEquals(incomingNodesB(), graph.getIncomingNodesWithEdges("B"));
-		assertEquals(incomingNodesF(), graph.getIncomingNodesWithEdges("F"));
+		assertEquals(incomingNodesB(), graph.getIncomingNodesByEdgeMap("B"));
+		assertEquals(incomingNodesF(), graph.getIncomingNodesByEdgeMap("F"));
 		assertEquals(new HashSet<String>(Arrays.asList("A", "C")), graph.getIncomingNodes("B"));
 		assertEquals(new HashSet<String>(Arrays.asList("E")), graph.getIncomingNodes("F"));
 		assertEquals(new HashSet<String>(Arrays.asList("E", "B")), graph.getIncomingNodes("C"));
+	}
+	
+	@Test
+	public void testGetIncomingEdges(){
+		FakeGraph graph = new FakeGraph();
+		assertEquals(new HashSet<String>(), graph.getIncomingEdges("A"));
+		assertEquals(new HashSet<String>(Arrays.asList("1", "8")), graph.getIncomingEdges("B"));
+		assertEquals(new HashSet<String>(Arrays.asList("2", "7")), graph.getIncomingEdges("C"));
+		assertEquals(new HashSet<String>(Arrays.asList("5", "6")), graph.getIncomingEdges("F"));
+	}
+	
+	@Test
+	public void testGetAdjacentEdges(){
+		FakeGraph graph = new FakeGraph();
+		assertEquals(new HashSet<String>(Arrays.asList("1")), graph.getOutgoingEdges("A"));
+		assertEquals(new HashSet<String>(Arrays.asList("3", "2")), graph.getOutgoingEdges("B"));
+		assertEquals(new HashSet<String>(Arrays.asList("8")), graph.getOutgoingEdges("C"));
+		assertEquals(new HashSet<String>(), graph.getOutgoingEdges("F"));
 	}
 	
 	@Test

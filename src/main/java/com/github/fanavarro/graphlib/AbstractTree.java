@@ -47,4 +47,14 @@ public abstract class AbstractTree<N, E> extends AbstractGraph<N, E> implements 
 	public Set<N> getLeaves() {
 		return this.getNodes().stream().filter(n -> (this.getAdjacentNodes(n).isEmpty())).collect(Collectors.toSet());
 	}
+	
+	@Override
+	public boolean isRoot(N node) {
+		return this.getIncomingNodes(node).isEmpty();
+	}
+
+	@Override
+	public boolean isLeaf(N node) {
+		return this.getAdjacentNodes(node).isEmpty();
+	}
 }

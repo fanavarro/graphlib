@@ -128,7 +128,7 @@ public class ShortestPathAlgorithm<N, E> implements Algorithm<N, E> {
 		 * In the entry, E is an edge and set N is a set of nodes reached from
 		 * current node throug E edge
 		 */
-		for (Entry<E, Set<N>> entry : graph.getAdjacentNodesWithEdges(current.getContent()).entrySet()) {
+		for (Entry<E, Set<N>> entry : graph.getAdjacentNodesByEdgeMap(current.getContent()).entrySet()) {
 			E edge = entry.getKey();
 			for (N node : entry.getValue()) {
 				/* This is needed to store all edges linking two nodes */

@@ -142,7 +142,7 @@ public class LeastCommonNodeAlgorithm<N, E> implements Algorithm<N, E> {
 	 *            the graph
 	 * @param nodesByLevel
 	 *            the nodes by level
-	 * @param node
+	 * @param initNode
 	 *            the node
 	 * @param level
 	 *            the level
@@ -150,6 +150,16 @@ public class LeastCommonNodeAlgorithm<N, E> implements Algorithm<N, E> {
 	 *            the reverse
 	 * @return the related nodes by level
 	 */
+	private Set<N> getRelatedNodes(Graph<N, E> graph, N node, boolean reverse) {
+		Set<N> relatedNodes;
+		if (reverse) {
+			relatedNodes = graph.getIncomingNodes(node);
+		} else {
+			relatedNodes = graph.getAdjacentNodes(node);
+		}
+		return relatedNodes;
+	}
+	
 	private void getRelatedNodesByLevel(Graph<N, E> graph, Map<Integer, Set<N>> nodesByLevel, N node, int level,
 			boolean reverse) {
 		if (nodesByLevel.get(level) == null) {
@@ -157,11 +167,7 @@ public class LeastCommonNodeAlgorithm<N, E> implements Algorithm<N, E> {
 		}
 		nodesByLevel.get(level).add(node);
 		Set<N> relatedNodes;
-		if (reverse) {
-			relatedNodes = graph.getIncomingNodes(node);
-		} else {
-			relatedNodes = graph.getAdjacentNodes(node);
-		}
+		relatedNodes = getRelatedNodes(graph, node, reverse);
 
 		for (N relatedNode : relatedNodes) {
 			// We skip the current node if it has been visited before (cycle

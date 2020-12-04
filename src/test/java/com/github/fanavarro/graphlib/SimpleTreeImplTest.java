@@ -1,6 +1,7 @@
 package com.github.fanavarro.graphlib;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
@@ -29,10 +30,24 @@ public class SimpleTreeImplTest {
 		tree.addNode("A", "1", new HashSet<String>(Arrays.asList("B", "C")));
 		tree.addNode("C", "2", "D");
 
+		assertTrue(tree.isRoot("A"));
+		assertTrue(tree.isLeaf("B"));
+		assertFalse(tree.isLeaf("C"));
+		assertTrue(tree.isLeaf("D"));
 		assertEquals(new HashSet<String>(Arrays.asList("A", "B", "C", "D")), tree.getNodes());
 		assertEquals(new HashSet<String>(Arrays.asList("B", "C")), tree.getAdjacentNodes("A"));
 		assertTrue(tree.getAdjacentNodes("B").isEmpty());
 		assertEquals(new HashSet<String>(Arrays.asList("D")), tree.getAdjacentNodes("C"));
+	}
+	
+	/**
+	 * Test remove node.
+	 */
+	@Test
+	public void testRemoveNode() {
+		SimpleTreeImpl<String, String> tree = (SimpleTreeImpl<String, String>) this.createCorrectTree();
+		tree.removeNode("E");
+		assertEquals(this.expectedTreeTestRemove(), tree);
 	}
 
 	/**
@@ -85,6 +100,18 @@ public class SimpleTreeImplTest {
 	public void testIncorrectTree2() {
 		Tree<String, String> tree = createIncorrectTree2();
 		tree.getRoot();
+	}
+	
+	@Test
+	public void testGetHeight(){
+		Tree<String, String> tree = this.createCorrectTree();
+		assertEquals(3, tree.getHeight());
+	}
+	
+	@Test
+	public void testGetMaxWidth(){
+		Tree<String, String> tree = this.createCorrectTree();
+		assertEquals(2, tree.getMaxWidth());
 	}
 
 	/**
@@ -148,6 +175,19 @@ public class SimpleTreeImplTest {
 		tree.addNode("C", "3", "D");
 		tree.addNode("C", "4", "E");
 		tree.addNode("B", "5", "A");
+		return tree;
+	}
+	
+	/**
+	 * Creates the correct tree.
+	 *
+	 * @return the tree
+	 */
+	private Tree<String, String> expectedTreeTestRemove() {
+		SimpleTreeImpl<String, String> tree = new SimpleTreeImpl<String, String>();
+		tree.addNode("A", "1", "B");
+		tree.addNode("A", "2", "C");
+		tree.addNode("C", "3", "D");
 		return tree;
 	}
 }

@@ -2,7 +2,9 @@ package com.github.fanavarro.graphlib;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -54,8 +56,8 @@ public class SimpleGraphImpl<N, E> extends AbstractGraph<N, E> {
 	 * Object)
 	 */
 	@Override
-	public Map<E, Set<N>> getAdjacentNodesWithEdges(N node) {
-		return adjacentNodes.get(node);
+	public Map<E, Set<N>> getAdjacentNodesByEdgeMap(N node) {
+		return adjacentNodes.getOrDefault(node, new HashMap<E, Set<N>>());
 	}
 
 	/**
@@ -108,6 +110,67 @@ public class SimpleGraphImpl<N, E> extends AbstractGraph<N, E> {
 			this.addNode(node, edge, adjacentNode);
 		}
 	}
+	
+	/**
+	 * Adds the node.
+	 *
+	 * @param node the node
+	 * @param edges the edges
+	 * @param adjacentNode the adjacent node
+	 */
+	public void addNode(N node, Set<E> edges, N adjacentNode) {
+		for(E edge : edges){
+			this.addNode(node, edge, adjacentNode);
+		}
+	}
+	
+	/**
+	 * Remove the node passed as argument. Also, references to this node are also removed.
+	 * @param nodeToRemove
+	 */
+	public void removeNode(N nodeToRemove){
+		/* Remove the entry in the adjacent nodes map */
+		this.adjacentNodes.remove(nodeToRemove);
+		
+		/* Remove references */
+		for(Entry<N,Map<E,Set<N>>> entry : this.adjacentNodes.entrySet()){
+			N node = entry.getKey();
+			Iterator<E> edgeIterator = adjacentNodes.get(node).keySet().iterator();
+			while(edgeIterator.hasNext()){
+				E edge = edgeIterator.next();
+				this.adjacentNodes.get(node).get(edge).remove(nodeToRemove);
+				if(this.adjacentNodes.get(node).get(edge).isEmpty()){
+					edgeIterator.remove();
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Remove the relation between source and target through edge in the graph.
+	 * @param source The source node.
+	 * @param edge The edge.
+	 * @param target The target node.
+	 */
+	public void removeLink(N source, E edge, N target){
+		if (this.adjacentNodes.containsKey(source)){
+			if(this.adjacentNodes.get(source).containsKey(edge)){
+				this.adjacentNodes.get(source).get(edge).remove(target);
+				if(this.adjacentNodes.get(source).get(edge).isEmpty()){
+					this.adjacentNodes.get(source).remove(edge);
+				}
+				
+				/* Remove source node if it has no adjacent nodes and it is not adjacent to other nodes */
+				if(this.getAdjacentNodes(source).isEmpty() && this.getIncomingNodes(source).isEmpty()){
+					this.removeNode(source);
+				}
+				/* Remove target node if it has no adjacent nodes and it is not adjacent to other nodes */
+				if(this.getAdjacentNodes(target).isEmpty() && this.getIncomingNodes(target).isEmpty()){
+					this.removeNode(target);
+				}
+			}
+		}
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -131,5 +194,25 @@ public class SimpleGraphImpl<N, E> extends AbstractGraph<N, E> {
 	public int hashCode() {
 		return new HashCodeBuilder().append(adjacentNodes).toHashCode();
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for(Entry <N, Map<E, Set<N>>> entry : adjacentNodes.entrySet()){
+			N node = entry.getKey();
+			Map<E, Set<N>> adjacentNodesWithEdge = entry.getValue();
+			for(Entry<E, Set<N>> entry2 : adjacentNodesWithEdge.entrySet()){
+				E edge = entry2.getKey();
+				Set<N> adjacentNodes = entry2.getValue();
+				sb.append(String.format("%s -[%s]->  %s\n", node, edge, adjacentNodes));
+			}
+		}
+		return sb.toString();
+	}
+
+
 
 }

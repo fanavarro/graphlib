@@ -35,6 +35,7 @@ public class SubtreeAlgorithmTest {
 		SubtreeInput<String, String> input = new SubtreeInput<String, String>();
 		input.setGraph(graph);
 		input.setNodesToBeContained(nodesToContain);
+		input.setComputeCommonAncestor(true);
 
 		SubtreeOutput<String, String> output = (SubtreeOutput<String, String>) algorithm.apply(input);
 		assertNotNull(output);
@@ -98,7 +99,8 @@ public class SubtreeAlgorithmTest {
 		SubtreeInput<String, String> input = new SubtreeInput<String, String>();
 		input.setGraph(graph);
 		input.setNodesToBeContained(nodesToContain);
-
+		input.setComputeCommonAncestor(true);
+		
 		SubtreeOutput<String, String> output = (SubtreeOutput<String, String>) algorithm.apply(input);
 		assertNotNull(output);
 		assertNotNull(output.getTrees());
@@ -106,6 +108,144 @@ public class SubtreeAlgorithmTest {
 
 		Set<Tree<String, String>> expectedTrees = createExpectedTreesForTest4();
 		assertEquals(expectedTrees, output.getTrees());
+	}
+	
+	/**
+	 * Subtree algorithm test 5.
+	 */
+	@Test
+	public void subtreeAlgorithmTest5() {
+		FakeGraph graph = new FakeGraph();
+		Algorithm<String, String> algorithm = new SubtreeAlgorithm<String, String>();
+
+		Set<String> nodesToContain = new HashSet<String>(Arrays.asList("A", "B"));
+		SubtreeInput<String, String> input = new SubtreeInput<String, String>();
+		input.setGraph(graph);
+		input.setNodesToBeContained(nodesToContain);
+
+		SubtreeOutput<String, String> output = (SubtreeOutput<String, String>) algorithm.apply(input);
+		assertNotNull(output);
+		assertNotNull(output.getTrees());
+		assertTrue(!output.getTrees().isEmpty());
+
+		Set<Tree<String, String>> expectedTrees = createExpectedTreesForTest5();
+		assertEquals(expectedTrees, output.getTrees());
+	}
+	
+	/**
+	 * Subtree algorithm test 6.
+	 */
+	@Test
+	public void subtreeAlgorithmTest6() {
+		FakeGraph graph = new FakeGraph();
+		Algorithm<String, String> algorithm = new SubtreeAlgorithm<String, String>();
+
+		Set<String> nodesToContain = new HashSet<String>(Arrays.asList("A", "B"));
+		Set<String> edgesToContain = new HashSet<String>(Arrays.asList("1", "2"));
+		SubtreeInput<String, String> input = new SubtreeInput<String, String>();
+		input.setGraph(graph);
+		input.setNodesToBeContained(nodesToContain);
+		input.setEdgesToBeContained(edgesToContain);
+
+		SubtreeOutput<String, String> output = (SubtreeOutput<String, String>) algorithm.apply(input);
+		assertNotNull(output);
+		assertNotNull(output.getTrees());
+		assertTrue(!output.getTrees().isEmpty());
+
+		Set<Tree<String, String>> expectedTrees = createExpectedTreesForTest6();
+		assertEquals(expectedTrees, output.getTrees());
+	}
+	
+	/**
+	 * Subtree algorithm test 7.
+	 */
+	@Test
+	public void subtreeAlgorithmTest7() {
+		FakeGraph graph = new FakeGraph();
+		Algorithm<String, String> algorithm = new SubtreeAlgorithm<String, String>();
+
+		Set<String> nodesToContain = new HashSet<String>(Arrays.asList("A", "B"));
+		Set<String> edgesToContain = new HashSet<String>(Arrays.asList("4"));
+		SubtreeInput<String, String> input = new SubtreeInput<String, String>();
+		input.setGraph(graph);
+		input.setNodesToBeContained(nodesToContain);
+		input.setEdgesToBeContained(edgesToContain);
+
+		SubtreeOutput<String, String> output = (SubtreeOutput<String, String>) algorithm.apply(input);
+		assertNotNull(output);
+		assertNotNull(output.getTrees());
+		assertTrue(!output.getTrees().isEmpty());
+
+		Set<Tree<String, String>> expectedTrees = createExpectedTreesForTest7();
+		assertEquals(expectedTrees, output.getTrees());
+	}
+	
+	/**
+	 * Subtree algorithm test 8.
+	 */
+	@Test
+	public void subtreeAlgorithmTest8() {
+		FakeGraph graph = new FakeGraph();
+		Algorithm<String, String> algorithm = new SubtreeAlgorithm<String, String>();
+
+		Set<String> nodesToContain = new HashSet<String>(Arrays.asList("A", "F"));
+		Set<String> edgesToContain = new HashSet<String>(Arrays.asList("8"));
+		SubtreeInput<String, String> input = new SubtreeInput<String, String>();
+		input.setGraph(graph);
+		input.setNodesToBeContained(nodesToContain);
+		input.setEdgesToBeContained(edgesToContain);
+
+		SubtreeOutput<String, String> output = (SubtreeOutput<String, String>) algorithm.apply(input);
+		assertNotNull(output);
+		assertNotNull(output.getTrees());
+		assertTrue(output.getTrees().isEmpty());
+
+	}
+	
+	/**
+	 * Subtree algorithm test 9.
+	 */
+	@Test
+	public void subtreeAlgorithmTest9() {
+		FakeGraph graph = new FakeGraph();
+		Algorithm<String, String> algorithm = new SubtreeAlgorithm<String, String>();
+
+		Set<String> nodesToContain = new HashSet<String>(Arrays.asList("A", "F"));
+		Set<String> edgesToContain = new HashSet<String>();
+		SubtreeInput<String, String> input = new SubtreeInput<String, String>();
+		input.setGraph(graph);
+		input.setNodesToBeContained(nodesToContain);
+		input.setEdgesToBeContained(edgesToContain);
+
+		SubtreeOutput<String, String> output = (SubtreeOutput<String, String>) algorithm.apply(input);
+		assertNotNull(output);
+		assertNotNull(output.getTrees());
+		assertTrue(!output.getTrees().isEmpty());
+
+		Set<Tree<String, String>> expectedTrees = createExpectedTreesForTest9();
+		assertEquals(expectedTrees, output.getTrees());
+	}
+	
+	/**
+	 * Subtree algorithm test 10.
+	 */
+	@Test
+	public void subtreeAlgorithmTest10() {
+		FakeGraph graph = new FakeGraph();
+		Algorithm<String, String> algorithm = new SubtreeAlgorithm<String, String>();
+
+		Set<String> nodesToContain = new HashSet<String>(Arrays.asList("A", "F"));
+		Set<String> edgesToContain = new HashSet<String>();
+		SubtreeInput<String, String> input = new SubtreeInput<String, String>();
+		input.setGraph(graph);
+		input.setNodesToBeContained(nodesToContain);
+		input.setEdgesToBeContained(edgesToContain);
+		input.setMaxDepth(4);
+
+		SubtreeOutput<String, String> output = (SubtreeOutput<String, String>) algorithm.apply(input);
+		assertNotNull(output);
+		assertNotNull(output.getTrees());
+		assertTrue(output.getTrees().isEmpty());
 	}
 
 	/**
@@ -175,5 +315,66 @@ public class SubtreeAlgorithmTest {
 		expectedTrees.add(tree2);
 		return expectedTrees;
 	}
+	
+	/**
+	 * Creates the expected trees for test 5.
+	 *
+	 * @return the sets the
+	 */
+	private Set<Tree<String, String>> createExpectedTreesForTest5() {
+		SimpleTreeImpl<String, String> tree1 = new SimpleTreeImpl<String, String>();
+		tree1.addNode("A", "1", "B");
 
+		Set<Tree<String, String>> expectedTrees = new HashSet<Tree<String, String>>();
+		expectedTrees.add(tree1);
+		return expectedTrees;
+	}
+	
+	/**
+	 * Creates the expected trees for test 6.
+	 *
+	 * @return the sets the
+	 */
+	private Set<Tree<String, String>> createExpectedTreesForTest6() {
+		SimpleTreeImpl<String, String> tree1 = new SimpleTreeImpl<String, String>();
+		tree1.addNode("A", "1", "B");
+		tree1.addNode("B", "2", "C");
+
+		Set<Tree<String, String>> expectedTrees = new HashSet<Tree<String, String>>();
+		expectedTrees.add(tree1);
+		return expectedTrees;
+	}
+	
+	/**
+	 * Creates the expected trees for test 7.
+	 *
+	 * @return the sets the
+	 */
+	private Set<Tree<String, String>> createExpectedTreesForTest7() {
+		SimpleTreeImpl<String, String> tree1 = new SimpleTreeImpl<String, String>();
+		tree1.addNode("A", "1", "B");
+		tree1.addNode("B", "3", "D");
+		tree1.addNode("D", "4", "E");
+
+		Set<Tree<String, String>> expectedTrees = new HashSet<Tree<String, String>>();
+		expectedTrees.add(tree1);
+		return expectedTrees;
+	}
+
+	/**
+	 * Creates the expected trees for test 8.
+	 *
+	 * @return the sets the
+	 */
+	private Set<Tree<String, String>> createExpectedTreesForTest9() {
+		SimpleTreeImpl<String, String> tree1 = new SimpleTreeImpl<String, String>();
+		tree1.addNode("A", "1", "B");
+		tree1.addNode("B", "3", "D");
+		tree1.addNode("D", "4", "E");
+		tree1.addNode("E", new HashSet<String>(Arrays.asList("5", "6")), "F");
+
+		Set<Tree<String, String>> expectedTrees = new HashSet<Tree<String, String>>();
+		expectedTrees.add(tree1);
+		return expectedTrees;
+	}
 }

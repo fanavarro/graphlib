@@ -94,12 +94,12 @@ public class IslandsAlgorithm<N, E> implements Algorithm<N, E> {
 		}
 		island.addNode(node);
 		visited.add(node);
-		Map<E, Set<N>> adjacentNodesWithEdges = graph.getAdjacentNodesWithEdges(node);
+		Map<E, Set<N>> adjacentNodesWithEdges = graph.getAdjacentNodesByEdgeMap(node);
 		visit(node, graph, island, visited, adjacentNodesWithEdges, RelationType.ADJACENT_NODE, ignoreEdgeDirection);
 
 		/* Incoming nodes are also expanded if ignoreEdgeDirection is true. */
 		if (ignoreEdgeDirection) {
-			Map<E, Set<N>> incomingNodesWithEdges = graph.getIncomingNodesWithEdges(node);
+			Map<E, Set<N>> incomingNodesWithEdges = graph.getIncomingNodesByEdgeMap(node);
 			visit(node, graph, island, visited, incomingNodesWithEdges, RelationType.INCOMING_NODE,
 					ignoreEdgeDirection);
 		}
