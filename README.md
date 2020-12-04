@@ -177,7 +177,7 @@ public class FakeGraph extends AbstractGraph<String, String> {
 
 ```
 
-At this point, we can apply algorithms to the graph. As example, below is showed a test case for the least common node algorithm, which computes the least common node of "A" and "C" in the FakeGraph, which results in node "B":
+At this point, we can apply algorithms to the graph. As example, below is shown a test case for the least common node algorithm, which computes the least common node of "A" and "C" in the FakeGraph, which results in node "B":
 
 ```java
 @Test
@@ -206,3 +206,128 @@ public void leastCommonNodeTest1() {
 ```
 
 For more examples, please check the [test cases](./src/test/java/com/github/fanavarro/graphlib/algorithms) provided for each algorithm.
+
+## Serialization
+The library also provides methods for graph serialization. Currently only JGF format is supported.
+
+### JSON Graph Format (JGF)
+JSON Graph Format ([JGF](https://jsongraphformat.info/)) is a JSON-based serialization for graphs. This library implements the conversion between our graph model into LPG format. For example, the following code, taken from the test cases, writes our FakeGraph in JGF format in the variable *serialization*:
+
+```java
+@Test
+public void testSerialize() {
+	Graph <String, String> graph = new FakeGraph();
+	JGFSerializer<String, String> serializer = new JGFSerializer<>();
+	assertNotNull(serializer.getMapper());
+	
+	String serialization = serializer.serialize(graph, "Fake Graph");
+	assertNotNull(serialization);
+	assertTrue(!serialization.isEmpty());
+
+	JSONObject jsonInput = new JSONObject(serialization);
+	JSONSerializerValidator.validateJGF(jsonInput);
+}
+```
+
+Finally, the variable *serialization* contains the FakeGraph expressed in JGF:
+
+```JSON
+{
+  "graph" : {
+    "label" : "Fake Graph",
+    "directed" : true,
+    "nodes" : [ {
+      "id" : "A",
+      "label" : "A"
+    }, {
+      "id" : "B",
+      "label" : "B"
+    }, {
+      "id" : "C",
+      "label" : "C"
+    }, {
+      "id" : "D",
+      "label" : "D"
+    }, {
+      "id" : "E",
+      "label" : "E"
+    }, {
+      "id" : "F",
+      "label" : "F"
+    }, {
+      "id" : "G",
+      "label" : "G"
+    }, {
+      "id" : "H",
+      "label" : "H"
+    }, {
+      "id" : "I",
+      "label" : "I"
+    }, {
+      "id" : "J",
+      "label" : "J"
+    } ],
+    "edges" : [ {
+      "source" : "A",
+      "target" : "B",
+      "relation" : "1",
+      "label" : "1"
+    }, {
+      "source" : "B",
+      "target" : "C",
+      "relation" : "2",
+      "label" : "2"
+    }, {
+      "source" : "B",
+      "target" : "D",
+      "relation" : "3",
+      "label" : "3"
+    }, {
+      "source" : "C",
+      "target" : "B",
+      "relation" : "8",
+      "label" : "8"
+    }, {
+      "source" : "D",
+      "target" : "E",
+      "relation" : "4",
+      "label" : "4"
+    }, {
+      "source" : "E",
+      "target" : "F",
+      "relation" : "5",
+      "label" : "5"
+    }, {
+      "source" : "E",
+      "target" : "F",
+      "relation" : "6",
+      "label" : "6"
+    }, {
+      "source" : "E",
+      "target" : "C",
+      "relation" : "7",
+      "label" : "7"
+    }, {
+      "source" : "G",
+      "target" : "I",
+      "relation" : "9",
+      "label" : "9"
+    }, {
+      "source" : "G",
+      "target" : "J",
+      "relation" : "10",
+      "label" : "10"
+    }, {
+      "source" : "H",
+      "target" : "I",
+      "relation" : "11",
+      "label" : "11"
+    }, {
+      "source" : "H",
+      "target" : "J",
+      "relation" : "12",
+      "label" : "12"
+    } ]
+  }
+}
+```

@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Queue;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import com.github.fanavarro.graphlib.Graph;
 import com.github.fanavarro.graphlib.SimpleTreeImpl;

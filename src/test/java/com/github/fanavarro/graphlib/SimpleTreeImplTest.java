@@ -1,6 +1,7 @@
 package com.github.fanavarro.graphlib;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
@@ -29,6 +30,10 @@ public class SimpleTreeImplTest {
 		tree.addNode("A", "1", new HashSet<String>(Arrays.asList("B", "C")));
 		tree.addNode("C", "2", "D");
 
+		assertTrue(tree.isRoot("A"));
+		assertTrue(tree.isLeaf("B"));
+		assertFalse(tree.isLeaf("C"));
+		assertTrue(tree.isLeaf("D"));
 		assertEquals(new HashSet<String>(Arrays.asList("A", "B", "C", "D")), tree.getNodes());
 		assertEquals(new HashSet<String>(Arrays.asList("B", "C")), tree.getAdjacentNodes("A"));
 		assertTrue(tree.getAdjacentNodes("B").isEmpty());

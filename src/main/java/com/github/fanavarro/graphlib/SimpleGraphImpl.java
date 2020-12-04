@@ -159,8 +159,14 @@ public class SimpleGraphImpl<N, E> extends AbstractGraph<N, E> {
 				if(this.adjacentNodes.get(source).get(edge).isEmpty()){
 					this.adjacentNodes.get(source).remove(edge);
 				}
-				if(this.adjacentNodes.get(source).isEmpty()){
+				
+				/* Remove source node if it has no adjacent nodes and it is not adjacent to other nodes */
+				if(this.getAdjacentNodes(source).isEmpty() && this.getIncomingNodes(source).isEmpty()){
 					this.removeNode(source);
+				}
+				/* Remove target node if it has no adjacent nodes and it is not adjacent to other nodes */
+				if(this.getAdjacentNodes(target).isEmpty() && this.getIncomingNodes(target).isEmpty()){
+					this.removeNode(target);
 				}
 			}
 		}

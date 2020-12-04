@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.SortedMap;
-import java.util.Stack;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
@@ -61,13 +60,8 @@ public class LeastCommonNodeAlgorithm<N, E> implements Algorithm<N, E> {
 		Set<N> commonNodes = null;
 		List<SortedMap<Integer, Set<N>>> nodesByLevels = new ArrayList<SortedMap<Integer, Set<N>>>();
 		for (N node : nodes) {
-			/* Iterative */
-			// SortedMap<Integer, Set<N>> nodesByLevel = this.getRelatedNodesByLevelIterative(graph, node, reverse);
-			
-			/* recursive */
 			SortedMap<Integer, Set<N>> nodesByLevel = new TreeMap<Integer, Set<N>>();
-			this.getRelatedNodesByLevelBak(graph, nodesByLevel, node, 0, reverse);
-			/* ********* */
+			this.getRelatedNodesByLevel(graph, nodesByLevel, node, 0, reverse);
 			nodesByLevels.add(nodesByLevel);
 		}
 		commonNodes = getLeastCommonNode(nodesByLevels);
@@ -156,38 +150,7 @@ public class LeastCommonNodeAlgorithm<N, E> implements Algorithm<N, E> {
 	 *            the reverse
 	 * @return the related nodes by level
 	 */
-	private SortedMap<Integer, Set<N>> getRelatedNodesByLevelIterative(Graph<N, E> graph, N initNode, boolean reverse) {
-		/* init */
-		SortedMap<Integer, Set<N>> nodesByLevel = new TreeMap<Integer, Set<N>>();
-		Stack <Integer> levelStack = new Stack<Integer>();
-		Stack <N> nodeStack = new Stack<N>();
-		levelStack.push(0);
-		nodeStack.push(initNode);
-		
-		/* Algorithm */
-		while(!nodeStack.isEmpty()){
-			N node = nodeStack.pop();
-			Integer level = levelStack.pop();
-			
-			nodesByLevel.putIfAbsent(level, new HashSet<N>());
-			nodesByLevel.get(level).add(node);
-			Set<N> relatedNodes = getRelatedNodesRecursive(graph, node, reverse);
-			
-			for (N relatedNode : relatedNodes) {
-				// We skip the current node if it has been visited before (cycle
-				// supporting)
-				if (nodesByLevel.values().stream().flatMap(Collection::stream).anyMatch(n -> (n.equals(relatedNode)))) {
-					continue;
-				}
-				levelStack.push(level + 1);
-				nodeStack.push(relatedNode);
-			}
-		}
-		
-		return nodesByLevel;
-	}
-
-	private Set<N> getRelatedNodesRecursive(Graph<N, E> graph, N node, boolean reverse) {
+	private Set<N> getRelatedNodes(Graph<N, E> graph, N node, boolean reverse) {
 		Set<N> relatedNodes;
 		if (reverse) {
 			relatedNodes = graph.getIncomingNodes(node);
@@ -197,14 +160,14 @@ public class LeastCommonNodeAlgorithm<N, E> implements Algorithm<N, E> {
 		return relatedNodes;
 	}
 	
-	private void getRelatedNodesByLevelBak(Graph<N, E> graph, Map<Integer, Set<N>> nodesByLevel, N node, int level,
+	private void getRelatedNodesByLevel(Graph<N, E> graph, Map<Integer, Set<N>> nodesByLevel, N node, int level,
 			boolean reverse) {
 		if (nodesByLevel.get(level) == null) {
 			nodesByLevel.put(level, new HashSet<N>());
 		}
 		nodesByLevel.get(level).add(node);
 		Set<N> relatedNodes;
-		relatedNodes = getRelatedNodesRecursive(graph, node, reverse);
+		relatedNodes = getRelatedNodes(graph, node, reverse);
 
 		for (N relatedNode : relatedNodes) {
 			// We skip the current node if it has been visited before (cycle
@@ -212,7 +175,7 @@ public class LeastCommonNodeAlgorithm<N, E> implements Algorithm<N, E> {
 			if (nodesByLevel.values().stream().flatMap(Collection::stream).anyMatch(n -> (n.equals(relatedNode)))) {
 				continue;
 			}
-			getRelatedNodesByLevelBak(graph, nodesByLevel, relatedNode, level + 1, reverse);
+			getRelatedNodesByLevel(graph, nodesByLevel, relatedNode, level + 1, reverse);
 		}
 	}
 

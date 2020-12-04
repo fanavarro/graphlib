@@ -1,6 +1,7 @@
 package com.github.fanavarro.graphlib;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -30,6 +31,17 @@ public class SimpleGraphImplTest {
 		SimpleGraphImpl<String, String> graph = this.createTestGraph1();
 		assertNotNull(graph);
 		assertEquals(new HashSet<String>(Arrays.asList("A", "B", "C", "D")), graph.getNodes());
+		assertEquals(new HashSet<String>(Arrays.asList("B", "C")), graph.getAdjacentNodes("A"));
+		assertEquals(new HashSet<String>(Arrays.asList("A")), graph.getSourceNodes("1"));
+		assertEquals(new HashSet<String>(Arrays.asList("B")), graph.getTargetNodes("1"));
+		
+		graph = this.createTestGraph2();
+		assertEquals(new HashSet<String>(Arrays.asList("A", "C")), graph.getSourceNodes("1"));
+		assertEquals(new HashSet<String>(Arrays.asList("B", "D")), graph.getTargetNodes("1"));
+		
+		 Map<String, Set<String>> edgesByIncomingNodesMap = graph.getEdgesByIncomingNodesMap("B");
+		 assertEquals(new HashSet<String>(Arrays.asList("A")), edgesByIncomingNodesMap.keySet());
+		 assertEquals(new HashSet<String>(Arrays.asList("1")), edgesByIncomingNodesMap.get("A"));
 	}
 
 	/**
@@ -97,41 +109,58 @@ public class SimpleGraphImplTest {
 		graph.addNode("B");
 		assertEquals(4, graph.getNodes().size());
 	}
-	
+
 	@Test
-	public void testRemove1(){
+	public void testRemove1() {
 		SimpleGraphImpl<String, String> graph = createTestGraph1();
-		SimpleGraphImpl<String, String> expected = this.getExpectedGraphTestRemove1();	
+		SimpleGraphImpl<String, String> expected = this.getExpectedGraphTestRemove1();
 		graph.removeNode("C");
-		
+
 		assertEquals(expected, graph);
 	}
-	
+
 	@Test
-	public void testRemove2(){
+	public void testRemove2() {
 		SimpleGraphImpl<String, String> graph = createTestGraph1();
-		SimpleGraphImpl<String, String> expected = this.getExpectedGraphTestRemove2();	
+		SimpleGraphImpl<String, String> expected = this.getExpectedGraphTestRemove2();
 		graph.removeNode("D");
-		
+
 		assertEquals(expected, graph);
 	}
-	
+
 	@Test
-	public void testRemove3(){
+	public void testRemove3() {
 		SimpleGraphImpl<String, String> graph = createTestGraph2();
-		SimpleGraphImpl<String, String> expected = this.getExpectedGraphTestRemove3();	
+		SimpleGraphImpl<String, String> expected = this.getExpectedGraphTestRemove3();
 		graph.removeNode("C");
-		
+
+		assertEquals(expected, graph);
+	}
+
+	@Test
+	public void testRemove4() {
+		SimpleGraphImpl<String, String> graph = createTestGraph2();
+		SimpleGraphImpl<String, String> expected = this.getExpectedGraphTestRemove4();
+		graph.removeNode("B");
+
+		assertEquals(expected, graph);
+	}
+
+	@Test
+	public void testRemoveLink1() {
+		SimpleGraphImpl<String, String> graph = createTestGraph1();
+		SimpleGraphImpl<String, String> expected = this.getExpectedGraphTestRemoveLink1();
+		graph.removeLink("C", "3", "D");
 		assertEquals(expected, graph);
 	}
 	
 	@Test
-	public void testRemove4(){
-		SimpleGraphImpl<String, String> graph = createTestGraph2();
-		SimpleGraphImpl<String, String> expected = this.getExpectedGraphTestRemove4();	
-		graph.removeNode("B");
+	public void testIsEmpty(){
+		SimpleGraphImpl<String, String> graph = createTestGraph1();
+		assertFalse(graph.isEmpty());
 		
-		assertEquals(expected, graph);
+		SimpleGraphImpl<String, String> emptyGraph = new SimpleGraphImpl<String, String>();
+		assertTrue(emptyGraph.isEmpty());
 	}
 
 	/**
@@ -190,7 +219,7 @@ public class SimpleGraphImplTest {
 		graph.addNode("C", "3", "D");
 		return graph;
 	}
-	
+
 	/**
 	 * Creates the test graph.
 	 *
@@ -203,32 +232,37 @@ public class SimpleGraphImplTest {
 		graph.addNode("C", new HashSet<String>(Arrays.asList("1", "3")), "D");
 		return graph;
 	}
-	
+
 	private SimpleGraphImpl<String, String> getExpectedGraphTestRemove1() {
 		SimpleGraphImpl<String, String> graph = new SimpleGraphImpl<String, String>();
 		graph.addNode("A", "1", "B");
 		graph.addNode("D");
 		return graph;
 	}
-	
+
 	private SimpleGraphImpl<String, String> getExpectedGraphTestRemove2() {
 		SimpleGraphImpl<String, String> graph = new SimpleGraphImpl<String, String>();
 		graph.addNode("A", "1", "B");
 		graph.addNode("A", "2", "C");
 		return graph;
 	}
-	
+
 	private SimpleGraphImpl<String, String> getExpectedGraphTestRemove3() {
 		return getExpectedGraphTestRemove1();
 	}
-	
+
 	private SimpleGraphImpl<String, String> getExpectedGraphTestRemove4() {
 		SimpleGraphImpl<String, String> graph = new SimpleGraphImpl<String, String>();
 		graph.addNode("A", "2", "C");
 		graph.addNode("C", new HashSet<String>(Arrays.asList("1", "3")), "D");
 		return graph;
 	}
-	
-	
+
+	private SimpleGraphImpl<String, String> getExpectedGraphTestRemoveLink1() {
+		SimpleGraphImpl<String, String> graph = new SimpleGraphImpl<String, String>();
+		graph.addNode("A", "1", "B");
+		graph.addNode("A", "2", "C");
+		return graph;
+	}
 
 }
