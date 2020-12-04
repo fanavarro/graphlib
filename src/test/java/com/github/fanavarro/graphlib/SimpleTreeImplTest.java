@@ -102,12 +102,18 @@ public class SimpleTreeImplTest {
 		tree.getRoot();
 	}
 	
+	/**
+	 * Test get height.
+	 */
 	@Test
 	public void testGetHeight(){
 		Tree<String, String> tree = this.createCorrectTree();
 		assertEquals(3, tree.getHeight());
 	}
 	
+	/**
+	 * Test get max width.
+	 */
 	@Test
 	public void testGetMaxWidth(){
 		Tree<String, String> tree = this.createCorrectTree();

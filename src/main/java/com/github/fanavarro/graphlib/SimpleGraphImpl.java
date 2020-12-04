@@ -21,9 +21,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  */
 public class SimpleGraphImpl<N, E> extends AbstractGraph<N, E> {
 
-	/**
-	 *
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 2726268195016138010L;
 	/**
 	 * The adjacent nodes. Key is a node, value is a map where the key is an
@@ -126,7 +124,8 @@ public class SimpleGraphImpl<N, E> extends AbstractGraph<N, E> {
 	
 	/**
 	 * Remove the node passed as argument. Also, references to this node are also removed.
-	 * @param nodeToRemove
+	 *
+	 * @param nodeToRemove the node to remove
 	 */
 	public void removeNode(N nodeToRemove){
 		/* Remove the entry in the adjacent nodes map */

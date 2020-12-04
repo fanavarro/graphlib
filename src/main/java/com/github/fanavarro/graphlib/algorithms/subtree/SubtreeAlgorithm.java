@@ -113,12 +113,11 @@ public class SubtreeAlgorithm<N, E> implements Algorithm<N, E> {
 	 * performed to create a tree containing all desired nodes. Then, this tree
 	 * is pruned for removing extra nodes included during the traversal.
 	 *
-	 * @param graph
-	 *            the graph
-	 * @param nodesToBeContained
-	 *            the nodes to be contained
-	 * @param rootNode
-	 *            the root node
+	 * @param graph            the graph
+	 * @param nodesToBeContained            the nodes to be contained
+	 * @param edgesToBeContained the edges to be contained
+	 * @param rootNode            the root node
+	 * @param maxDepth the max depth
 	 * @return the tree containing nodes
 	 */
 	private Tree<N, E> getTreeContainingNodes(Graph<N, E> graph, Set<N> nodesToBeContained, Set<E> edgesToBeContained,
@@ -176,6 +175,13 @@ public class SubtreeAlgorithm<N, E> implements Algorithm<N, E> {
 		return null;
 	}
 
+	/**
+	 * Prune tree.
+	 *
+	 * @param tree the tree
+	 * @param nodesToBeContained the nodes to be contained
+	 * @param edgesToBeContained the edges to be contained
+	 */
 	private void pruneTree(Tree<N, E> tree, Set<N> nodesToBeContained, Set<E> edgesToBeContained) {
 		/*
 		 * Prune leaves: finish condition: all leaves are included in nodesToBeContained or
@@ -211,6 +217,15 @@ public class SubtreeAlgorithm<N, E> implements Algorithm<N, E> {
 
 	}
 
+	/**
+	 * Should prune leaf.
+	 *
+	 * @param tree the tree
+	 * @param nodesToBeContained the nodes to be contained
+	 * @param edgesToBeContained the edges to be contained
+	 * @param leaf the leaf
+	 * @return true, if successful
+	 */
 	private boolean shouldPruneLeaf(Tree<N, E> tree, Set<N> nodesToBeContained, Set<E> edgesToBeContained, N leaf){
 		boolean prune = false;
 		if (!nodesToBeContained.contains(leaf)){
@@ -238,6 +253,15 @@ public class SubtreeAlgorithm<N, E> implements Algorithm<N, E> {
 		}
 		return prune;
 	}
+	
+	/**
+	 * Prune tree finish condition.
+	 *
+	 * @param tree the tree
+	 * @param nodesToBeContained the nodes to be contained
+	 * @param edgesToBeContained the edges to be contained
+	 * @return true, if successful
+	 */
 	private boolean pruneTreeFinishCondition(Tree<N, E> tree, Set<N> nodesToBeContained, Set<E> edgesToBeContained) {
 		for (N leaf : tree.getLeaves()) {
 			if (!nodesToBeContained.contains(leaf)) {

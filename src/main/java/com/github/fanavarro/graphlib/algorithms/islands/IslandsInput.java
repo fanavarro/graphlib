@@ -25,10 +25,7 @@ public class IslandsInput<N, E> implements AlgorithmInput<N, E>, Serializable {
 	/** The graph. */
 	private Graph<N, E> graph;
 
-	/**
-	 * Specify if the direction of the edges should be taken into account for
-	 * computing the islands
-	 */
+	/** Specify if the direction of the edges should be taken into account for computing the islands. */
 	private boolean ignoreEdgeDirection;
 
 	/*
@@ -54,6 +51,8 @@ public class IslandsInput<N, E> implements AlgorithmInput<N, E>, Serializable {
 	}
 
 	/**
+	 * Checks if is ignore edge direction.
+	 *
 	 * @return the ignoreEdgeDirection
 	 */
 	public boolean isIgnoreEdgeDirection() {
@@ -61,8 +60,9 @@ public class IslandsInput<N, E> implements AlgorithmInput<N, E>, Serializable {
 	}
 
 	/**
-	 * @param ignoreEdgeDirection
-	 *            The ignoreEdgeDirection to set. This parameter is used for
+	 * Sets the ignore edge direction.
+	 *
+	 * @param ignoreEdgeDirection            The ignoreEdgeDirection to set. This parameter is used for
 	 *            ignoring edge direction when computing the islands of the
 	 *            graph.
 	 */

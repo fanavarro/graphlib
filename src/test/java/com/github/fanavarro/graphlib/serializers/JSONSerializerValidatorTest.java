@@ -4,20 +4,34 @@ package com.github.fanavarro.graphlib.serializers;
 import org.everit.json.schema.ValidationException;
 import org.junit.Test;
 
+/**
+ * The Class JSONSerializerValidatorTest.
+ */
 public class JSONSerializerValidatorTest {
 
+	/**
+	 * Test validate JGF valid string.
+	 */
 	@Test
 	public void testValidateJGFValidString() {
 		String jgf = this.getValidJGF();
 		JSONSerializerValidator.validateJGF(jgf);
 	}
 	
+	/**
+	 * Test validate JGF invalid string.
+	 */
 	@Test(expected = ValidationException.class)
 	public void testValidateJGFInvalidString() {
 		String jgf = this.getInvalidJGF();
 		JSONSerializerValidator.validateJGF(jgf);
 	}
 	
+	/**
+	 * Gets the valid JGF.
+	 *
+	 * @return the valid JGF
+	 */
 	private String getValidJGF(){
 		StringBuilder sb = new StringBuilder();
 		sb.append("{");
@@ -42,6 +56,11 @@ public class JSONSerializerValidatorTest {
 		return sb.toString();
 	}
 
+	/**
+	 * Gets the invalid JGF.
+	 *
+	 * @return the invalid JGF
+	 */
 	private String getInvalidJGF(){
 		StringBuilder sb = new StringBuilder();
 		sb.append("{");

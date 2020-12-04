@@ -138,16 +138,9 @@ public class LeastCommonNodeAlgorithm<N, E> implements Algorithm<N, E> {
 	 * node passed as parameter, and whose keys are the number of edges from the
 	 * node passed as parameter to the nodes in the value.
 	 *
-	 * @param graph
-	 *            the graph
-	 * @param nodesByLevel
-	 *            the nodes by level
-	 * @param initNode
-	 *            the node
-	 * @param level
-	 *            the level
-	 * @param reverse
-	 *            the reverse
+	 * @param graph            the graph
+	 * @param node the node
+	 * @param reverse            the reverse
 	 * @return the related nodes by level
 	 */
 	private Set<N> getRelatedNodes(Graph<N, E> graph, N node, boolean reverse) {
@@ -160,6 +153,16 @@ public class LeastCommonNodeAlgorithm<N, E> implements Algorithm<N, E> {
 		return relatedNodes;
 	}
 	
+	/**
+	 * Gets the related nodes by level.
+	 *
+	 * @param graph the graph
+	 * @param nodesByLevel the nodes by level
+	 * @param node the node
+	 * @param level the level
+	 * @param reverse the reverse
+	 * @return the related nodes by level
+	 */
 	private void getRelatedNodesByLevel(Graph<N, E> graph, Map<Integer, Set<N>> nodesByLevel, N node, int level,
 			boolean reverse) {
 		if (nodesByLevel.get(level) == null) {

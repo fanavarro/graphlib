@@ -121,6 +121,9 @@ public class PathNode<N, E> implements Serializable {
 		return new HashCodeBuilder().append(source).append(edges).append(target).toHashCode();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

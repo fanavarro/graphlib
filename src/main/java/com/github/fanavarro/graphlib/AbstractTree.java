@@ -13,9 +13,7 @@ import java.util.stream.Collectors;
  */
 public abstract class AbstractTree<N, E> extends AbstractGraph<N, E> implements Tree<N, E> {
 
-	/**
-	 *
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -1773262514460428150L;
 
 	/*
@@ -48,11 +46,17 @@ public abstract class AbstractTree<N, E> extends AbstractGraph<N, E> implements 
 		return this.getNodes().stream().filter(n -> (this.getAdjacentNodes(n).isEmpty())).collect(Collectors.toSet());
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.github.fanavarro.graphlib.Tree#isRoot(java.lang.Object)
+	 */
 	@Override
 	public boolean isRoot(N node) {
 		return this.getIncomingNodes(node).isEmpty();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.github.fanavarro.graphlib.Tree#isLeaf(java.lang.Object)
+	 */
 	@Override
 	public boolean isLeaf(N node) {
 		return this.getAdjacentNodes(node).isEmpty();

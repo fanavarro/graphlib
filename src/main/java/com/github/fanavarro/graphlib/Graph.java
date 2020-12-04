@@ -111,14 +111,16 @@ public interface Graph<N, E> extends Serializable {
 	
 	/**
 	 * Get the nodes which are the source of the edge passed as argument.
-	 * @param edge
+	 *
+	 * @param edge the edge
 	 * @return A set of nodes from which the edge starts.
 	 */
 	Set<N> getSourceNodes(E edge);
 	
 	/**
-	 * Get the nodes which are the target of the edge passed as argument,
-	 * @param edge
+	 * Get the nodes which are the target of the edge passed as argument,.
+	 *
+	 * @param edge the edge
 	 * @return A set of nodes from which the edge ends.
 	 */
 	Set<N> getTargetNodes(E edge);

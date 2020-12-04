@@ -9,8 +9,14 @@ import org.junit.Test;
 import com.github.fanavarro.graphlib.FakeGraph;
 import com.github.fanavarro.graphlib.Graph;
 
+/**
+ * The Class JGFSerializerTest.
+ */
 public class JGFSerializerTest {
 
+	/**
+	 * Test serialize.
+	 */
 	@Test
 	public void testSerialize() {
 		Graph <String, String> graph = new FakeGraph();

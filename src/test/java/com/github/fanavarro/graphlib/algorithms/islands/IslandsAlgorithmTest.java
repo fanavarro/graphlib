@@ -16,8 +16,14 @@ import com.github.fanavarro.graphlib.algorithms.islands.IslandsAlgorithm;
 import com.github.fanavarro.graphlib.algorithms.islands.IslandsInput;
 import com.github.fanavarro.graphlib.algorithms.islands.IslandsOutput;
 
+/**
+ * The Class IslandsAlgorithmTest.
+ */
 public class IslandsAlgorithmTest {
 
+	/**
+	 * Test ignoring edge direction.
+	 */
 	@Test
 	public void testIgnoringEdgeDirection() {
 		Algorithm<String, String> algorithm = new IslandsAlgorithm<String, String>();
@@ -31,6 +37,9 @@ public class IslandsAlgorithmTest {
 		assertEquals(getExpectedIslandsIgnoringEdgeDirection(), output.getIslands());
 	}
 	
+	/**
+	 * Test not ignoring edge direction.
+	 */
 	@Test
 	public void testNotIgnoringEdgeDirection() {
 		Algorithm<String, String> algorithm = new IslandsAlgorithm<String, String>();
@@ -44,6 +53,9 @@ public class IslandsAlgorithmTest {
 		assertEquals(getExpectedIslandsNotIgnoringEdgeDirection(), output.getIslands());
 	}
 	
+	/**
+	 * Test conflictive graph.
+	 */
 	@Test
 	public void testConflictiveGraph() {
 		Algorithm<String, String> algorithm = new IslandsAlgorithm<String, String>();
@@ -57,6 +69,11 @@ public class IslandsAlgorithmTest {
 		assertEquals(getExpectedIslandsConflictiveGraph(), output.getIslands());
 	}
 
+	/**
+	 * Gets the expected islands ignoring edge direction.
+	 *
+	 * @return the expected islands ignoring edge direction
+	 */
 	private Set<Graph<String, String>> getExpectedIslandsIgnoringEdgeDirection(){
 		Set<Graph<String, String>> islands = new HashSet<Graph<String, String>>();
 		islands.add(getExpectedIsland1());
@@ -64,6 +81,11 @@ public class IslandsAlgorithmTest {
 		return islands;
 	}
 	
+	/**
+	 * Gets the expected islands not ignoring edge direction.
+	 *
+	 * @return the expected islands not ignoring edge direction
+	 */
 	private Set<Graph<String, String>> getExpectedIslandsNotIgnoringEdgeDirection(){
 		Set<Graph<String, String>> islands = new HashSet<Graph<String, String>>();
 		islands.add(getExpectedIsland1());
@@ -72,6 +94,11 @@ public class IslandsAlgorithmTest {
 		return islands;
 	}
 	
+	/**
+	 * Gets the expected islands conflictive graph.
+	 *
+	 * @return the expected islands conflictive graph
+	 */
 	private Set<Graph<String, String>> getExpectedIslandsConflictiveGraph(){
 		Set<Graph<String, String>> islands = new HashSet<Graph<String, String>>();
 		islands.add(getExpectedIsland5());
@@ -79,6 +106,11 @@ public class IslandsAlgorithmTest {
 		return islands;
 	}
 
+	/**
+	 * Gets the expected island 1.
+	 *
+	 * @return the expected island 1
+	 */
 	private Graph<String, String> getExpectedIsland1() {
 		SimpleGraphImpl<String, String> g = new SimpleGraphImpl<String, String>();
 		g.addNode("A", "1", "B");
@@ -92,6 +124,11 @@ public class IslandsAlgorithmTest {
 		return g;
 	}
 
+	/**
+	 * Gets the expected island 2.
+	 *
+	 * @return the expected island 2
+	 */
 	private Graph<String, String> getExpectedIsland2() {
 		SimpleGraphImpl<String, String> g = new SimpleGraphImpl<String, String>();
 		g.addNode("G", "9", "I");
@@ -101,6 +138,11 @@ public class IslandsAlgorithmTest {
 		return g;
 	}
 	
+	/**
+	 * Gets the expected island 3.
+	 *
+	 * @return the expected island 3
+	 */
 	private Graph<String, String> getExpectedIsland3() {
 		SimpleGraphImpl<String, String> g = new SimpleGraphImpl<String, String>();
 		g.addNode("G", "9", "I");
@@ -108,6 +150,11 @@ public class IslandsAlgorithmTest {
 		return g;
 	}
 	
+	/**
+	 * Gets the expected island 4.
+	 *
+	 * @return the expected island 4
+	 */
 	private Graph<String, String> getExpectedIsland4() {
 		SimpleGraphImpl<String, String> g = new SimpleGraphImpl<String, String>();
 		g.addNode("H", "11", "I");
@@ -115,6 +162,11 @@ public class IslandsAlgorithmTest {
 		return g;
 	}
 	
+	/**
+	 * Gets the expected island 5.
+	 *
+	 * @return the expected island 5
+	 */
 	private Graph<String, String> getExpectedIsland5() {
 		SimpleGraphImpl<String, String> g = new SimpleGraphImpl<String, String>();
 		g.addNode("C", "1", "A");
@@ -122,6 +174,11 @@ public class IslandsAlgorithmTest {
 		return g;
 	}
 	
+	/**
+	 * Gets the expected island 6.
+	 *
+	 * @return the expected island 6
+	 */
 	private Graph<String, String> getExpectedIsland6() {
 		SimpleGraphImpl<String, String> g = new SimpleGraphImpl<String, String>();
 		g.addNode("D", "3", "A");
@@ -129,12 +186,17 @@ public class IslandsAlgorithmTest {
 		return g;
 	}
 	
+	/**
+	 * The Class AnotherFakeGraph.
+	 */
 	private class AnotherFakeGraph extends SimpleGraphImpl<String, String>{
-		/**
-		 * 
-		 */
+		
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1924974165350966390L;
 
+		/**
+		 * Instantiates a new another fake graph.
+		 */
 		public AnotherFakeGraph(){
 			super();
 			this.addNode("C", "1", "A");

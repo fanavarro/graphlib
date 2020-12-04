@@ -19,15 +19,25 @@ import com.github.fanavarro.graphlib.algorithms.islands.IslandsOutput;
 import com.github.fanavarro.graphlib.test_config.GraphTestFactory;
 import com.github.fanavarro.graphlib.test_config.MeanBeanConfigurationBase;
 
+/**
+ * The Class IslandsOutputTest.
+ */
 public class IslandsOutputTest {
 
+	/** The configuration. */
 	private final Configuration configuration = MeanBeanConfigurationBase.getConfigurationBuilderBase().overrideFactory("input", new IslandsInputFactory()).build();
 	
+	/**
+	 * Test getters and setters.
+	 */
 	@Test
 	public void testGettersAndSetters() {
 		new BeanTester().testBean(IslandsInput.class, configuration);
 	}
 	
+	/**
+	 * Test equals.
+	 */
 	@Test
 	public void testEquals() {
 		EqualsMethodTester tester = new EqualsMethodTester();
@@ -45,8 +55,14 @@ public class IslandsOutputTest {
 		tester.testHashCodeMethod(new IslandsOutputEquivalentFactory());
 	}
 	
+	/**
+	 * A factory for creating IslandsOutputEquivalent objects.
+	 */
 	private class IslandsOutputEquivalentFactory implements EquivalentFactory<IslandsOutput<String, String>>{
 
+		/* (non-Javadoc)
+		 * @see org.meanbean.lang.EquivalentFactory#create()
+		 */
 		@Override
 		public IslandsOutput<String, String> create() {
 			IslandsOutput<String, String> output = new IslandsOutput<String, String>();
@@ -57,16 +73,28 @@ public class IslandsOutputTest {
 		}
 	}
 	
+	/**
+	 * A factory for creating Islands objects.
+	 */
 	private class IslandsFactory implements Factory<Set<Graph<String, String>>>{
 
+		/* (non-Javadoc)
+		 * @see org.meanbean.lang.Factory#create()
+		 */
 		@Override
 		public Set<Graph<String, String>> create() {
 			return new HashSet<Graph<String, String>>(Arrays.asList(new FakeGraph()));
 		}
 	}
 	
+	/**
+	 * A factory for creating IslandsInput objects.
+	 */
 	private class IslandsInputFactory implements Factory<IslandsInput<String, String>>{
 
+		/* (non-Javadoc)
+		 * @see org.meanbean.lang.Factory#create()
+		 */
 		@Override
 		public IslandsInput<String, String> create() {
 			IslandsInput<String, String> input = new IslandsInput<String, String>();
