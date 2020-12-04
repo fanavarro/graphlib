@@ -43,6 +43,9 @@ public class GraphTest {
 		assertEquals(new HashSet<String>(Arrays.asList("E", "B")), graph.getIncomingNodes("C"));
 	}
 	
+	/**
+	 * Test get incoming edges.
+	 */
 	@Test
 	public void testGetIncomingEdges(){
 		FakeGraph graph = new FakeGraph();
@@ -52,6 +55,9 @@ public class GraphTest {
 		assertEquals(new HashSet<String>(Arrays.asList("5", "6")), graph.getIncomingEdges("F"));
 	}
 	
+	/**
+	 * Test get adjacent edges.
+	 */
 	@Test
 	public void testGetAdjacentEdges(){
 		FakeGraph graph = new FakeGraph();
@@ -61,6 +67,9 @@ public class GraphTest {
 		assertEquals(new HashSet<String>(), graph.getOutgoingEdges("F"));
 	}
 	
+	/**
+	 * Test is contained in.
+	 */
 	@Test
 	public void testIsContainedIn(){
 		Graph<String, String> graph = new FakeGraph();
@@ -74,6 +83,11 @@ public class GraphTest {
 		assertFalse(getNotContainedGraph3().isContainedIn(null));
 	}
 
+	/**
+	 * Gets the contained graph 1.
+	 *
+	 * @return the contained graph 1
+	 */
 	private Graph<String, String> getContainedGraph1() {
 		SimpleGraphImpl<String, String> g = new SimpleGraphImpl<String, String>();
 		g.addNode("G", "9", "I");
@@ -83,27 +97,54 @@ public class GraphTest {
 		return g;
 	}
 	
+	/**
+	 * Gets the contained graph 2.
+	 *
+	 * @return the contained graph 2
+	 */
 	private Graph<String, String> getContainedGraph2() {
 		SimpleGraphImpl<String, String> g = new SimpleGraphImpl<String, String>();
 		g.addNode("G");
 		return g;
 	}
 	
+	/**
+	 * Gets the empty graph.
+	 *
+	 * @return the empty graph
+	 */
 	private Graph<String, String> getEmptyGraph() {
 		SimpleGraphImpl<String, String> g = new SimpleGraphImpl<String, String>();
 		return g;
 	}
 	
+	/**
+	 * Gets the not contained graph 1.
+	 *
+	 * @return the not contained graph 1
+	 */
 	private Graph<String, String> getNotContainedGraph1() {
 		SimpleGraphImpl<String, String> g = new SimpleGraphImpl<String, String>();
 		g.addNode("D", "1", "G");
 		return g;
 	}
+	
+	/**
+	 * Gets the not contained graph 2.
+	 *
+	 * @return the not contained graph 2
+	 */
 	private Graph<String, String> getNotContainedGraph2() {
 		SimpleGraphImpl<String, String> g = new SimpleGraphImpl<String, String>();
 		g.addNode("X", "1", "Y");
 		return g;
 	}
+	
+	/**
+	 * Gets the not contained graph 3.
+	 *
+	 * @return the not contained graph 3
+	 */
 	private Graph<String, String> getNotContainedGraph3() {
 		SimpleGraphImpl<String, String> g = new SimpleGraphImpl<String, String>();
 		g.addNode("A", "1", "G");

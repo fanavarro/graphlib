@@ -4,16 +4,18 @@ import com.github.fanavarro.graphlib.Graph;
 
 /**
  * Serializer interface, which defines the methods for serializing graphs.
- * @param N Type of the node.
- * @param E Type of the edge.
- * @author fabad
  *
+ * @author fabad
+ * @param <N> the number type
+ * @param <E> the element type
  */
 public interface Serializer <N, E>{
+	
 	/**
 	 * Serialize the graph passed as argument.
+	 *
 	 * @param graph The graph to serialize.
-	 * @param graphName. The name of the graph to be serialized.
+	 * @param graphName the graph name
 	 * @return A string with the graph serialization.
 	 */
 	String serialize(Graph <N, E> graph, String graphName);

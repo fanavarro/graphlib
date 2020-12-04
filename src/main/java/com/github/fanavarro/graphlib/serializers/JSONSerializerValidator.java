@@ -12,6 +12,7 @@ import org.json.JSONTokener;
  */
 public class JSONSerializerValidator {
 	
+	/** The jgf schema resource. */
 	private static String JGF_SCHEMA_RESOURCE = "/jsonValidationSchemas/JGFSchema.json";
 	
 	/**
@@ -35,7 +36,8 @@ public class JSONSerializerValidator {
 	
 	/**
 	 * Check if the inputJson is compliant with JSON Graph Format Schema.
-	 * @param inputJson The json to check.
+	 *
+	 * @param inputString the input string
 	 */
 	public static void validateJGF(String inputString){
 		JSONObject inputJson = new JSONObject(inputString);

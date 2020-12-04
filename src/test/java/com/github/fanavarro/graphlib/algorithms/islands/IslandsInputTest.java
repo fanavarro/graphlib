@@ -13,15 +13,25 @@ import com.github.fanavarro.graphlib.algorithms.islands.IslandsInput;
 import com.github.fanavarro.graphlib.test_config.GraphTestFactory;
 import com.github.fanavarro.graphlib.test_config.MeanBeanConfigurationBase;
 
+/**
+ * The Class IslandsInputTest.
+ */
 public class IslandsInputTest {
 
+	/** The configuration. */
 	private final Configuration configuration = MeanBeanConfigurationBase.getConfigurationBuilderBase().build();
 	
+	/**
+	 * Test getters and setters.
+	 */
 	@Test
 	public void testGettersAndSetters() {
 		new BeanTester().testBean(IslandsInput.class, configuration);
 	}
 	
+	/**
+	 * Test equals.
+	 */
 	@Test
 	public void testEquals() {
 		EqualsMethodTester tester = new EqualsMethodTester();
@@ -39,8 +49,14 @@ public class IslandsInputTest {
 		tester.testHashCodeMethod(new IslandsInputEquivalentFactory());
 	}
 	
+	/**
+	 * A factory for creating IslandsInputEquivalent objects.
+	 */
 	private class IslandsInputEquivalentFactory implements EquivalentFactory<IslandsInput<String, String>>{
 
+		/* (non-Javadoc)
+		 * @see org.meanbean.lang.EquivalentFactory#create()
+		 */
 		@Override
 		public IslandsInput<String, String> create() {
 			IslandsInput<String, String> input = new IslandsInput<String, String>();

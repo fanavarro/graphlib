@@ -27,11 +27,12 @@ import com.github.fanavarro.graphlib.algorithms.AlgorithmOutput;
  */
 public abstract class AbstractGraph<N, E> implements Graph<N, E> {
 
-	/**
-	 *
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -3585035402556938043L;
 	
+	/* (non-Javadoc)
+	 * @see com.github.fanavarro.graphlib.Graph#getEdgesByAdjacentNodeMap(java.lang.Object)
+	 */
 	@Override
 	public Map<N, Set<E>> getEdgesByAdjacentNodeMap(N node){
 		Map<E, Set<N>> adjacentNodesByEdgeMap = this.getAdjacentNodesByEdgeMap(node);
@@ -39,6 +40,12 @@ public abstract class AbstractGraph<N, E> implements Graph<N, E> {
 	}
 
 
+	/**
+	 * Traspose map.
+	 *
+	 * @param nodesByEdgeMap the nodes by edge map
+	 * @return the map
+	 */
 	private Map<N, Set<E>> trasposeMap(Map<E, Set<N>> nodesByEdgeMap) {
 		Map<N, Set<E>> edgeByNodeMap = new HashMap<>();
 		for(Entry<E, Set<N>> entry : nodesByEdgeMap.entrySet()){
@@ -54,12 +61,18 @@ public abstract class AbstractGraph<N, E> implements Graph<N, E> {
 	}
 
 
+	/* (non-Javadoc)
+	 * @see com.github.fanavarro.graphlib.Graph#getAdjacentNodes(java.lang.Object)
+	 */
 	@Override
 	public Set<N> getAdjacentNodes(N node) {
 		return this.getAdjacentNodesByEdgeMap(node).values().stream().flatMap(Collection::stream)
 				.collect(Collectors.toSet());
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.github.fanavarro.graphlib.Graph#getOutgoingEdges(java.lang.Object)
+	 */
 	@Override
 	public Set<E> getOutgoingEdges(N node){
 		return this.getAdjacentNodesByEdgeMap(node).keySet();
@@ -90,6 +103,9 @@ public abstract class AbstractGraph<N, E> implements Graph<N, E> {
 		return incomingNodes;
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.github.fanavarro.graphlib.Graph#getEdgesByIncomingNodesMap(java.lang.Object)
+	 */
 	@Override
 	public Map<N, Set<E>> getEdgesByIncomingNodesMap(N node){
 		Map<E, Set<N>> incomingNodesByEdgeMap = this.getIncomingNodesByEdgeMap(node);
@@ -107,21 +123,33 @@ public abstract class AbstractGraph<N, E> implements Graph<N, E> {
 				.collect(Collectors.toSet());
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.github.fanavarro.graphlib.Graph#getIncomingEdges(java.lang.Object)
+	 */
 	@Override
 	public Set<E> getIncomingEdges(N node){
 		return this.getIncomingNodesByEdgeMap(node).keySet();
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.github.fanavarro.graphlib.Graph#getSourceNodes(java.lang.Object)
+	 */
 	@Override
 	public Set<N> getSourceNodes(E edge){
 		 return this.getNodes().stream().filter(n -> (this.getOutgoingEdges(n).contains(edge))).collect(Collectors.toSet());
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.github.fanavarro.graphlib.Graph#getTargetNodes(java.lang.Object)
+	 */
 	@Override
 	public Set<N> getTargetNodes(E edge){
 		return this.getNodes().stream().filter(n -> (this.getIncomingEdges(n).contains(edge))).collect(Collectors.toSet());
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.github.fanavarro.graphlib.Graph#isContainedIn(com.github.fanavarro.graphlib.Graph)
+	 */
 	@Override
 	public boolean isContainedIn(Graph<N, E> other){
 		boolean isSubGraph = true;
@@ -142,6 +170,13 @@ public abstract class AbstractGraph<N, E> implements Graph<N, E> {
 		return isSubGraph;
 	}
 
+	/**
+	 * Removes the nodes not contained in current graph.
+	 *
+	 * @param otherAdjacentNodes the other adjacent nodes
+	 * @param thisNodes the this nodes
+	 * @return the map
+	 */
 	private Map<E, Set<N>> removeNodesNotContainedInCurrentGraph(Map<E, Set<N>> otherAdjacentNodes, Set<N> thisNodes) {
 		Map<E, Set<N>> filteredAdjacentNodes = new HashMap<E, Set<N>>();
 		for(Entry<E, Set<N>> entry : otherAdjacentNodes.entrySet()){
@@ -162,12 +197,18 @@ public abstract class AbstractGraph<N, E> implements Graph<N, E> {
 	}
 
 
+	/* (non-Javadoc)
+	 * @see com.github.fanavarro.graphlib.Graph#applyAlgorithm(com.github.fanavarro.graphlib.algorithms.Algorithm, com.github.fanavarro.graphlib.algorithms.AlgorithmInput)
+	 */
 	@Override
 	public AlgorithmOutput<N, E> applyAlgorithm(Algorithm<N, E> algorithm, AlgorithmInput<N, E> input) {
 		input.setGraph(this);
 		return algorithm.apply(input);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.github.fanavarro.graphlib.Graph#isEmpty()
+	 */
 	@Override
 	public boolean isEmpty(){
 		return this.getNodes().isEmpty();

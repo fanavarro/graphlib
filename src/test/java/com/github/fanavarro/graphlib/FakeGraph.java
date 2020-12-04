@@ -13,9 +13,7 @@ import com.github.fanavarro.graphlib.AbstractGraph;
  */
 public class FakeGraph extends AbstractGraph<String, String> {
 
-	/**
-	 *
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -4996387857511308304L;
 
 	/*

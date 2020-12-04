@@ -110,6 +110,9 @@ public class SimpleGraphImplTest {
 		assertEquals(4, graph.getNodes().size());
 	}
 
+	/**
+	 * Test remove 1.
+	 */
 	@Test
 	public void testRemove1() {
 		SimpleGraphImpl<String, String> graph = createTestGraph1();
@@ -119,6 +122,9 @@ public class SimpleGraphImplTest {
 		assertEquals(expected, graph);
 	}
 
+	/**
+	 * Test remove 2.
+	 */
 	@Test
 	public void testRemove2() {
 		SimpleGraphImpl<String, String> graph = createTestGraph1();
@@ -128,6 +134,9 @@ public class SimpleGraphImplTest {
 		assertEquals(expected, graph);
 	}
 
+	/**
+	 * Test remove 3.
+	 */
 	@Test
 	public void testRemove3() {
 		SimpleGraphImpl<String, String> graph = createTestGraph2();
@@ -137,6 +146,9 @@ public class SimpleGraphImplTest {
 		assertEquals(expected, graph);
 	}
 
+	/**
+	 * Test remove 4.
+	 */
 	@Test
 	public void testRemove4() {
 		SimpleGraphImpl<String, String> graph = createTestGraph2();
@@ -146,6 +158,9 @@ public class SimpleGraphImplTest {
 		assertEquals(expected, graph);
 	}
 
+	/**
+	 * Test remove link 1.
+	 */
 	@Test
 	public void testRemoveLink1() {
 		SimpleGraphImpl<String, String> graph = createTestGraph1();
@@ -154,6 +169,9 @@ public class SimpleGraphImplTest {
 		assertEquals(expected, graph);
 	}
 	
+	/**
+	 * Test is empty.
+	 */
 	@Test
 	public void testIsEmpty(){
 		SimpleGraphImpl<String, String> graph = createTestGraph1();
@@ -233,6 +251,11 @@ public class SimpleGraphImplTest {
 		return graph;
 	}
 
+	/**
+	 * Gets the expected graph test remove 1.
+	 *
+	 * @return the expected graph test remove 1
+	 */
 	private SimpleGraphImpl<String, String> getExpectedGraphTestRemove1() {
 		SimpleGraphImpl<String, String> graph = new SimpleGraphImpl<String, String>();
 		graph.addNode("A", "1", "B");
@@ -240,6 +263,11 @@ public class SimpleGraphImplTest {
 		return graph;
 	}
 
+	/**
+	 * Gets the expected graph test remove 2.
+	 *
+	 * @return the expected graph test remove 2
+	 */
 	private SimpleGraphImpl<String, String> getExpectedGraphTestRemove2() {
 		SimpleGraphImpl<String, String> graph = new SimpleGraphImpl<String, String>();
 		graph.addNode("A", "1", "B");
@@ -247,10 +275,20 @@ public class SimpleGraphImplTest {
 		return graph;
 	}
 
+	/**
+	 * Gets the expected graph test remove 3.
+	 *
+	 * @return the expected graph test remove 3
+	 */
 	private SimpleGraphImpl<String, String> getExpectedGraphTestRemove3() {
 		return getExpectedGraphTestRemove1();
 	}
 
+	/**
+	 * Gets the expected graph test remove 4.
+	 *
+	 * @return the expected graph test remove 4
+	 */
 	private SimpleGraphImpl<String, String> getExpectedGraphTestRemove4() {
 		SimpleGraphImpl<String, String> graph = new SimpleGraphImpl<String, String>();
 		graph.addNode("A", "2", "C");
@@ -258,6 +296,11 @@ public class SimpleGraphImplTest {
 		return graph;
 	}
 
+	/**
+	 * Gets the expected graph test remove link 1.
+	 *
+	 * @return the expected graph test remove link 1
+	 */
 	private SimpleGraphImpl<String, String> getExpectedGraphTestRemoveLink1() {
 		SimpleGraphImpl<String, String> graph = new SimpleGraphImpl<String, String>();
 		graph.addNode("A", "1", "B");

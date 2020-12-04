@@ -24,10 +24,20 @@ import java.util.TreeSet;
  */
 public class IslandsAlgorithm<N, E> implements Algorithm<N, E> {
 
+	/**
+	 * The Enum RelationType.
+	 */
 	private enum RelationType {
-		ADJACENT_NODE, INCOMING_NODE
+		
+		/** The adjacent node. */
+		ADJACENT_NODE, 
+ /** The incoming node. */
+ INCOMING_NODE
 	};
 
+	/* (non-Javadoc)
+	 * @see com.github.fanavarro.graphlib.algorithms.Algorithm#apply(com.github.fanavarro.graphlib.algorithms.AlgorithmInput)
+	 */
 	@Override
 	public AlgorithmOutput<N, E> apply(AlgorithmInput<N, E> input) {
 		IslandsOutput<N, E> output = new IslandsOutput<N, E>();
@@ -56,6 +66,12 @@ public class IslandsAlgorithm<N, E> implements Algorithm<N, E> {
 		return output;
 	}
 
+	/**
+	 * Removes the redundant islands.
+	 *
+	 * @param islands the islands
+	 * @return the sets the
+	 */
 	private Set<Graph<N, E>> removeRedundantIslands(Set<Graph<N, E>> islands) {
 		Set<Graph<N, E>> finalIslands = new HashSet<Graph<N, E>>();
 		if (islands.size() == 1) {
@@ -79,6 +95,14 @@ public class IslandsAlgorithm<N, E> implements Algorithm<N, E> {
 		return finalIslands;
 	}
 
+	/**
+	 * Gets the island from.
+	 *
+	 * @param node the node
+	 * @param graph the graph
+	 * @param ignoreEdgeDirection the ignore edge direction
+	 * @return the island from
+	 */
 	private Graph<N, E> getIslandFrom(N node, Graph<N, E> graph, boolean ignoreEdgeDirection) {
 		SimpleGraphImpl<N, E> island = new SimpleGraphImpl<N, E>();
 		Set<N> visited = new HashSet<N>();
@@ -87,6 +111,15 @@ public class IslandsAlgorithm<N, E> implements Algorithm<N, E> {
 		return island;
 	}
 
+	/**
+	 * Expand.
+	 *
+	 * @param node the node
+	 * @param graph the graph
+	 * @param island the island
+	 * @param visited the visited
+	 * @param ignoreEdgeDirection the ignore edge direction
+	 */
 	private void expand(N node, Graph<N, E> graph, SimpleGraphImpl<N, E> island, Set<N> visited,
 			boolean ignoreEdgeDirection) {
 		if (visited.contains(node)) {
@@ -105,6 +138,17 @@ public class IslandsAlgorithm<N, E> implements Algorithm<N, E> {
 		}
 	}
 
+	/**
+	 * Visit.
+	 *
+	 * @param node the node
+	 * @param graph the graph
+	 * @param island the island
+	 * @param visited the visited
+	 * @param relatedNodesWithEdges the related nodes with edges
+	 * @param relationType the relation type
+	 * @param ignoreEdgeDirection the ignore edge direction
+	 */
 	private void visit(N node, Graph<N, E> graph, SimpleGraphImpl<N, E> island, Set<N> visited,
 			Map<E, Set<N>> relatedNodesWithEdges, RelationType relationType, boolean ignoreEdgeDirection) {
 		for (Entry<E, Set<N>> entry : relatedNodesWithEdges.entrySet()) {
@@ -123,6 +167,14 @@ public class IslandsAlgorithm<N, E> implements Algorithm<N, E> {
 		}
 	}
 
+	/**
+	 * Adds the incoming nodes.
+	 *
+	 * @param island the island
+	 * @param incomingNodes the incoming nodes
+	 * @param edge the edge
+	 * @param node the node
+	 */
 	private void addIncomingNodes(SimpleGraphImpl<N, E> island, Set<N> incomingNodes, E edge, N node) {
 		for (N incomingNode : incomingNodes) {
 			island.addNode(incomingNode, edge, node);

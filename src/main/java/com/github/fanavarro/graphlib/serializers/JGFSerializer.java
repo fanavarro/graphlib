@@ -12,33 +12,60 @@ import com.github.fanavarro.graphlib.Graph;
 
 /**
  * Class for serializing graphs into Json Graph format (JGF).
- * 
+ *
  * @author fabad
+ * @param <N>            Type of node.
+ * @param <E>            Type of edge.
  * @see https://jsongraphformat.info/
- * @param <N>
- *            Type of node.
- * @param <E>
- *            Type of edge.
  */
 public class JGFSerializer<N, E> implements Serializer<N, E> {
 
+	/** The Constant ARRAY_SEPARATOR. */
 	protected static final String ARRAY_SEPARATOR = ", ";
+	
+	/** The Constant RELATION. */
 	protected static final String RELATION = "relation";
+	
+	/** The Constant TARGET. */
 	protected static final String TARGET = "target";
+	
+	/** The Constant SOURCE. */
 	protected static final String SOURCE = "source";
+	
+	/** The Constant ID. */
 	protected static final String ID = "id";
+	
+	/** The Constant GRAPH. */
 	protected static final String GRAPH = "graph";
+	
+	/** The Constant EDGES. */
 	protected static final String EDGES = "edges";
+	
+	/** The Constant NODES. */
 	protected static final String NODES = "nodes";
+	
+	/** The Constant DIRECTED. */
 	protected static final String DIRECTED = "directed";
+	
+	/** The Constant LABEL. */
 	protected static final String LABEL = "label";
+	
+	/** The Constant METADATA. */
 	protected static final String METADATA = "metadata";
+	
+	/** The mapper. */
 	private ObjectMapper mapper;
 
+	/**
+	 * Instantiates a new JGF serializer.
+	 */
 	public JGFSerializer() {
 		mapper = new ObjectMapper();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.github.fanavarro.graphlib.serializers.Serializer#serialize(com.github.fanavarro.graphlib.Graph, java.lang.String)
+	 */
 	@Override
 	public String serialize(Graph<N, E> graph, String graphName) {
 		ObjectNode jsonRoot = mapper.createObjectNode();
@@ -51,6 +78,12 @@ public class JGFSerializer<N, E> implements Serializer<N, E> {
 		return jsonRoot.toPrettyString();
 	}
 
+	/**
+	 * Creates the nodes.
+	 *
+	 * @param graph the graph
+	 * @return the array node
+	 */
 	private ArrayNode createNodes(Graph<N, E> graph) {
 		ArrayNode jsonGraphNodes = mapper.createArrayNode();
 		for (N node : graph.getNodes()) {
@@ -60,6 +93,12 @@ public class JGFSerializer<N, E> implements Serializer<N, E> {
 		return jsonGraphNodes;
 	}
 
+	/**
+	 * Creates the edges.
+	 *
+	 * @param graph the graph
+	 * @return the array node
+	 */
 	private ArrayNode createEdges(Graph<N, E> graph) {
 		ArrayNode jsonGraphEdges = mapper.createArrayNode();
 		for (N node : graph.getNodes()) {
@@ -155,6 +194,11 @@ public class JGFSerializer<N, E> implements Serializer<N, E> {
 		return null;
 	}
 	
+	/**
+	 * Gets the mapper.
+	 *
+	 * @return the mapper
+	 */
 	protected ObjectMapper getMapper(){
 		return this.mapper;
 	}

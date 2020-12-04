@@ -30,21 +30,23 @@ public interface Tree<N, E> extends Graph<N, E> {
 	
 	/**
 	 * Check if the node passed as argument is the root.
-	 * @param node
+	 *
+	 * @param node the node
 	 * @return True if node is the root, false otherwise.
 	 */
 	public boolean isRoot(N node);
 	
 	/**
 	 * Check if the node passed as argument is a leaf.
-	 * @param node
+	 *
+	 * @param node the node
 	 * @return True if node is a leaf, false otherwise.
 	 */
 	public boolean isLeaf(N node);
 	
 	/**
-	 * Return the height of the tree
-	 * 
+	 * Return the height of the tree.
+	 *
 	 * @return the height
 	 */
 	public int getHeight();

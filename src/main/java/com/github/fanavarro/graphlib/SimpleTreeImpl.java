@@ -21,9 +21,8 @@ import com.github.fanavarro.graphlib.algorithms.shortest_path.ShortestPathOutput
  *            the edge type
  */
 public class SimpleTreeImpl<N, E> extends AbstractTree<N, E> {
-	/**
-	 *
-	 */
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -7635999002152850671L;
 
 	/**
@@ -31,15 +30,24 @@ public class SimpleTreeImpl<N, E> extends AbstractTree<N, E> {
 	 */
 	private SimpleGraphImpl<N, E> internalGraph;
 
+	/**
+	 * Instantiates a new simple tree impl.
+	 */
 	public SimpleTreeImpl() {
 		internalGraph = new SimpleGraphImpl<N, E>();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.github.fanavarro.graphlib.Graph#getNodes()
+	 */
 	@Override
 	public Set<N> getNodes() {
 		return internalGraph.getNodes();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.github.fanavarro.graphlib.Graph#getAdjacentNodesByEdgeMap(java.lang.Object)
+	 */
 	@Override
 	public Map<E, Set<N>> getAdjacentNodesByEdgeMap(N node) {
 		return internalGraph.getAdjacentNodesByEdgeMap(node);
@@ -95,7 +103,8 @@ public class SimpleTreeImpl<N, E> extends AbstractTree<N, E> {
 	}
 	
 	/**
-	 * Remove the node
+	 * Remove the node.
+	 *
 	 * @param nodeToRemove Node to remove.
 	 * @see {@link com.github.fanavarro.graphlib.SimpleGraphImpl#removeNode(N)}
 	 */
@@ -145,6 +154,9 @@ public class SimpleTreeImpl<N, E> extends AbstractTree<N, E> {
 		return this.internalGraph.toString();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.github.fanavarro.graphlib.Tree#getHeight()
+	 */
 	@Override
 	public int getHeight() {
 		N root = this.getRoot();
@@ -165,6 +177,9 @@ public class SimpleTreeImpl<N, E> extends AbstractTree<N, E> {
 		return height + 1;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.github.fanavarro.graphlib.Tree#getMaxWidth()
+	 */
 	@Override
 	public int getMaxWidth() {
 		int maxWidth = 0;

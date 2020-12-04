@@ -122,6 +122,16 @@ public class ShortestPathAlgorithm<N, E> implements Algorithm<N, E> {
 
 	}
 
+	/**
+	 * Expand.
+	 *
+	 * @param graph the graph
+	 * @param visited the visited
+	 * @param q the q
+	 * @param depthQueue the depth queue
+	 * @param current the current
+	 * @param depth the depth
+	 */
 	private void expand(Graph<N, E> graph, Set<TreeNode<N, Set<E>>> visited, Queue<TreeNode<N, Set<E>>> q,
 			Queue<Integer> depthQueue, TreeNode<N, Set<E>> current, Integer depth) {
 		/*
