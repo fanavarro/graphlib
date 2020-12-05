@@ -11,12 +11,11 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.fanavarro.graphlib.Graph;
 
 /**
- * Class for serializing graphs into Json Graph format (JGF).
+ * Class for serializing graphs into Json Graph format (JGF) (see https://jsongraphformat.info/).
  *
  * @author fabad
  * @param <N>            Type of node.
  * @param <E>            Type of edge.
- * @see https://jsongraphformat.info/
  */
 public class JGFSerializer<N, E> implements Serializer<N, E> {
 

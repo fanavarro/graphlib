@@ -106,7 +106,6 @@ public class SimpleTreeImpl<N, E> extends AbstractTree<N, E> {
 	 * Remove the node.
 	 *
 	 * @param nodeToRemove Node to remove.
-	 * @see {@link com.github.fanavarro.graphlib.SimpleGraphImpl#removeNode(N)}
 	 */
 	public void removeNode(N nodeToRemove){
 		internalGraph.removeNode(nodeToRemove);
@@ -117,7 +116,6 @@ public class SimpleTreeImpl<N, E> extends AbstractTree<N, E> {
 	 * @param source The source node.
 	 * @param edge The edge.
 	 * @param target The target node.
-	 * @see {@link com.github.fanavarro.graphlib.SimpleGraphImpl#removeLink(N, E, N)}
 	 */
 	public void removeLink(N source, E edge, N target){
 		internalGraph.removeLink(source, edge, target);
