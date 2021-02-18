@@ -34,7 +34,7 @@
 		<jacoco.version>0.8.5</jacoco.version>
 		<meanbean.version>2.0.3</meanbean.version>
 		<apache.commons.lang.version>3.9</apache.commons.lang.version>
-		<jackson.version>2.10.3</jackson.version>
+		<jackson.version>2.10.5.1</jackson.version>
 		<org.everit.json.schema.version>1.5.1</org.everit.json.schema.version>
 	</properties>
 
