@@ -1,3 +1,4 @@
+dist: bionic
 language: java
 jdk:
 - openjdk11
@@ -37,6 +38,7 @@ deploy:
     name: $project_version
   - provider: script
     script: mvn clean deploy --settings .maven.xml -DskipTests=true -B -U -Prelease
+    skip_cleanup: true
     on:
       repo: fanavarro/graphlib
       branch: master
