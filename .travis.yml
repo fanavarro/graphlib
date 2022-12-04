@@ -17,7 +17,6 @@ after_success:
 before_install:
     - echo $GPG_SECRET_KEYS | base64 --decode | $GPG_EXECUTABLE --import --no-tty --batch
     - echo $GPG_OWNERTRUST | base64 --decode | $GPG_EXECUTABLE --import-ownertrust --no-tty --batch
-    - $GPG_EXECUTABLE -v --keyserver hkp://keys.openpgp.org:80 --refresh-keys
     - $GPG_EXECUTABLE -v --list-keys
     
 install:
