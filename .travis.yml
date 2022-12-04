@@ -15,7 +15,6 @@ after_success:
 
 ## export GPG details
 before_install:
-    - $GPG_EXECUTABLE -v --keyserver keys.openpgp.org --refresh-keys
     - echo $GPG_SECRET_KEYS | base64 --decode | $GPG_EXECUTABLE --import --no-tty --batch
     - echo $GPG_OWNERTRUST | base64 --decode | $GPG_EXECUTABLE --import-ownertrust --no-tty --batch
     - $GPG_EXECUTABLE -v --list-keys
