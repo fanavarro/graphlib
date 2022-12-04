@@ -15,8 +15,10 @@ after_success:
 
 ## export GPG details
 before_install:
+    - gpg -v --keyserver keys.openpgp.org --refresh-keys
     - echo $GPG_SECRET_KEYS | base64 --decode | $GPG_EXECUTABLE --import --no-tty --batch
     - echo $GPG_OWNERTRUST | base64 --decode | $GPG_EXECUTABLE --import-ownertrust --no-tty --batch
+    - gpg -v --list-keys
     
 install:
     mvn --settings .maven.xml install -DskipTests=true -Dgpg.skip -Dmaven.javadoc.skip=true -B -V
